@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { Livvic } from 'next/font/google';
 import './globals.css';
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: {
        template: '%s | NDU TEC',
-       default: 'NDU TEC | Tələbə Elmi Cəmiyyəti',
+       default: 'NDU TEC rəsmi saytı. Layihələr, tədbirlər və xəbərləri kəşf edin.',
     },
     description: 'NDU TEC rəsmi saytı. Layihələr, tədbirlər və xəbərləri kəşf edin.',
     images: ['/tecson2.png'],
