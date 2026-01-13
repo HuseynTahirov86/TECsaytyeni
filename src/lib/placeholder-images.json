@@ -1,3 +1,94 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "slider-1",
+      "description": "Featured news article about technology",
+      "imageUrl": "https://images.unsplash.com/photo-1700427296131-0cc4c4610fc6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWNobm9sb2d5JTIwYWJzdHJhY3R8ZW58MHx8fHwxNzY4MjQ3MTczfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "technology abstract"
+    },
+    {
+      "id": "slider-2",
+      "description": "Featured news article about global economy",
+      "imageUrl": "https://images.unsplash.com/photo-1493134799591-2c9eed26201a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjaXR5JTIwc2t5bGluZXxlbnwwfHx8fDE3NjgxODc1MjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "city skyline"
+    },
+    {
+      "id": "slider-3",
+      "description": "Featured news article about sports championship",
+      "imageUrl": "https://images.unsplash.com/photo-1556764420-e37ef4cdfa5c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzdGFkaXVtJTIwbGlnaHRzfGVufDB8fHx8MTc2ODI1ODMzMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "stadium lights"
+    },
+    {
+      "id": "article-thumb-tech-1",
+      "description": "Article thumbnail for AI",
+      "imageUrl": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlfGVufDB8fHx8MTc2ODE5MTU5OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "artificial intelligence"
+    },
+    {
+      "id": "article-thumb-tech-2",
+      "description": "Article thumbnail for quantum computing",
+      "imageUrl": "https://images.unsplash.com/photo-1608742213509-815b97c30b36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8cXVhbnR1bSUyMGNvbXB1dGVyfGVufDB8fHx8MTc2ODI4MjQ0OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "quantum computer"
+    },
+    {
+      "id": "article-thumb-sports-1",
+      "description": "Article thumbnail for football match",
+      "imageUrl": "https://images.unsplash.com/photo-1629977009792-9ea41c019ea2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Zm9vdGJhbGwlMjBzb2NjZXJ8ZW58MHx8fHwxNzY4MjgyNDUwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "football soccer"
+    },
+    {
+      "id": "article-thumb-sports-2",
+      "description": "Article thumbnail for basketball game",
+      "imageUrl": "https://images.unsplash.com/photo-1571806714291-22fd2f6e6989?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxiYXNrZXRiYWxsJTIwaG9vcHxlbnwwfHx8fDE3NjgyODI0NTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "basketball hoop"
+    },
+    {
+      "id": "article-thumb-politics-1",
+      "description": "Article thumbnail for international summit",
+      "imageUrl": "https://images.unsplash.com/photo-1633095975779-fd354aa0dc95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3b3JsZCUyMGxlYWRlcnN8ZW58MHx8fHwxNzY4MjgyNDUwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "world leaders"
+    },
+    {
+      "id": "article-thumb-politics-2",
+      "description": "Article thumbnail for election",
+      "imageUrl": "https://images.unsplash.com/photo-1573376670774-4427757f7963?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dm90aW5nJTIwYm9vdGh8ZW58MHx8fHwxNzY4MjEyODQ2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "voting booth"
+    },
+    {
+      "id": "article-thumb-culture-1",
+      "description": "Article thumbnail for film festival",
+      "imageUrl": "https://images.unsplash.com/photo-1485846234645-a62644f84728?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxtb3ZpZSUyMGNhbWVyYXxlbnwwfHx8fDE3NjgyMDM5Nzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "movie camera"
+    },
+    {
+      "id": "article-thumb-business-1",
+      "description": "Article thumbnail for stock market",
+      "imageUrl": "https://images.unsplash.com/photo-1651340981821-b519ad14da7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzdG9jayUyMG1hcmtldHxlbnwwfHx8fDE3NjgyMzE0NjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "stock market"
+    },
+    {
+      "id": "user-avatar-1",
+      "description": "User avatar",
+      "imageUrl": "https://images.unsplash.com/photo-1590086782792-42dd2350140d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjgyMzk0NDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "user-avatar-2",
+      "description": "User avatar",
+      "imageUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjgyMzk0NDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "user-avatar-3",
+      "description": "User avatar",
+      "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjgyMzk0NDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "user-avatar-4",
+      "description": "User avatar",
+      "imageUrl": "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NjgyMzk0NDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "person portrait"
+    }
+  ]
 }
