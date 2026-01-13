@@ -1,9 +1,10 @@
 
 import type { Metadata } from 'next';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, getDocs, orderBy, query, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import type { TeamMember } from '../ndutecnaxcivan19692025tec/team/team-form';
 import type { FormerChairman } from '../ndutecnaxcivan19692025tec/formers/former-chairman-form';
+import type { AboutContent } from '../ndutecnaxcivan19692025tec/about-content/form';
 import AboutClientPage from './AboutClientPage';
 
 export const dynamic = 'force-dynamic';
@@ -31,9 +32,19 @@ async function getFormerChairmen(): Promise<FormerChairman[]> {
     }) as FormerChairman);
 }
 
+async function getAboutContent(): Promise<AboutContent | null> {
+    const docRef = doc(db, "siteContent", "about");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        return docSnap.data() as AboutContent;
+    }
+    return null;
+}
+
 export default async function AboutPage() {
     const teamMembers = await getTeamMembers();
     const formerChairmen = await getFormerChairmen();
+    const aboutContent = await getAboutContent();
 
-    return <AboutClientPage teamMembers={teamMembers} formerChairmen={formerChairmen} />;
+    return <AboutClientPage teamMembers={teamMembers} formerChairmen={formerChairmen} aboutContent={aboutContent} />;
 }

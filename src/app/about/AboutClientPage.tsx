@@ -11,13 +11,26 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import type { FormerChairman } from '../ndutecnaxcivan19692025tec/formers/former-chairman-form';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { type AboutContent } from '../ndutecnaxcivan19692025tec/about-content/form';
+import { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
+
 
 interface AboutClientPageProps {
     teamMembers: TeamMember[];
     formerChairmen: FormerChairman[];
+    aboutContent: AboutContent | null;
 }
 
-export default function AboutClientPage({ teamMembers, formerChairmen }: AboutClientPageProps) {
+export default function AboutClientPage({ teamMembers, formerChairmen, aboutContent }: AboutClientPageProps) {
+  const [sanitizedContent, setSanitizedContent] = useState('');
+
+  useEffect(() => {
+    if (aboutContent?.mainContent && typeof window !== 'undefined') {
+      setSanitizedContent(DOMPurify.sanitize(aboutContent.mainContent));
+    }
+  }, [aboutContent]);
+
   const FADE_IN_ANIMATION_SETTINGS = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -89,11 +102,11 @@ export default function AboutClientPage({ teamMembers, formerChairmen }: AboutCl
         />
       </motion.div>
 
-       <motion.section className="mt-12 prose prose-lg max-w-none text-foreground/90" variants={FADE_IN_ANIMATION_SETTINGS}>
-            <p>Tələbə Elmi Cəmiyyəti elmi tədqiqat və elmi-təşkilati işlərdə fəal iştirak edən ali təhsil pilləsinin bakalavriat və magistratura səviyyələrində, tibb təhsili sahəsində isə ali tibb təhsili müəssisələrində və rezidenturada təhsil alan tələbələrin könüllü ictimai təşkilatıdır. Tələbələrin elmi-tədqiqat işlərinin təşkili və əlaqələndirilməsi vəzifələrini Tələbə Elmi Cəmiyyəti yerinə yetirir. Tələbə Elmi Cəmiyyəti sabahın gənc tədqiqatçılarının həqiqi axtarış və yaradıcılıq məktəbidir. Eyni zamanda, bu cəmiyyət istedadlı və bacarıqlı tələbələrin üzə çıxarılmasında mühüm rol oynayır. Bu elmi arena tələbələrin nə qədər bilikli, bacarıqlı, elmə bağlı olmalarını nümayiş etdirmələri baxımından çox önəmlidir.</p>
-
-            <p>Naxçıvan Dövlət Universitetində Tələbə Elmi Cəmiyyəti 1969-cu ildə, bu ali məktəb Azərbaycan Dövlət Pedaqoji İnstitutunun Naxçıvan filialı kimi fəaliyyət göstərdiyi dövrdən yaradılmışdır. Həmin illərdə cəmi 25 nəfər tədqiqatçı tələbəni əhatə edən cəmiyyətin üzvlərinin sayı sonralar ildən-ilə artmışdır. Hazırda Universitet Tələbə Elmi Cəmiyyəti sıralarında tələbə yaradıcılıq axtarışlarına maraq göstərən gənclər elmi-tədqiqat işləri sahəsində ilk addımlarını atmaqdadır. Hal-hazırda Tələbə Elmi Cəmiyyətinin strukturu 100 nəfər bakalavriat və magistratura pilləsində təhsil alan tələbələrdən ibarətdir.</p>
-        </motion.section>
+       <motion.section 
+            className="mt-12 prose prose-lg max-w-none text-foreground/90 prose-headings:text-primary prose-a:text-primary prose-strong:text-foreground"
+            variants={FADE_IN_ANIMATION_SETTINGS}
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+        />
 
         <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
             <div className="text-center">
@@ -116,44 +129,27 @@ export default function AboutClientPage({ teamMembers, formerChairmen }: AboutCl
             </div>
         </motion.section>
         
-        <motion.section className="mt-16 prose prose-lg max-w-none text-foreground/90" variants={FADE_IN_ANIMATION_SETTINGS}>
-             <h3 className="text-2xl font-bold text-primary text-center">Dəyər Prinsiplərimiz</h3>
-            <ol>
-                <li><strong>Elmə hörmət və maraq:</strong> Tələbə Elmi Cəmiyyəti elmə və tədqiqata olan hörmət və marağı artırmaqla yanaşı, tələbələr arasında elmə qarşı motivasiya tədbirləri görür.</li>
-                <li><strong>İnkişaf və yenilikçilik:</strong> Tədqiqatçıları və tələbələri yeni biliklərə, yenilikçi yanaşmalara və müasir texnologiyalara açıq olmağa təşviq edir.</li>
-                <li><strong>Əməkdaşlıq və komanda işi:</strong> Təcrübə mübadiləsi, elmi layihələrin birgə həyata keçirilməsi və müxtəlif sahələrdə biliklərin birləşdirilməsi, elmi tədqiqatların inkişafına töhfə verir.</li>
-                <li><strong>Ədalət və bərabərlik:</strong> Hər bir üzvün fərqli fikirlərini və yanaşmalarını dəyərləndirərək fəaliyyət göstərir.</li>
-                <li><strong>Açıq və şəffaflıq:</strong> Cəmiyyətin fəaliyyəti açıq. şəffaf, qərəzsiz və ictimai faydalı şəkildə təşkil olunur.</li>
-                <li><strong>Təhsil və bilik paylaşımı:</strong> Tələbə Elmi Cəmiyyəti tələbələri bilik paylaşım və elmi mübadiləyə təşviq edir. Tələbələrin təhsil həyatını dəyişmək, onlara yeni bacarıqlar qazandırmaq və biliklərini digər üzvlərlə paylaşmaq imkanı yaradır.</li>
-                <li><strong>Sosial məsuliyyət və vətəndaşlıq:</strong> Tələbə Elmi Cəmiyyəti yalnız elmi və akademik fəaliyyətlə məhdudlaşmır, eyni zamanda tələbələrin problemlərinə həll yolları tapmağa yönəlir.</li>
-                <li><strong>Etika və dürüstlük:</strong> Tələbə Elmi Cəmiyyəti elmi işlərin etik prinsiplərə əsaslanaraq həyata keçirilməsinə, tədqiqatların doğruluğuna, plagiarizmin qarşısının alınmasına və elmi etikaya riayət edilməsinə təşviq edir.</li>
-            </ol>
-            
-            <p>Tələbə Elmi Cəmiyyətinin tərkibində 4 departament (İctimaiyyətlə əlaqələr, Layihələrin idarə olunması, Tədbirlərin təşkili və İnsan resursları), 1 xidmət (Mətbuat xidməti), 12 fakültə Tələbə Elmi Cəmiyyəti və 3 klub (“Yazarlar”, “Təlimçilər” və “Şahmat”) fəaliyyət göstərir.</p>
-
-            <p>Hər tədris ilinin başlanğıcında bütün fakültələrdə, xüsusən birinci kurslara TEC tərəfindən infosessiya keçirilərək məlumat verilir. Fakültə TEC sədrləri və üzvləri seçilir, fəaliyyətə başlanılır. Müxtəlif mövzular seçilərək tələbələrə verilir. Bu mövzular arasında Naxçıvan Muxtar Respublikasının tarixi, coğrafiyası, təbiəti, incəsənəti, görkəmli şəxsiyyətləri haqqında mövzuların seçilməsinə üstünlük verilir. Elmi-tədqiat işini işlənib-hazırlanmasında və başa çatdırmalarında tələbələrə elmi rəhbərlər köməklik edirlər. Tədris ilinin sonuna kimi tələbələr öz elmi işi üzərində çalışır, araşdırmalar aparırlar. Tədris ilinin sonuna yaxın fakültələrdə yekun konfranslar keçirilir. Elmi göstəriciləri ilə seçilən, bacarıqlı və təcrübəli tələbələr seçilərək universitet turuna buraxılırlar. Universitet turunda ən layiqli tələbələr qalib olaraq müvafiq diplomlar və hədiyyələrlə təltif olunurlar. Qaliblər Azərbaycan Respublikası Təhsil Nazirliyinin keçirdiyi tələbə elmi konfranslarında iştirak etmək hüququ qazanırlar.</p>
-             <p>Naxçıvan Dövlət Universiteti Tələbə Elmi Cəmiyyətinin sədri Yusif Mirzəzadədir.</p>
-             
-            <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
-                <Button asChild size="lg">
-                    <a href="https://ndu.edu.az/public/upload/tecesasname.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                        <Download className="mr-2 h-5 w-5" />
-                        TEC Əsasnaməsi
-                    </a>
-                </Button>
-                 <Button asChild size="lg" variant="secondary">
-                    <a href="/storage/tecetik.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                        <Download className="mr-2 h-5 w-5" />
-                        Etik Davranış Kodeksi
-                    </a>
-                </Button>
+        <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+          <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
+              <Button asChild size="lg">
+                  <a href="https://ndu.edu.az/public/upload/tecesasname.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                      <Download className="mr-2 h-5 w-5" />
+                      TEC Əsasnaməsi
+                  </a>
+              </Button>
                 <Button asChild size="lg" variant="secondary">
-                     <a href="https://old.bioscript.shop/uploads/ali-tehsil-muessisesinde-tehsilalanlarin-elmi-tedqiqat-isinin-teskili-haqqinda-esasname-27.06.14-emr-752-elave.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center text-center">
-                        <Download className="mr-2 h-5 w-5 flex-shrink-0" />
-                        <span className="whitespace-normal leading-tight text-center">Təhsilalanların Elmi Tədqiqat İşi Haqqında Əsasnamə</span>
-                    </a>
-                </Button>
-            </div>
+                  <a href="/storage/tecetik.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                      <Download className="mr-2 h-5 w-5" />
+                      Etik Davranış Kodeksi
+                  </a>
+              </Button>
+              <Button asChild size="lg" variant="secondary">
+                    <a href="https://old.bioscript.shop/uploads/ali-tehsil-muessisesinde-tehsilalanlarin-elmi-tedqiqat-isinin-teskili-haqqinda-esasname-27.06.14-emr-752-elave.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center text-center">
+                      <Download className="mr-2 h-5 w-5 flex-shrink-0" />
+                      <span className="whitespace-normal leading-tight text-center">Təhsilalanların Elmi Tədqiqat İşi Haqqında Əsasnamə</span>
+                  </a>
+              </Button>
+          </div>
         </motion.section>
 
       <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
@@ -287,5 +283,3 @@ export default function AboutClientPage({ teamMembers, formerChairmen }: AboutCl
     </motion.div>
   );
 }
-
-    

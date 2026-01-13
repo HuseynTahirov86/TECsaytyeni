@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon } from "lucide-react";
+import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { logoutAdmin } from '@/lib/actions';
@@ -12,6 +12,7 @@ import { logoutAdmin } from '@/lib/actions';
 
 const navLinks = [
   { href: "/ndutecnaxcivan19692025tec/dashboard", label: "Əsas Panel", icon: Home },
+  { href: "/ndutecnaxcivan19692025tec/about-content", label: "Haqqımızda Məzmunu", icon: Info },
   { href: "/ndutecnaxcivan19692025tec/admins", label: "Admin Hesabları", icon: Shield },
   { href: "/ndutecnaxcivan19692025tec/users", label: "Təlim İstifadəçiləri", icon: Users },
   { href: "/ndutecnaxcivan19692025tec/messages", label: "Mesajlar", icon: MessageSquare },
