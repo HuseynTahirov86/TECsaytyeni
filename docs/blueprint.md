@@ -1,21 +1,19 @@
-# **App Name**: AzerNews Hub
+# **App Name**: TEC Insights
 
 ## Core Features:
 
-- AI-Powered Article Summarizer: Summarize lengthy news articles for quick consumption using a generative AI tool.
-- Homepage Slider: Display highlighted news using a visually appealing slider at the top of the home page.
-- Categorized News Sections: Organize content into category cards on the homepage.
-- User Authentication: Allow users to register and log in to personalize their experience.
-- Article Pages: Display detailed news articles with multimedia and sharing options.
-- Commenting System: Allow users to comment on articles and engage in discussions.
-- Database: Uses a database to store users, articles, comments and preferences
+- Homepage Showcase: Home page with a brief introduction and carousels for news and upcoming events.
+- About Us Section: Detailed 'About Us' page outlining the mission, vision, and organizational structure of the TEC.
+- Projects & Research Display: Project gallery with descriptions and details about each student research project.
+- Events Calendar: Events calendar displaying conferences, seminars, and competitions, to promote TEC activities.
+- News & Blog Hub: News and blog section for announcements and articles, filtered and searchable by relevant topics.
+- Article submission: An interface through which TEC members can submit articles.
 
 ## Style Guidelines:
 
-- Primary color: Soft blue (#A0D2EB) to promote trust and readability.
-- Background color: Light gray (#F5F5F5) for a clean and modern feel.
-- Accent color: Orange (#FFB347) for call-to-action buttons and important highlights.
-- Body and headline font: 'Inter', a grotesque-style sans-serif for a modern, objective feel.
-- Responsive grid layout for optimal viewing on all devices.
-- Simple and modern icons to represent categories and actions.
-- Subtle animations for loading states and UI transitions to improve user experience.
+- Primary color: #00578c - Reflects knowledge and clarity.
+- Background color: Light Gray (#F0F8FF) - Maintains a clean and professional look.
+- Accent color: #0a97b1 - Highlights interactive elements and important notifications.
+- Font pairing: 'Inter' sans-serif for both headings and body text to maintain a clean, modern, objective feel.
+- Use simple, professional icons to represent categories and actions, improving user navigation.
+- Responsive design with a clear grid structure to ensure readability and usability on all devices.

@@ -1,4 +1,2 @@
-import { config } from 'dotenv';
-config();
 
-import '@/ai/flows/summarize-news-articles.ts';
+import './flows/training-helpers-flow';

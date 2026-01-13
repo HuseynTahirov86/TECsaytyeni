@@ -1,0 +1,18 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallowed paths for all crawlers
+Disallow: /ndutecnaxcivan19692025tec/
+Disallow: /admin/
+Disallow: /account/
+Disallow: /login/
+Disallow: /register/
+Disallow: /teti-register/
+Disallow: /teti-account/
+Disallow: /teti-login/
+Disallow: /training-login/
+Disallow: /certificate/
+Disallow: /submit-document/
+
+Sitemap: https://tec.ndu.edu.az/sitemap.xml
