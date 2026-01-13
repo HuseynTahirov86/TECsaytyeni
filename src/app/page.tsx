@@ -186,10 +186,8 @@ export default function Home() {
                                 className="relative z-10 max-w-2xl">
                                 
                                 <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                    Naxçıvan Dövlət Universiteti
-                                </motion.h1>
-                                <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                    Tələbə Elmi Cəmiyyəti
+                                    <span className="block">Naxçıvan Dövlət Universiteti</span>
+                                    <span className="block">Tələbə Elmi Cəmiyyəti</span>
                                 </motion.h1>
                                 
                                 <motion.div variants={heroItemVariants}>
