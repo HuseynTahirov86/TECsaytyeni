@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardTitle, CardHeader, CardFooter } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import Link from "next/link";
-import { Users, ArrowRight, BookOpen, FileText, Landmark } from "lucide-react";
+import { Users, ArrowRight, BookOpen, FileText, Landmark, Image as ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { collection, getDocs, limit, orderBy, query, Timestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
@@ -16,6 +16,7 @@ import { ProjectArticle } from './ndutecnaxcivan19692025tec/projects/project-for
 import type { LibraryEntry } from './ndutecnaxcivan19692025tec/library/library-form';
 import type { Aphorism } from './ndutecnaxcivan19692025tec/aphorisms/aphorism-form';
 import type { AcademicWritingRule } from './ndutecnaxcivan19692025tec/academic-writing/form';
+import type { HeroSlide } from './ndutecnaxcivan19692025tec/hero-slides/slide-form';
 import Autoplay from "embla-carousel-autoplay";
 import { formatDate } from '@/lib/utils';
 
@@ -31,20 +32,39 @@ export default function Home() {
     const [libraryEntries, setLibraryEntries] = React.useState<LibraryEntry[]>([]);
     const [aphorisms, setAphorisms] = React.useState<Aphorism[]>([]);
     const [academicWritingRules, setAcademicWritingRules] = React.useState<AcademicWritingRule[]>([]);
+    const [heroSlides, setHeroSlides] = React.useState<HeroSlide[]>([]);
+
     const [isLoadingNews, setIsLoadingNews] = React.useState(true);
     const [isLoadingProjects, setIsLoadingProjects] = React.useState(true);
     const [isLoadingLibrary, setIsLoadingLibrary] = React.useState(true);
     const [isLoadingAphorisms, setIsLoadingAphorisms] = React.useState(true);
     const [isLoadingAcademicRules, setIsLoadingAcademicRules] = React.useState(true);
+    const [isLoadingHero, setIsLoadingHero] = React.useState(true);
+    
     const [dynamicTextIndex, setDynamicTextIndex] = React.useState(0);
+    const [api, setApi] = React.useState<CarouselApi>()
+    const [currentSlide, setCurrentSlide] = React.useState(0)
 
-    const aphorismAutoplay = React.useRef(
-      Autoplay({ delay: 5000, stopOnInteraction: false })
-    );
+    const aphorismAutoplay = React.useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
+    const rulesAutoplay = React.useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
+    const heroAutoplay = React.useRef(Autoplay({ delay: 6000, stopOnInteraction: true }))
 
-     const rulesAutoplay = React.useRef(
-      Autoplay({ delay: 4000, stopOnInteraction: true })
-    );
+
+    React.useEffect(() => {
+        if (!api) return;
+        
+        const onSelect = () => {
+          setCurrentSlide(api.selectedScrollSnap())
+        }
+        
+        api.on("select", onSelect)
+        onSelect(); // Set initial slide
+
+        return () => {
+          api.off("select", onSelect)
+        }
+    }, [api])
+
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -56,105 +76,38 @@ export default function Home() {
 
     React.useEffect(() => {
         setIsClient(true);
-        
-        const fetchNews = async () => {
-            setIsLoadingNews(true);
+
+        const fetchData = async (collectionName: string, setter: Function, setLoading: Function, orderField: string = "order", orderDirection: "asc" | "desc" = "asc", itemLimit?: number) => {
+            setLoading(true);
             try {
-                const q = query(collection(db, "news"), orderBy("date", "desc"), limit(6));
+                let q = query(collection(db, collectionName), orderBy(orderField, orderDirection));
+                if (itemLimit) {
+                    q = query(q, limit(itemLimit));
+                }
                 const querySnapshot = await getDocs(q);
-                const newsList = querySnapshot.docs.map(doc => {
+                const itemList = querySnapshot.docs.map(doc => {
                     const data = doc.data();
-                    return {
-                        id: doc.id,
-                        ...data,
-                        date: data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date,
-                    } as NewsArticle;
+                    // Specific date handling for news
+                    if (collectionName === 'news' && data.date instanceof Timestamp) {
+                       return { id: doc.id, ...data, date: data.date.toDate().toISOString().split('T')[0] }
+                    }
+                    return { id: doc.id, ...data };
                 });
-                setNewsItems(newsList);
+                setter(itemList);
             } catch (error) {
-                console.error("Error fetching news:", error);
+                console.error(`Error fetching ${collectionName}:`, error);
             } finally {
-                setIsLoadingNews(false);
-            }
-        };
-
-        const fetchProjects = async () => {
-            setIsLoadingProjects(true);
-            try {
-                const q = query(collection(db, "projects"), limit(3));
-                const querySnapshot = await getDocs(q);
-                const projectList = querySnapshot.docs.map(doc => {
-                    const data = doc.data();
-                    return {
-                        id: doc.id,
-                        ...data,
-                    } as ProjectArticle;
-                });
-                setProjects(projectList);
-            } catch (error) {
-                console.error("Error fetching projects:", error);
-            } finally {
-                setIsLoadingProjects(false);
-            }
-        };
-
-        const fetchLibraryEntries = async () => {
-          setIsLoadingLibrary(true);
-          try {
-            const q = query(collection(db, "library"), orderBy("title"), limit(4));
-            const querySnapshot = await getDocs(q);
-            const entryList = querySnapshot.docs.map(doc => ({
-              id: doc.id,
-              ...doc.data(),
-            } as LibraryEntry));
-            setLibraryEntries(entryList);
-          } catch (error) {
-            console.error("Error fetching library entries:", error);
-          } finally {
-            setIsLoadingLibrary(false);
-          }
-        };
-
-        const fetchAphorisms = async () => {
-            setIsLoadingAphorisms(true);
-            try {
-                const q = query(collection(db, "aphorisms"), orderBy("order", "asc"));
-                const querySnapshot = await getDocs(q);
-                const aphorismList = querySnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }) as Aphorism);
-                setAphorisms(aphorismList);
-            } catch (error) {
-                console.error("Error fetching aphorisms:", error);
-            } finally {
-                setIsLoadingAphorisms(false);
+                setLoading(false);
             }
         };
         
-        const fetchAcademicWritingRules = async () => {
-            setIsLoadingAcademicRules(true);
-            try {
-                const q = query(collection(db, "academicWritingRules"), orderBy("order", "asc"));
-                const querySnapshot = await getDocs(q);
-                const rulesList = querySnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }) as AcademicWritingRule);
-                setAcademicWritingRules(rulesList);
-            } catch (error) {
-                console.error("Error fetching academic writing rules:", error);
-            } finally {
-                setIsLoadingAcademicRules(false);
-            }
-        };
+        fetchData("news", setNewsItems, setIsLoadingNews, "date", "desc", 6);
+        fetchData("projects", setProjects, setIsLoadingProjects, "title", "asc", 3);
+        fetchData("library", setLibraryEntries, setIsLoadingLibrary, "title", "asc", 4);
+        fetchData("aphorisms", setAphorisms, setIsLoadingAphorisms);
+        fetchData("academicWritingRules", setAcademicWritingRules, setIsLoadingAcademicRules);
+        fetchData("heroSlides", setHeroSlides, setIsLoadingHero);
 
-
-        fetchNews();
-        fetchProjects();
-        fetchLibraryEntries();
-        fetchAphorisms();
-        fetchAcademicWritingRules();
     }, []);
 
     const motionProps = {
@@ -182,8 +135,8 @@ export default function Home() {
     const heroItemVariants = {
         initial: { opacity: 0, y: 20 },
         animate: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+        exit: { opacity: 0, y: -20, transition: { duration: 0.3, ease: "easeIn" } },
     };
-
 
   return (
     <motion.div 
@@ -195,112 +148,79 @@ export default function Home() {
         animate: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
       }}
     >
-      <section className="w-full">
-        {/* Desktop View */}
-        <div className="hidden sm:block relative w-full">
-             <motion.div
-                initial={{ scale: 1.05, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-             >
-                <Image
-                    src="/banner2.png"
-                    alt="Tələbə Elmi Cəmiyyəti"
-                    width={1920}
-                    height={1080}
-                    className="w-full h-auto"
-                    priority
-                />
-             </motion.div>
-            
-            <div className="absolute inset-0 flex items-center justify-start text-left">
-                <div className="container mx-auto px-4">
-                <motion.div 
-                    variants={heroContainerVariants}
-                    initial="initial"
-                    animate="animate"
-                    className="relative z-10 max-w-2xl">
-                    <div style={{ color: '#0b98b2' }}>
-                        <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight whitespace-nowrap">
-                            Naxçıvan Dövlət Universiteti
-                        </motion.h1>
-                        <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight">
-                            Tələbə Elmi Cəmiyyəti
-                        </motion.h1>
-                    </div>
-                    <motion.div variants={heroItemVariants}>
-                        <AnimatePresence mode="wait">
-                        <motion.p
-                            key={dynamicTextIndex}
-                            initial={textAnimation.initial}
-                            animate={textAnimation.animate}
-                            exit={textAnimation.exit}
-                            transition={textAnimation.transition}
-                            className="mt-4 text-xl font-normal italic"
-                            style={{ color: '#0b98b2' }}
-                        >
-                            {dynamicTexts[dynamicTextIndex]}
-                        </motion.p>
-                        </AnimatePresence>
-                    </motion.div>
-                    <motion.div variants={heroItemVariants} className="mt-8 flex gap-4">
-                        <Button size="lg" asChild>
-                            <Link href="/about">Daha çox <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                        </Button>
-                        <Button size="lg" asChild>
-                            <Link href="/projects">Layihələrimiz <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                        </Button>
-                    </motion.div>
-                </motion.div>
-                </div>
-            </div>
-        </div>
-
-        {/* Mobile View: Image on top, content below */}
-        <div className="sm:hidden flex flex-col">
-          <motion.div {...motionProps}>
-            <Image
-              src="/tecson2.png"
-              alt="Tələbə Elmi Cəmiyyəti"
-              width={800}
-              height={600}
-              className="w-full h-auto object-cover"
-              priority
-            />
-          </motion.div>
-          <div className="container mx-auto px-4 py-8 text-center">
-             <motion.div {...motionProps}>
-                <h1 className="text-3xl font-extrabold tracking-tight" style={{ color: '#0b98b2' }}>
-                Naxçıvan Dövlət Universiteti
-                </h1>
-                <h1 className="text-3xl font-extrabold tracking-tight" style={{ color: '#0b98b2' }}>
-                    Tələbə Elmi Cəmiyyəti
-                </h1>
-                <AnimatePresence mode="wait">
-                  <motion.p
-                      key={dynamicTextIndex}
-                      initial={textAnimation.initial}
-                      animate={textAnimation.animate}
-                      exit={textAnimation.exit}
-                      transition={textAnimation.transition}
-                      className="mt-3 text-lg font-normal italic"
-                      style={{ color: '#0b98b2' }}
-                  >
-                      {dynamicTexts[dynamicTextIndex]}
-                  </motion.p>
-                </AnimatePresence>
-                <div className="mt-6 flex flex-col gap-4 items-center">
-                    <Button size="lg" className="w-full" asChild>
-                        <Link href="/about">Daha çox <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                    </Button>
-                    <Button size="lg" className="w-full" asChild>
-                        <Link href="/projects">Layihələrimiz <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                    </Button>
-                </div>
-             </motion.div>
-          </div>
-        </div>
-      </section>
+        <section className="w-full relative h-[60vh] sm:h-[80vh] lg:h-auto">
+             <Carousel 
+                className="w-full h-full"
+                plugins={[heroAutoplay.current]}
+                setApi={setApi}
+                opts={{ loop: true }}
+              >
+              <CarouselContent>
+                {isLoadingHero ? (
+                    <CarouselItem>
+                        <Skeleton className="w-full h-[60vh] sm:h-[80vh] lg:h-full lg:aspect-[16/7]" />
+                    </CarouselItem>
+                ) : heroSlides.map((slide, index) => (
+                    <CarouselItem key={slide.id}>
+                        <div className="relative w-full h-[60vh] sm:h-[80vh] lg:h-full lg:aspect-[16/7]">
+                            <Image
+                                src={slide.imageUrl}
+                                alt={slide.title || `Hero Slide ${index + 1}`}
+                                fill
+                                className="object-cover"
+                                priority={index === 0}
+                            />
+                        </div>
+                    </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="absolute inset-0 flex items-center justify-start text-left bg-gradient-to-r from-black/50 to-transparent">
+                  <div className="container mx-auto px-4">
+                      <AnimatePresence>
+                        {heroSlides[currentSlide]?.type === 'main' && (
+                            <motion.div 
+                                variants={heroContainerVariants}
+                                initial="initial"
+                                animate="animate"
+                                exit="exit"
+                                className="relative z-10 max-w-2xl">
+                                
+                                <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                                    Naxçıvan Dövlət Universiteti
+                                </motion.h1>
+                                <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                                    Tələbə Elmi Cəmiyyəti
+                                </motion.h1>
+                                
+                                <motion.div variants={heroItemVariants}>
+                                    <AnimatePresence mode="wait">
+                                    <motion.p
+                                        key={dynamicTextIndex}
+                                        initial={textAnimation.initial}
+                                        animate={textAnimation.animate}
+                                        exit={textAnimation.exit}
+                                        transition={textAnimation.transition}
+                                        className="mt-4 text-xl font-normal italic text-gray-200 drop-shadow-md"
+                                    >
+                                        {dynamicTexts[dynamicTextIndex]}
+                                    </motion.p>
+                                    </AnimatePresence>
+                                </motion.div>
+                                <motion.div variants={heroItemVariants} className="mt-8 flex gap-4">
+                                    <Button size="lg" asChild>
+                                        <Link href="/about">Daha çox <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                                    </Button>
+                                    <Button size="lg" variant="secondary" asChild>
+                                        <Link href="/projects">Layihələrimiz <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                                    </Button>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                      </AnimatePresence>
+                  </div>
+              </div>
+            </Carousel>
+        </section>
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">

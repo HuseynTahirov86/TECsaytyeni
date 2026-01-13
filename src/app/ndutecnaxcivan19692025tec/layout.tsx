@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield } from "lucide-react";
+import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { logoutAdmin } from '@/lib/actions';
@@ -18,6 +18,7 @@ const navLinks = [
   { href: "/ndutecnaxcivan19692025tec/appeals", label: "Sədrə Müraciətlər", icon: MailCheck },
   { href: "/ndutecnaxcivan19692025tec/teti-reports", label: "TETİ Sənədləri", icon: Building },
   { href: "/ndutecnaxcivan19692025tec/teti-users", label: "TETİ İstifadəçiləri", icon: Users },
+  { href: "/ndutecnaxcivan19692025tec/hero-slides", label: "Hero Karusel", icon: ImageIcon },
   { href: "/ndutecnaxcivan19692025tec/aphorisms", label: "Aforizmlər", icon: Quote },
   { href: "/ndutecnaxcivan19692025tec/academic-writing", label: "Akademik Yazı", icon: BookText },
   { href: "/ndutecnaxcivan19692025tec/journal-archive", label: "Jurnal Arxivi", icon: Archive },
