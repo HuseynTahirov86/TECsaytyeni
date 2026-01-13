@@ -29,7 +29,11 @@ const protocolSchema = z.object({
 
 type FormValues = z.infer<typeof protocolSchema>;
 
-export function DepartmentProtocolForm() {
+interface DepartmentProtocolFormProps {
+    documentType: 'protocol' | 'other';
+}
+
+export function DepartmentProtocolForm({ documentType }: DepartmentProtocolFormProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [protocolFile, setProtocolFile] = useState<File | null>(null);
@@ -42,7 +46,7 @@ export function DepartmentProtocolForm() {
     setIsSubmitting(true);
     
     if (!protocolFile) {
-        toast({ title: "Xəta!", description: "Protokol faylını yükləməlisiniz.", variant: "destructive" });
+        toast({ title: "Xəta!", description: "Sənəd faylını yükləməlisiniz.", variant: "destructive" });
         setIsSubmitting(false);
         return;
     }
@@ -50,14 +54,14 @@ export function DepartmentProtocolForm() {
     try {
       const fileUrl = await uploadFile(protocolFile, "kafedraciaris");
       await addDoc(collection(db, "departmentDocuments"), {
-        documentType: 'protocol',
+        documentType: documentType,
         department: values.department,
         fileUrl: fileUrl,
         submittedAt: serverTimestamp(),
       });
 
       toast({
-        title: "Protokol Göndərildi!",
+        title: "Sənəd Göndərildi!",
         description: "Sənədiniz uğurla sistemə yükləndi.",
       });
       form.reset();
@@ -66,13 +70,16 @@ export function DepartmentProtocolForm() {
       console.error("Error submitting protocol: ", error);
       toast({
         title: "Xəta!",
-        description: error.message || "Protokol göndərilərkən bir problem yarandı.",
+        description: error.message || "Sənəd göndərilərkən bir problem yarandı.",
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
   }
+
+  const title = documentType === 'protocol' ? 'Protokol Faylı' : 'Sənəd Faylı';
+  const description = documentType === 'protocol' ? 'Protokoldan çıxarış faylını yükləyin.' : 'Müvafiq sənədi yükləyin.';
 
   return (
     <Form {...form}>
@@ -101,16 +108,16 @@ export function DepartmentProtocolForm() {
         />
         
         <FormItem>
-          <FormLabel>Protokol Faylı *</FormLabel>
+          <FormLabel>{title} *</FormLabel>
           <FileUploader 
             id="department-protocol-file"
             onFileSelect={setProtocolFile}
           />
-          <FormDescription>Protokoldan çıxarış faylını yükləyin.</FormDescription>
+          <FormDescription>{description}</FormDescription>
         </FormItem>
         
         <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? 'Göndərilir...' : 'Protokolu Göndər'}
+          {isSubmitting ? 'Göndərilir...' : 'Sənədi Göndər'}
         </Button>
       </form>
     </Form>

@@ -17,7 +17,7 @@ import { exportToExcel } from "@/lib/utils";
 
 interface DepartmentDocument {
     id: string;
-    documentType: 'statistics' | 'protocol';
+    documentType: 'statistics' | 'protocol' | 'other';
     department: string;
     statistics?: {
         az: { total: number; male: number; female: number; };
@@ -25,6 +25,15 @@ interface DepartmentDocument {
     };
     fileUrl: string;
     submittedAt: Timestamp;
+}
+
+const getDocumentTypeText = (type: 'statistics' | 'protocol' | 'other') => {
+    switch (type) {
+        case 'statistics': return 'TETİ Məlumatları';
+        case 'protocol': return 'Protokol Çıxarışı';
+        case 'other': return 'Müxtəlif Təyinatlı Sənəd';
+        default: return 'Bilinməyən Sənəd';
+    }
 }
 
 export default function DepartmentDocumentsPage() {
@@ -70,7 +79,7 @@ export default function DepartmentDocumentsPage() {
   const handleExport = () => {
     const dataToExport = documents.map(doc => ({
       'Kafedra': doc.department,
-      'Sənəd Növü': doc.documentType === 'statistics' ? 'TETİ Məlumatları' : 'Protokol Çıxarışı',
+      'Sənəd Növü': getDocumentTypeText(doc.documentType),
       'Tarix': doc.submittedAt ? doc.submittedAt.toDate().toLocaleString('az-AZ') : 'Bilinmir',
       'Fayl URL': doc.fileUrl,
       'AZ Vətəndaş (Ümumi)': doc.statistics?.az.total ?? 'N/A',
@@ -110,8 +119,8 @@ export default function DepartmentDocumentsPage() {
                                     <div className="font-medium w-64 truncate">{doc.department}</div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                     <Badge variant={doc.documentType === 'statistics' ? 'default' : 'secondary'}>
-                                        {doc.documentType === 'statistics' ? 'TETİ Məlumatları' : 'Protokol Çıxarışı'}
+                                     <Badge variant={'default'}>
+                                        {getDocumentTypeText(doc.documentType)}
                                     </Badge>
                                     <Badge variant="outline" className="hidden sm:inline-flex">
                                         {isClient && doc.submittedAt ? doc.submittedAt.toDate().toLocaleDateString('az-AZ', { day: 'numeric', month: 'long', year: 'numeric' }) : '...'}

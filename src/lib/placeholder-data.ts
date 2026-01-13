@@ -24,6 +24,7 @@ export const faculties = [
     "İncəsənət",
     "Tarix-filologiya",
     "Fizika-riyaziyyat",
+    "Xarici dillər",
 ];
 
 export const specializations = [
@@ -51,8 +52,8 @@ export const departmentList = [
     "Əczaçılıq və biokimya",
     "İngilis dili və tərcümə",
     "İngilis dili və metodika",
-    "Roman-german dilləri",
-    "Rus və şərq dilləri",
+    "Avropa dilləri",
+    "Şərq dilləri",
     "Azərbaycan dilçiliyi",
     "Azərbaycan ədəbiyyatı",
     "Azərbaycan tarixi",

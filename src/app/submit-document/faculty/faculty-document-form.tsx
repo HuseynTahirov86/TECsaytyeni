@@ -17,7 +17,6 @@ import {
   FormMessage,
   FormDescription,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { faculties } from "@/lib/placeholder-data";
@@ -26,6 +25,7 @@ import { uploadFile } from "@/lib/utils";
 
 const formSchema = z.object({
   faculty: z.string({ required_error: "Fakültə seçilməlidir." }),
+  documentType: z.string({ required_error: "Sənəd növü seçilməlidir." }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -51,7 +51,7 @@ export function FacultyDocumentForm() {
     try {
       const fileUrl = await uploadFile(documentFile, "fakultecixaris");
       await addDoc(collection(db, "facultyDocuments"), {
-        faculty: values.faculty,
+        ...values,
         fileUrl: fileUrl,
         submittedAt: serverTimestamp(),
       });
@@ -100,10 +100,27 @@ export function FacultyDocumentForm() {
           )}
         />
 
-        <div>
-            <p className="text-sm font-medium">Təyinat</p>
-            <p className="text-sm text-muted-foreground mt-2 rounded-md border p-3 bg-muted">TETİ nəticələri ilə bağlı Fakültə Elmi Şurasının protokolundan çıxarış</p>
-        </div>
+        <FormField
+          control={form.control}
+          name="documentType"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Sənədin Təyinatı *</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Sənədin təyinatını seçin" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                    <SelectItem value="TETİ nəticələri ilə bağlı Fakültə Elmi Şurasının protokolundan çıxarış">TETİ nəticələri ilə bağlı Fakültə Elmi Şurasının protokolundan çıxarış</SelectItem>
+                    <SelectItem value="Müxtəlif təyinatlı sənəd">Müxtəlif təyinatlı sənəd</SelectItem>
+                </SelectContent>
+              </Select>
+               <FormMessage />
+            </FormItem>
+          )}
+        />
         
         <FormItem>
           <FormLabel>Protokol Faylı *</FormLabel>

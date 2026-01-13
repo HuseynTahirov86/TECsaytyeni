@@ -18,6 +18,7 @@ import { exportToExcel } from "@/lib/utils";
 interface FacultyDocument {
     id: string;
     faculty: string;
+    documentType: string;
     fileUrl: string;
     submittedAt: Timestamp;
 }
@@ -65,6 +66,7 @@ export default function FacultyDocumentsPage() {
   const handleExport = () => {
     const dataToExport = documents.map(doc => ({
       'Fakültə': doc.faculty,
+      'Sənəd Təyinatı': doc.documentType,
       'Tarix': doc.submittedAt ? doc.submittedAt.toDate().toLocaleString('az-AZ') : 'Bilinmir',
       'Fayl URL': doc.fileUrl,
     }));
@@ -108,7 +110,7 @@ export default function FacultyDocumentsPage() {
                            <div className="space-y-6">
                             <div className="prose prose-sm max-w-none">
                                 <h4 className="font-semibold">Təyinat</h4>
-                                <p>TETİ nəticələri ilə bağlı Fakültə Elmi Şurasının protokolundan çıxarış</p>
+                                <p>{doc.documentType}</p>
                             </div>
                              <div className="flex justify-between items-center pt-4 border-t">
                                 <Button asChild variant="outline" size="sm">
