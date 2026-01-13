@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import { RichTextEditor } from "@/components/rich-text-editor";
 
 export interface AboutContent {
   mainContent: string;
@@ -48,17 +48,15 @@ export function AboutContentForm({ onSubmit, initialData }: AboutContentFormProp
           name="mainContent"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Səhifənin Əsas Məzmunu (HTML)</FormLabel>
+              <FormLabel>Səhifənin Əsas Məzmunu</FormLabel>
               <FormControl>
-                <Textarea
+                <RichTextEditor
+                  value={field.value}
+                  onChange={field.onChange}
                   placeholder="Haqqımızda səhifəsinin mətnini daxil edin..."
                   className="min-h-[400px]"
-                  {...field}
                 />
               </FormControl>
-              <FormDescription>
-                Mətnə format vermək üçün HTML teqlərindən istifadə edə bilərsiniz (məs., &lt;h3&gt;, &lt;p&gt;, &lt;strong&gt;, &lt;ol&gt;, &lt;li&gt;).
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

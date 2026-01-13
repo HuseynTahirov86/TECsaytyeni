@@ -7,12 +7,12 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { generateSlug } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { ImageUploader } from "@/components/image-uploader";
+import { RichTextEditor } from "@/components/rich-text-editor";
 
 export interface ProjectArticle {
   id: string;
@@ -121,7 +121,7 @@ export function ProjectForm({ onSubmit, initialData, onClose }: ProjectFormProps
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Qısa Təsvir</FormLabel>
-                  <FormControl><Textarea placeholder="Layihə haqqında qısa məlumat (kartlarda görünəcək)" {...field} /></FormControl>
+                  <FormControl><RichTextEditor placeholder="Layihə haqqında qısa məlumat (kartlarda görünəcək)" {...field} /></FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -131,11 +131,10 @@ export function ProjectForm({ onSubmit, initialData, onClose }: ProjectFormProps
               name="content"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ətraflı Məzmun (HTML)</FormLabel>
+                  <FormLabel>Ətraflı Məzmun</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Layihənin tam mətni (HTML formatında)" {...field} rows={15} className="font-mono text-sm" />
+                    <RichTextEditor placeholder="Layihənin tam mətni..." {...field} rows={15} />
                   </FormControl>
-                  <FormDescription>Mətnə format vermək üçün HTML teqlərindən istifadə edə bilərsiniz (məs., &lt;b&gt;Qalın&lt;/b&gt;, &lt;p&gt;Paraqraf&lt;/p&gt;, &lt;img src='...'&gt;).</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

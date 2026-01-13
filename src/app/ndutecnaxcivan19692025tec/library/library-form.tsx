@@ -7,7 +7,6 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { libraryCategories } from "@/lib/placeholder-data";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -15,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { ImageUploader } from "@/components/image-uploader";
 import { FileUploader } from "@/components/file-uploader";
+import { RichTextEditor } from "@/components/rich-text-editor";
 
 export interface LibraryEntry {
   id: string;
@@ -135,9 +135,8 @@ export function LibraryForm({ onSubmit, initialData, onClose }: LibraryFormProps
                 name="description"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Qısa Təsvir (HTML)</FormLabel>
-                    <FormControl><Textarea placeholder="Material haqqında qısa məlumat..." {...field} rows={5} /></FormControl>
-                     <FormDescription>Mətnə format vermək üçün HTML teqlərindən istifadə edə bilərsiniz.</FormDescription>
+                    <FormLabel>Qısa Təsvir</FormLabel>
+                    <FormControl><RichTextEditor placeholder="Material haqqında qısa məlumat..." {...field} /></FormControl>
                     <FormMessage />
                     </FormItem>
                 )}

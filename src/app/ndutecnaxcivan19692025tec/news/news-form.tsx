@@ -14,6 +14,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { ImageUploader } from "@/components/image-uploader";
+import { RichTextEditor } from "@/components/rich-text-editor";
 
 export interface NewsArticle {
   id: string;
@@ -134,11 +135,10 @@ export function NewsForm({ onSubmit, initialData, onClose }: NewsFormProps) {
                 name="content"
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>Ətraflı Məzmun (HTML)</FormLabel>
+                    <FormLabel>Ətraflı Məzmun</FormLabel>
                     <FormControl>
-                        <Textarea placeholder="Xəbərin tam mətni (HTML formatında)" {...field} rows={15} className="font-mono text-sm" />
+                        <RichTextEditor placeholder="Xəbərin tam mətni..." {...field} rows={15} />
                     </FormControl>
-                    <FormDescription>Mətnə format vermək üçün HTML teqlərindən istifadə edə bilərsiniz (məs., &lt;b&gt;Qalın&lt;/b&gt;, &lt;p&gt;Paraqraf&lt;/p&gt;, &lt;img src='...'&gt;).</FormDescription>
                     <FormMessage />
                     </FormItem>
                 )}

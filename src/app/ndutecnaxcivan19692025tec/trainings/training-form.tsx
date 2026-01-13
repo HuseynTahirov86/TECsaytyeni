@@ -17,6 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ImageUploader } from "@/components/image-uploader";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RichTextEditor } from "@/components/rich-text-editor";
 
 const questionSchema = z.object({
   question: z.string().min(5, "Sual ən azı 5 simvoldan ibarət olmalıdır."),
@@ -145,7 +146,7 @@ export function TrainingForm({ onSubmit, initialData, onClose }: TrainingFormPro
 
   const handleSubmit = async (values: FormValues) => {
     if (!files.mainImage && !initialData) {
-        toast({ title: "Xəta", description: "Təlim üçün əsas şəkil yüklənməlidir.", variant: "destructive" });
+        toast({ title: "Xəta!", description: "Təlim üçün əsas şəkil yüklənməlidir.", variant: "destructive" });
         return;
     }
 
@@ -187,7 +188,7 @@ export function TrainingForm({ onSubmit, initialData, onClose }: TrainingFormPro
                         <FormItem><FormLabel>Qısa Təsvir</FormLabel><FormControl><Textarea placeholder="Təlimlər səhifəsində görünəcək anons" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
                     <FormField name="content" control={control} render={({ field }) => (
-                        <FormItem><FormLabel>Giriş Məzmunu (HTML)</FormLabel><FormControl><Textarea placeholder="Təlimin əsas səhifəsində modullardan əvvəl görünəcək mətn" {...field} rows={8} /></FormControl><FormMessage /></FormItem>
+                        <FormItem><FormLabel>Giriş Məzmunu</FormLabel><FormControl><RichTextEditor placeholder="Təlimin əsas səhifəsində modullardan əvvəl görünəcək mətn" {...field} rows={8} /></FormControl><FormMessage /></FormItem>
                     )} />
                      <FormField name="date" control={control} render={({ field }) => (
                         <FormItem><FormLabel>Tarix</FormLabel><FormControl><Input type="date" {...field} /></FormControl><FormMessage /></FormItem>
@@ -229,9 +230,9 @@ export function TrainingForm({ onSubmit, initialData, onClose }: TrainingFormPro
                                     <FormItem><FormLabel>Başlıq</FormLabel><FormControl><Input placeholder="Modul başlığı" {...field} /></FormControl><FormMessage /></FormItem>
                                 )} />
                                  <FormItem>
-                                    <FormLabel>Məzmun (HTML)</FormLabel>
+                                    <FormLabel>Məzmun</FormLabel>
                                      <FormField name={`modules.${index}.content`} control={control} render={({ field }) => (
-                                         <Textarea placeholder="Modulun məzmununu daxil edin. Sadə mətn və ya HTML ola bilər." {...field} rows={6} className="flex-grow"/>
+                                         <RichTextEditor placeholder="Modulun məzmununu daxil edin..." {...field} rows={6} className="flex-grow"/>
                                      )} />
                                      <FormMessage>{form.formState.errors.modules?.[index]?.content?.message}</FormMessage>
                                 </FormItem>
