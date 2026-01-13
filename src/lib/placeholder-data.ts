@@ -50,8 +50,6 @@ export const departmentList = [
     "Klinik fənlər və hərbi tibb",
     "Stomatologiya",
     "Əczaçılıq və biokimya",
-    "İngilis dili və tərcümə",
-    "İngilis dili və metodika",
     "Avropa dilləri",
     "Şərq dilləri",
     "Azərbaycan dilçiliyi",
