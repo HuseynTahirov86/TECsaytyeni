@@ -2,21 +2,29 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import 'react-quill/dist/quill.snow.css';
 import { cn } from "@/lib/utils";
 
 // Dynamically import ReactQuill to ensure it's only loaded on the client side
-const ReactQuill = dynamic(() => import('react-quill'), { 
-    ssr: false,
-    loading: () => <p>Redaktor Yüklənir...</p> 
-});
+const ReactQuill = dynamic(
+    async () => {
+        const { default: RQ } = await import('react-quill');
+        // @ts-ignore
+        return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
+    }, 
+    { 
+        ssr: false,
+        loading: () => <p>Redaktor Yüklənir...</p> 
+    }
+);
+import 'react-quill/dist/quill.snow.css';
+
 
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   className?: string;
-  rows?: number; // This prop is kept for interface consistency but won't directly set height
+  rows?: number;
 }
 
 const modules = {
@@ -37,7 +45,6 @@ const formats = [
 ];
 
 export function RichTextEditor({ value, onChange, placeholder, className, rows = 10 }: RichTextEditorProps) {
-  // Use a wrapper div to control styling and dimensions
   return (
     <div className={cn("bg-background", className)} style={{ minHeight: `${rows * 1.5}rem` }}>
       <ReactQuill
