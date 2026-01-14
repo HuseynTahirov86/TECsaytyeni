@@ -29,9 +29,9 @@ export default function ProjectsClientPage() {
     const fetchProjects = async () => {
       setIsLoading(true);
       try {
-        const q = query(collection(db, "projects"), orderBy("date", "desc"));
+        const q = query(collection(db, "projects"));
         const querySnapshot = await getDocs(q);
-        const projectList = querySnapshot.docs.map(doc => {
+        let projectList = querySnapshot.docs.map(doc => {
           const data = doc.data();
           return {
             id: doc.id,
@@ -39,6 +39,14 @@ export default function ProjectsClientPage() {
             date: data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date,
           } as ProjectArticle;
         });
+
+        // Sort by date in descending order, putting projects without a date at the end
+        projectList.sort((a, b) => {
+            const dateA = a.date ? new Date(a.date).getTime() : 0;
+            const dateB = b.date ? new Date(b.date).getTime() : 0;
+            return dateB - dateA;
+        });
+        
         setProjects(projectList);
       } catch (error) {
         console.error("Error fetching projects:", error);

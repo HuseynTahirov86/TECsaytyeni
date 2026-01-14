@@ -77,21 +77,37 @@ export default function Home() {
     React.useEffect(() => {
         setIsClient(true);
 
-        const fetchData = async (collectionName: string, setter: Function, setLoading: Function, orderField: string = "order", orderDirection: "asc" | "desc" = "asc", itemLimit?: number) => {
+        const fetchData = async (collectionName: string, setter: Function, setLoading: Function, orderField?: string, orderDirection: "asc" | "desc" = "asc", itemLimit?: number) => {
             setLoading(true);
             try {
-                let q = query(collection(db, collectionName), orderBy(orderField, orderDirection));
+                let q = orderField 
+                    ? query(collection(db, collectionName), orderBy(orderField, orderDirection))
+                    : query(collection(db, collectionName));
+                
                 if (itemLimit) {
                     q = query(q, limit(itemLimit));
                 }
+
                 const querySnapshot = await getDocs(q);
-                const itemList = querySnapshot.docs.map(doc => {
+                let itemList = querySnapshot.docs.map(doc => {
                     const data = doc.data();
                     if ((collectionName === 'news' || collectionName === 'projects') && data.date instanceof Timestamp) {
                        return { id: doc.id, ...data, date: data.date.toDate().toISOString().split('T')[0] }
                     }
                     return { id: doc.id, ...data };
                 });
+                
+                if (collectionName === 'projects') {
+                    itemList.sort((a, b) => {
+                        const dateA = a.date ? new Date(a.date).getTime() : 0;
+                        const dateB = b.date ? new Date(b.date).getTime() : 0;
+                        return dateB - dateA;
+                    });
+                    if (itemLimit) {
+                        itemList = itemList.slice(0, itemLimit);
+                    }
+                }
+                
                 setter(itemList);
             } catch (error) {
                 console.error(`Error fetching ${collectionName}:`, error);
@@ -101,11 +117,11 @@ export default function Home() {
         };
         
         fetchData("news", setNewsItems, setIsLoadingNews, "date", "desc", 6);
-        fetchData("projects", setProjects, setIsLoadingProjects, "date", "desc", 3);
+        fetchData("projects", setProjects, setIsLoadingProjects, undefined, "desc", 3);
         fetchData("library", setLibraryEntries, setIsLoadingLibrary, "title", "asc", 4);
-        fetchData("aphorisms", setAphorisms, setIsLoadingAphorisms);
-        fetchData("academicWritingRules", setAcademicWritingRules, setIsLoadingAcademicRules);
-        fetchData("heroSlides", setHeroSlides, setIsLoadingHero);
+        fetchData("aphorisms", setAphorisms, setIsLoadingAphorisms, "order");
+        fetchData("academicWritingRules", setAcademicWritingRules, setIsLoadingAcademicRules, "order");
+        fetchData("heroSlides", setHeroSlides, setIsLoadingHero, "order");
 
     }, []);
 
