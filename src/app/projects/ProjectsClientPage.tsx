@@ -109,10 +109,12 @@ export default function ProjectsClientPage() {
                           <Users className="h-4 w-4 text-accent" />
                           <span className="truncate">{project.team.join(', ')}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4 text-accent" />
-                          <span>{isClient ? formatDate(project.date) : '...'}</span>
-                      </div>
+                      {isClient && project.date && (
+                        <div className="flex items-center gap-2">
+                            <Calendar className="h-4 w-4 text-accent" />
+                            <span>{formatDate(project.date)}</span>
+                        </div>
+                      )}
                   </CardFooter>
                 </Card>
               </Link>

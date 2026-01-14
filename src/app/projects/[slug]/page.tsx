@@ -18,10 +18,14 @@ async function getProject(slug: string): Promise<ProjectArticle | null> {
     }
     const docSnap = querySnapshot.docs[0];
     const data = docSnap.data();
+    
+    // Safely handle date conversion
+    const date = data.date ? (data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date) : null;
+    
     return { 
         id: docSnap.id, 
         ...data,
-        date: data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date,
+        date: date,
     } as ProjectArticle;
 }
 
@@ -39,15 +43,11 @@ export async function generateMetadata(
   }
 
   const previousImages = (await parent).openGraph?.images || []
-
-  return {
-    title: project.title,
-    description: project.description,
-    openGraph: {
+  
+  const openGraphData: any = {
       title: project.title,
       description: project.description,
        type: 'article',
-      publishedTime: new Date(project.date).toISOString(),
       images: [
         {
           url: project.imageUrl,
@@ -57,7 +57,17 @@ export async function generateMetadata(
         },
         ...previousImages
       ],
-    },
+  };
+
+  if (project.date) {
+      openGraphData.publishedTime = new Date(project.date).toISOString();
+  }
+
+
+  return {
+    title: project.title,
+    description: project.description,
+    openGraph: openGraphData,
   }
 }
 
@@ -82,7 +92,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
       "@type": "Person",
       "name": name
     })),
-    "datePublished": new Date(project.date).toISOString(),
+    "datePublished": project.date ? new Date(project.date).toISOString() : undefined,
      "publisher": {
         "@type": "Organization",
         "name": "NDU Tələbə Elmi Cəmiyyəti",

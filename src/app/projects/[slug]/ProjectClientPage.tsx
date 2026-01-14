@@ -50,10 +50,12 @@ export default function ProjectClientPage({ project }: ProjectClientPageProps) {
                 <Users className="h-4 w-4 text-accent" />
                 <span className="font-medium">{project.team.join(', ')}</span>
             </div>
+            {isClient && project.date && (
              <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-accent" />
-                <span className="font-medium">{isClient ? formatDate(project.date) : '...'}</span>
+                <span className="font-medium">{formatDate(project.date)}</span>
             </div>
+            )}
           </div>
         </header>
         

@@ -313,7 +313,7 @@ export default function Home() {
                                 />
                             </CardHeader>
                             <CardContent className="p-6">
-                                <p className="text-sm text-muted-foreground">{isClient ? formatDate(item.date) : '...'} &bull; <span className="text-accent font-semibold">{item.category}</span></p>
+                                <p className="text-sm text-muted-foreground">{isClient && item.date ? formatDate(item.date) : '...'} &bull; <span className="text-accent font-semibold">{item.category}</span></p>
                                 <CardTitle className="mt-2 text-xl font-semibold leading-snug group-hover:text-primary transition-colors">{item.title}</CardTitle>
                                 <p className="mt-4 text-primary inline-flex items-center">
                                     Ətraflı <ArrowRight className="ml-1 h-4 w-4" />
@@ -439,10 +439,12 @@ export default function Home() {
                                 <Users className="h-4 w-4 text-accent" />
                                 <span className="truncate">{project.team.join(', ')}</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <Calendar className="h-4 w-4 text-accent" />
-                                <span>{isClient ? formatDate(project.date) : '...'}</span>
-                            </div>
+                            {isClient && project.date && (
+                                <div className="flex items-center gap-2">
+                                    <Calendar className="h-4 w-4 text-accent" />
+                                    <span>{formatDate(project.date)}</span>
+                                </div>
+                            )}
                         </div>
                     </Card>
                 </Link>
