@@ -80,14 +80,8 @@ export default function Home() {
         const fetchData = async (collectionName: string, setter: Function, setLoading: Function, orderField?: string, orderDirection: "asc" | "desc" = "asc", itemLimit?: number) => {
             setLoading(true);
             try {
-                let q = orderField 
-                    ? query(collection(db, collectionName), orderBy(orderField, orderDirection))
-                    : query(collection(db, collectionName));
+                let q = collection(db, collectionName);
                 
-                if (itemLimit && collectionName !== 'projects') {
-                    q = query(q, limit(itemLimit));
-                }
-
                 const querySnapshot = await getDocs(q);
                 let itemList = querySnapshot.docs.map(doc => {
                     const data = doc.data();
@@ -97,15 +91,27 @@ export default function Home() {
                     return { id: doc.id, ...data };
                 });
                 
-                if (collectionName === 'projects') {
+                if (collectionName === 'projects' || collectionName === 'news') {
                     itemList.sort((a, b) => {
                         const dateA = a.date ? new Date(a.date).getTime() : 0;
                         const dateB = b.date ? new Date(b.date).getTime() : 0;
+                        if (dateB === dateA) {
+                            // If dates are same, or both are null, sort by title or some other field
+                            return a.title?.localeCompare(b.title || '') || 0;
+                        }
                         return dateB - dateA;
                     });
-                    if (itemLimit) {
-                        itemList = itemList.slice(0, itemLimit);
-                    }
+                } else if (orderField) {
+                     itemList.sort((a, b) => {
+                        if (orderDirection === 'asc') {
+                            return a[orderField] > b[orderField] ? 1 : -1;
+                        }
+                        return a[orderField] < b[orderField] ? 1 : -1;
+                    });
+                }
+                
+                if (itemLimit) {
+                    itemList = itemList.slice(0, itemLimit);
                 }
                 
                 setter(itemList);
@@ -117,7 +123,7 @@ export default function Home() {
         };
         
         fetchData("news", setNewsItems, setIsLoadingNews, "date", "desc", 6);
-        fetchData("projects", setProjects, setIsLoadingProjects, undefined, "desc", 3);
+        fetchData("projects", setProjects, setIsLoadingProjects, "date", "desc", 3);
         fetchData("library", setLibraryEntries, setIsLoadingLibrary, "title", "asc", 4);
         fetchData("aphorisms", setAphorisms, setIsLoadingAphorisms, "order");
         fetchData("academicWritingRules", setAcademicWritingRules, setIsLoadingAcademicRules, "order");
@@ -201,7 +207,8 @@ export default function Home() {
                                 className="relative z-10 max-w-2xl">
                                 
                                 <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                    Naxçıvan Dövlət Universiteti Tələbə Elmi Cəmiyyəti
+                                  <span className="block">Naxçıvan Dövlət Universiteti</span>
+                                  <span className="block text-2xl lg:text-4xl mt-1 text-gray-200">Tələbə Elmi Cəmiyyəti</span>
                                 </motion.h1>
                                 
                                 <motion.div variants={heroItemVariants}>

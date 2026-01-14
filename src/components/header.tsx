@@ -52,7 +52,8 @@ export function Header() {
           <Link href="/" className="flex items-center space-x-3">
              <Image src="/logo1.png" alt="TEC Təhlilləri Loqosu" width={60} height={60} className="object-contain flex-shrink-0" />
             <div className="hidden sm:flex flex-col text-sm font-semibold leading-tight min-w-0">
-              <span className="whitespace-nowrap text-xs lg:text-sm">Naxçıvan Dövlət Universiteti | Tələbə Elmi Cəmiyyəti</span>
+              <span className="whitespace-nowrap">Naxçıvan Dövlət Universiteti</span>
+              <span className="text-xs font-medium whitespace-nowrap">Tələbə Elmi Cəmiyyəti</span>
             </div>
           </Link>
         </div>
