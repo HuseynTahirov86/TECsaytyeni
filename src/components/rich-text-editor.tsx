@@ -1,51 +1,57 @@
 "use client";
 
-import dynamic from 'next/dynamic';
-import 'react-quill-new/dist/quill.snow.css';
+import { useEffect, useRef } from 'react';
+import Quill from 'quill';
+import 'quill/dist/quill.snow.css';
 import { cn } from '@/lib/utils';
-
-const ReactQuill = dynamic(() => import('react-quill-new'), {
-  ssr: false,
-  loading: () => <p>Redaktor Yüklənir...</p>,
-});
 
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   className?: string;
-  rows?: number;
 }
 
-const modules = {
-  toolbar: [
-    [{ 'header': [1, 2, 3, false] }],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-    ['link', 'image'],
-    ['clean']
-  ],
-};
+export function RichTextEditor({ value, onChange, placeholder, className }: RichTextEditorProps) {
+  const editorRef = useRef<HTMLDivElement>(null);
+  const quillRef = useRef<Quill | null>(null);
 
-const formats = [
-  'header',
-  'bold', 'italic', 'underline', 'strike', 'blockquote',
-  'list', 'bullet', 'indent',
-  'link', 'image'
-];
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
 
-export function RichTextEditor({ value, onChange, placeholder, className, rows = 10 }: RichTextEditorProps) {
+    if (editorRef.current && !quillRef.current) {
+      quillRef.current = new Quill(editorRef.current, {
+        theme: 'snow',
+        placeholder,
+        modules: {
+          toolbar: [
+            [{ 'header': [1, 2, 3, false] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+            ['link', 'image'],
+            ['clean']
+          ],
+        }
+      });
+      
+      const quill = quillRef.current;
+      quill.root.innerHTML = value;
+
+      quill.on('text-change', () => {
+        onChange(quill.root.innerHTML);
+      });
+    }
+
+    return () => {
+      if (quillRef.current) {
+        quillRef.current.off('text-change');
+      }
+    };
+  }, [value, onChange, placeholder]);
+  
   return (
-    <div className={cn("bg-background", className)} style={{ minHeight: `${rows * 1.5}rem` }}>
-      <ReactQuill
-        theme="snow"
-        value={value}
-        onChange={onChange}
-        modules={modules}
-        formats={formats}
-        placeholder={placeholder}
-        className="h-full"
-      />
+    <div className={cn("bg-background rounded-md border border-input", className)}>
+        <div ref={editorRef} style={{ minHeight: '250px' }} />
     </div>
-  );
+  )
 }
