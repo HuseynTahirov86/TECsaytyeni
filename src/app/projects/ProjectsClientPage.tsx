@@ -3,17 +3,19 @@
 
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users } from "lucide-react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { Users, Calendar } from "lucide-react";
+import { collection, getDocs, orderBy, query, Timestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ProjectArticle } from "../ndutecnaxcivan19692025tec/projects/project-form";
 import Link from "next/link";
 import { motion } from 'framer-motion';
+import { formatDate } from "@/lib/utils";
 
 export default function ProjectsClientPage() {
   const [projects, setProjects] = useState<ProjectArticle[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
 
   const FADE_IN_ANIMATION_SETTINGS = {
     initial: { opacity: 0, y: 20 },
@@ -23,16 +25,18 @@ export default function ProjectsClientPage() {
 
 
   useEffect(() => {
+    setIsClient(true);
     const fetchProjects = async () => {
       setIsLoading(true);
       try {
-        const q = query(collection(db, "projects"), orderBy("title"));
+        const q = query(collection(db, "projects"), orderBy("date", "desc"));
         const querySnapshot = await getDocs(q);
         const projectList = querySnapshot.docs.map(doc => {
           const data = doc.data();
           return {
             id: doc.id,
             ...data,
+            date: data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date,
           } as ProjectArticle;
         });
         setProjects(projectList);
@@ -100,10 +104,14 @@ export default function ProjectsClientPage() {
                     <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</CardTitle>
                     <CardDescription className="mt-2 text-base line-clamp-3">{project.description}</CardDescription>
                   </CardContent>
-                  <CardFooter className="p-6 pt-0">
-                      <div className="flex items-center text-sm text-muted-foreground">
-                          <Users className="h-4 w-4 mr-2 text-accent" />
-                          <span>{project.team.join(', ')}</span>
+                  <CardFooter className="p-6 pt-0 flex justify-between items-center text-sm text-muted-foreground">
+                      <div className="flex items-center gap-2">
+                          <Users className="h-4 w-4 text-accent" />
+                          <span className="truncate">{project.team.join(', ')}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                          <Calendar className="h-4 w-4 text-accent" />
+                          <span>{isClient ? formatDate(project.date) : '...'}</span>
                       </div>
                   </CardFooter>
                 </Card>

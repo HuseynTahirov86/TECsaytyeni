@@ -21,6 +21,7 @@ export interface ProjectArticle {
   description: string;
   content: string;
   team: string[];
+  date: string;
   imageUrl: string;
   imageHint: string;
 }
@@ -30,6 +31,7 @@ const formSchema = z.object({
   description: z.string().min(20, { message: "Qısa təsvir ən azı 20 simvoldan ibarət olmalıdır." }),
   content: z.string().min(50, { message: "Ətraflı məzmun ən azı 50 simvoldan ibarət olmalıdır." }),
   team: z.string().min(1, { message: "Komanda üzvlərini daxil edin (vergüllə ayırın)." }),
+  date: z.string().refine((val) => !isNaN(Date.parse(val)), { message: "Düzgün tarix daxil edin." }),
   imageUrl: z.string().url({ message: "Şəkil yüklənməlidir." }),
   imageHint: z.string().min(2, { message: "Şəkil üçün açar söz daxil edin." }),
 });
@@ -56,6 +58,7 @@ export function ProjectForm({ onSubmit, initialData, onClose }: ProjectFormProps
         description: initialData?.description || "",
         content: initialData?.content || "",
         team: initialData?.team.join(', ') || "",
+        date: initialData?.date || new Date().toISOString().split('T')[0],
         imageUrl: initialData?.imageUrl || "",
         imageHint: initialData?.imageHint || "",
     },
@@ -139,18 +142,31 @@ export function ProjectForm({ onSubmit, initialData, onClose }: ProjectFormProps
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="team"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Komanda</FormLabel>
-                  <FormControl><Input placeholder="Alisa Cabbarlı, Babək Vəliyev" {...field} /></FormControl>
-                  <FormDescription>Komanda üzvlərinin adlarını vergüllə ayırın.</FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-2 gap-4">
+                 <FormField
+                  control={form.control}
+                  name="team"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Komanda</FormLabel>
+                      <FormControl><Input placeholder="Alisa Cabbarlı, Babək Vəliyev" {...field} /></FormControl>
+                      <FormDescription>Komanda üzvlərinin adlarını vergüllə ayırın.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                    control={form.control}
+                    name="date"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>Tarix</FormLabel>
+                        <FormControl><Input type="date" {...field} /></FormControl>
+                        <FormMessage />
+                    </FormItem>
+                    )}
+                />
+            </div>
             
             <FormField
               control={form.control}

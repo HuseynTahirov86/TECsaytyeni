@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardTitle, CardHeader, CardFooter } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "@/components/ui/carousel";
 import Link from "next/link";
-import { Users, ArrowRight, BookOpen, FileText, Landmark, Image as ImageIcon } from "lucide-react";
+import { Users, ArrowRight, BookOpen, FileText, Landmark, Image as ImageIcon, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { collection, getDocs, limit, orderBy, query, Timestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
@@ -87,8 +87,7 @@ export default function Home() {
                 const querySnapshot = await getDocs(q);
                 const itemList = querySnapshot.docs.map(doc => {
                     const data = doc.data();
-                    // Specific date handling for news
-                    if (collectionName === 'news' && data.date instanceof Timestamp) {
+                    if ((collectionName === 'news' || collectionName === 'projects') && data.date instanceof Timestamp) {
                        return { id: doc.id, ...data, date: data.date.toDate().toISOString().split('T')[0] }
                     }
                     return { id: doc.id, ...data };
@@ -102,7 +101,7 @@ export default function Home() {
         };
         
         fetchData("news", setNewsItems, setIsLoadingNews, "date", "desc", 6);
-        fetchData("projects", setProjects, setIsLoadingProjects, "title", "asc", 3);
+        fetchData("projects", setProjects, setIsLoadingProjects, "date", "desc", 3);
         fetchData("library", setLibraryEntries, setIsLoadingLibrary, "title", "asc", 4);
         fetchData("aphorisms", setAphorisms, setIsLoadingAphorisms);
         fetchData("academicWritingRules", setAcademicWritingRules, setIsLoadingAcademicRules);
@@ -435,10 +434,14 @@ export default function Home() {
                         <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</CardTitle>
                         <CardDescription className="mt-2 text-base">{project.description}</CardDescription>
                         </CardContent>
-                        <div className="p-6 pt-0">
-                            <div className="flex items-center text-sm text-muted-foreground">
-                                <Users className="h-4 w-4 mr-2 text-accent" />
-                                <span>{project.team.join(', ')}</span>
+                        <div className="p-6 pt-0 flex justify-between items-center text-sm text-muted-foreground">
+                            <div className="flex items-center gap-2">
+                                <Users className="h-4 w-4 text-accent" />
+                                <span className="truncate">{project.team.join(', ')}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Calendar className="h-4 w-4 text-accent" />
+                                <span>{isClient ? formatDate(project.date) : '...'}</span>
                             </div>
                         </div>
                     </Card>

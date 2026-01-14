@@ -1,6 +1,6 @@
 
 import type { Metadata, ResolvingMetadata } from 'next';
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, Timestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { ProjectArticle } from "@/app/ndutecnaxcivan19692025tec/projects/project-form";
 import ProjectClientPage from './ProjectClientPage';
@@ -17,7 +17,12 @@ async function getProject(slug: string): Promise<ProjectArticle | null> {
         return null;
     }
     const docSnap = querySnapshot.docs[0];
-    return { id: docSnap.id, ...docSnap.data() } as ProjectArticle;
+    const data = docSnap.data();
+    return { 
+        id: docSnap.id, 
+        ...data,
+        date: data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date,
+    } as ProjectArticle;
 }
 
 export async function generateMetadata(
@@ -41,6 +46,8 @@ export async function generateMetadata(
     openGraph: {
       title: project.title,
       description: project.description,
+       type: 'article',
+      publishedTime: new Date(project.date).toISOString(),
       images: [
         {
           url: project.imageUrl,
@@ -75,6 +82,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
       "@type": "Person",
       "name": name
     })),
+    "datePublished": new Date(project.date).toISOString(),
      "publisher": {
         "@type": "Organization",
         "name": "NDU Tələbə Elmi Cəmiyyəti",

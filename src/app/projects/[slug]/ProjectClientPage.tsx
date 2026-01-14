@@ -3,9 +3,10 @@
 
 import { useState, useEffect } from "react";
 import { ProjectArticle } from "@/app/ndutecnaxcivan19692025tec/projects/project-form";
-import { Users } from "lucide-react";
+import { Users, Calendar } from "lucide-react";
 import { motion } from 'framer-motion';
 import DOMPurify from 'dompurify';
+import { formatDate } from "@/lib/utils";
 
 interface ProjectClientPageProps {
   project: ProjectArticle;
@@ -44,10 +45,14 @@ export default function ProjectClientPage({ project }: ProjectClientPageProps) {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-primary leading-tight">
             {project.title}
           </h1>
-          <div className="flex items-center gap-6 mt-4 text-sm text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-accent" />
                 <span className="font-medium">{project.team.join(', ')}</span>
+            </div>
+             <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-accent" />
+                <span className="font-medium">{isClient ? formatDate(project.date) : '...'}</span>
             </div>
           </div>
         </header>

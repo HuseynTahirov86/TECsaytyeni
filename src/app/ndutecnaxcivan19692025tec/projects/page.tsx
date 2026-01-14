@@ -4,7 +4,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { db } from "@/lib/firebase";
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query, Timestamp } from "firebase/firestore";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -13,7 +13,7 @@ import { ProjectForm, ProjectArticle } from "./project-form";
 import { useToast } from "@/hooks/use-toast";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription as AlertDialogDesc, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { uploadFile, generateSlug } from "@/lib/utils";
+import { uploadFile, generateSlug, formatDate } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 
 export default function ProjectsAdminPage() {
@@ -26,13 +26,14 @@ export default function ProjectsAdminPage() {
   const fetchProjects = async () => {
     setIsLoading(true);
     try {
-      const q = query(collection(db, "projects"), orderBy("title", "asc"));
+      const q = query(collection(db, "projects"), orderBy("date", "desc"));
       const querySnapshot = await getDocs(q);
       const projectList = querySnapshot.docs.map(doc => {
         const data = doc.data();
         return {
           id: doc.id,
           ...data,
+           date: data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date,
         } as ProjectArticle;
       });
       setProjects(projectList);
@@ -157,7 +158,7 @@ export default function ProjectsAdminPage() {
                                       />
                                     <p className="font-medium">{project.title}</p>
                                </div>
-                                <span className="text-sm text-muted-foreground hidden md:inline-block max-w-xs truncate">{project.team.join(', ')}</span>
+                                <span className="text-sm text-muted-foreground hidden md:inline-block">{formatDate(project.date)}</span>
                            </div>
                         </AccordionTrigger>
                         <AccordionContent>
