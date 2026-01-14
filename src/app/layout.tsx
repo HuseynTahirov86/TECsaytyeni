@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Toaster } from "@/components/ui/toaster";
-import 'react-quill-new/dist/quill.snow.css';
+import 'react-quill/dist/quill.snow.css';
 
 
 const livvic = Livvic({ 
