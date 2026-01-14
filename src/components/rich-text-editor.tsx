@@ -1,23 +1,13 @@
-
 "use client";
 
 import dynamic from 'next/dynamic';
 import { cn } from "@/lib/utils";
-
-// Dynamically import ReactQuill to ensure it's only loaded on the client side
-const ReactQuill = dynamic(
-    async () => {
-        const { default: RQ } = await import('react-quill');
-        // @ts-ignore
-        return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
-    }, 
-    { 
-        ssr: false,
-        loading: () => <p>Redaktor Yüklənir...</p> 
-    }
-);
 import 'react-quill/dist/quill.snow.css';
 
+const ReactQuill = dynamic(() => import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Redaktor Yüklənir...</p>,
+});
 
 interface RichTextEditorProps {
   value: string;
