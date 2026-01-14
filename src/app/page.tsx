@@ -1,4 +1,3 @@
-
 "use client";
 import React from 'react';
 import Image from "next/image";
@@ -77,41 +76,30 @@ export default function Home() {
     React.useEffect(() => {
         setIsClient(true);
 
-        const fetchData = async (collectionName: string, setter: Function, setLoading: Function, orderField?: string, orderDirection: "asc" | "desc" = "asc", itemLimit?: number) => {
+        const fetchData = async (collectionName: string, setter: Function, setLoading: Function) => {
             setLoading(true);
             try {
-                let q = collection(db, collectionName);
-                
+                let q = query(collection(db, collectionName));
                 const querySnapshot = await getDocs(q);
                 let itemList = querySnapshot.docs.map(doc => {
                     const data = doc.data();
+                    // Handle date conversion for specific collections
                     if ((collectionName === 'news' || collectionName === 'projects') && data.date instanceof Timestamp) {
                        return { id: doc.id, ...data, date: data.date.toDate().toISOString().split('T')[0] }
                     }
                     return { id: doc.id, ...data };
                 });
                 
+                // Client-side sorting for projects and news by date
                 if (collectionName === 'projects' || collectionName === 'news') {
                     itemList.sort((a, b) => {
                         const dateA = a.date ? new Date(a.date).getTime() : 0;
                         const dateB = b.date ? new Date(b.date).getTime() : 0;
                         if (dateB === dateA) {
-                            // If dates are same, or both are null, sort by title or some other field
                             return a.title?.localeCompare(b.title || '') || 0;
                         }
                         return dateB - dateA;
                     });
-                } else if (orderField) {
-                     itemList.sort((a, b) => {
-                        if (orderDirection === 'asc') {
-                            return a[orderField] > b[orderField] ? 1 : -1;
-                        }
-                        return a[orderField] < b[orderField] ? 1 : -1;
-                    });
-                }
-                
-                if (itemLimit) {
-                    itemList = itemList.slice(0, itemLimit);
                 }
                 
                 setter(itemList);
@@ -121,13 +109,30 @@ export default function Home() {
                 setLoading(false);
             }
         };
+
+        const fetchOrderedData = async (collectionName: string, setter: Function, setLoading: Function, orderField: string, itemLimit?: number) => {
+             setLoading(true);
+             try {
+                let q = query(collection(db, collectionName), orderBy(orderField, "asc"));
+                if (itemLimit) {
+                    q = query(collection(db, collectionName), orderBy(orderField, "asc"), limit(itemLimit));
+                }
+                const querySnapshot = await getDocs(q);
+                const itemList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                setter(itemList);
+             } catch (error) {
+                console.error(`Error fetching ordered ${collectionName}:`, error);
+             } finally {
+                setLoading(false);
+             }
+        };
         
-        fetchData("news", setNewsItems, setIsLoadingNews, "date", "desc", 6);
-        fetchData("projects", setProjects, setIsLoadingProjects, "date", "desc", 3);
-        fetchData("library", setLibraryEntries, setIsLoadingLibrary, "title", "asc", 4);
-        fetchData("aphorisms", setAphorisms, setIsLoadingAphorisms, "order");
-        fetchData("academicWritingRules", setAcademicWritingRules, setIsLoadingAcademicRules, "order");
-        fetchData("heroSlides", setHeroSlides, setIsLoadingHero, "order");
+        fetchData("news", setNewsItems, setIsLoadingNews);
+        fetchData("projects", setProjects, setIsLoadingProjects);
+        fetchOrderedData("library", setLibraryEntries, setIsLoadingLibrary, "title", 4);
+        fetchOrderedData("aphorisms", setAphorisms, setIsLoadingAphorisms, "order");
+        fetchOrderedData("academicWritingRules", setAcademicWritingRules, setIsLoadingAcademicRules, "order");
+        fetchOrderedData("heroSlides", setHeroSlides, setIsLoadingHero, "order");
 
     }, []);
 
@@ -207,8 +212,8 @@ export default function Home() {
                                 className="relative z-10 max-w-2xl">
                                 
                                 <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                  <span className="block">Naxçıvan Dövlət Universiteti</span>
-                                  <span className="block text-2xl lg:text-4xl mt-1 text-gray-200">Tələbə Elmi Cəmiyyəti</span>
+                                  <span className="block whitespace-nowrap">Naxçıvan Dövlət Universiteti</span>
+                                  <span className="block text-2xl lg:text-4xl mt-1 text-gray-200 whitespace-nowrap">Tələbə Elmi Cəmiyyəti</span>
                                 </motion.h1>
                                 
                                 <motion.div variants={heroItemVariants}>
@@ -319,7 +324,7 @@ export default function Home() {
                        </div>
                     </CarouselItem>
                   ))
-                ) : newsItems.map((item) => (
+                ) : newsItems.slice(0, 6).map((item) => (
                     <CarouselItem key={item.id} className="md:basis-1/2 lg:basis-1/3">
                       <div className="p-2 h-full">
                         <Link href={`/blog/${item.slug}`} className="block h-full group">
@@ -432,7 +437,7 @@ export default function Home() {
                     </Card>
                 </motion.div>
               ))
-            ) : projects.map((project, index) => (
+            ) : projects.slice(0,3).map((project, index) => (
               <motion.div 
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
