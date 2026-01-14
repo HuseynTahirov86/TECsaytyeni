@@ -26,16 +26,25 @@ export default function ProjectsAdminPage() {
   const fetchProjects = async () => {
     setIsLoading(true);
     try {
-      const q = query(collection(db, "projects"), orderBy("date", "desc"));
+      // Order by title first to get all documents
+      const q = query(collection(db, "projects"), orderBy("title"));
       const querySnapshot = await getDocs(q);
-      const projectList = querySnapshot.docs.map(doc => {
+      let projectList = querySnapshot.docs.map(doc => {
         const data = doc.data();
         return {
           id: doc.id,
           ...data,
-           date: data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date,
+          date: data.date instanceof Timestamp ? data.date.toDate().toISOString().split('T')[0] : data.date,
         } as ProjectArticle;
       });
+
+      // Then sort by date in the client, putting projects without a date at the end
+      projectList.sort((a, b) => {
+        const dateA = a.date ? new Date(a.date).getTime() : 0;
+        const dateB = b.date ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+      });
+
       setProjects(projectList);
     } catch (error) {
       console.error("Error fetching projects: ", error);
@@ -158,7 +167,7 @@ export default function ProjectsAdminPage() {
                                       />
                                     <p className="font-medium">{project.title}</p>
                                </div>
-                                <span className="text-sm text-muted-foreground hidden md:inline-block">{formatDate(project.date)}</span>
+                                <span className="text-sm text-muted-foreground hidden md:inline-block">{project.date ? formatDate(project.date) : 'Tarix yoxdur'}</span>
                            </div>
                         </AccordionTrigger>
                         <AccordionContent>
