@@ -84,7 +84,7 @@ export default function Home() {
                     ? query(collection(db, collectionName), orderBy(orderField, orderDirection))
                     : query(collection(db, collectionName));
                 
-                if (itemLimit) {
+                if (itemLimit && collectionName !== 'projects') {
                     q = query(q, limit(itemLimit));
                 }
 
@@ -201,8 +201,7 @@ export default function Home() {
                                 className="relative z-10 max-w-2xl">
                                 
                                 <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                    <span className="block">Naxçıvan Dövlət Universiteti</span>
-                                    <span className="block">Tələbə Elmi Cəmiyyəti</span>
+                                    Naxçıvan Dövlət Universiteti Tələbə Elmi Cəmiyyəti
                                 </motion.h1>
                                 
                                 <motion.div variants={heroItemVariants}>
