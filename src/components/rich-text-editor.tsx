@@ -3,6 +3,7 @@
 
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
+import { cn } from "@/lib/utils";
 
 // Dynamically import ReactQuill to ensure it's only loaded on the client side
 const ReactQuill = dynamic(() => import('react-quill'), { 
