@@ -65,7 +65,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
       },
        {
         title: "Praktiki bacarıqların inkişafı",
-        description: "Tələbələrə araşdırma metodologiyaları, statistik təhlil, yazılı və şifahi təqdimat bacarıqları kimi praktik bacarıqları öyrədir və inkişaf etdirir.",
+        description: "Tələbələərə araşdırma metodologiyaları, statistik təhlil, yazılı və şifahi təqdimat bacarıqları kimi praktik bacarıqları öyrədir və inkişaf etdirir.",
         icon: ListOrdered,
       },
       {
@@ -132,19 +132,19 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
         <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
           <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
               <Button asChild size="lg">
-                  <a href="https://ndu.edu.az/public/upload/tecesasname.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                  <a href="/tecesasname.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
                       <Download className="mr-2 h-5 w-5" />
                       TEC Əsasnaməsi
                   </a>
               </Button>
                 <Button asChild size="lg" variant="secondary">
-                  <a href="/storage/tecetik.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                  <a href="/tecetikcodex.docx" target="_blank" rel="noopener noreferrer" className="flex items-center">
                       <Download className="mr-2 h-5 w-5" />
                       Etik Davranış Kodeksi
                   </a>
               </Button>
               <Button asChild size="lg" variant="secondary">
-                    <a href="https://old.bioscript.shop/uploads/ali-tehsil-muessisesinde-tehsilalanlarin-elmi-tedqiqat-isinin-teskili-haqqinda-esasname-27.06.14-emr-752-elave.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center text-center">
+                    <a href="/alitehsilesas.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center text-center">
                       <Download className="mr-2 h-5 w-5 flex-shrink-0" />
                       <span className="whitespace-normal leading-tight text-center">Təhsilalanların Elmi Tədqiqat İşi Haqqında Əsasnamə</span>
                   </a>
