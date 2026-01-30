@@ -10,13 +10,24 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { type AboutContent } from '@/app/ndutecnaxcivan19692025tec/about-content/form';
+import { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 
 
 interface AboutClientPageProps {
     teamMembers: SecTeamMember[];
+    aboutContent: AboutContent | null;
 }
 
-export default function AboutClientPage({ teamMembers }: AboutClientPageProps) {
+export default function AboutClientPage({ teamMembers, aboutContent }: AboutClientPageProps) {
+  const [sanitizedContent, setSanitizedContent] = useState('');
+
+  useEffect(() => {
+    if (aboutContent?.mainContent && typeof window !== 'undefined') {
+      setSanitizedContent(DOMPurify.sanitize(aboutContent.mainContent));
+    }
+  }, [aboutContent]);
 
   const FADE_IN_ANIMATION_SETTINGS = {
     initial: { opacity: 0, y: 20 },
@@ -75,12 +86,10 @@ export default function AboutClientPage({ teamMembers }: AboutClientPageProps) {
       </motion.div>
 
        <motion.section 
-            className="mt-12 prose prose-lg max-w-none mx-auto text-justify text-foreground/90 prose-headings:text-primary prose-a:text-primary prose-strong:text-foreground"
+            className="mt-12 prose prose-lg max-w-none text-foreground/90 prose-headings:text-primary prose-a:text-primary prose-strong:text-foreground"
             variants={FADE_IN_ANIMATION_SETTINGS}
-        >
-             <p>Naxçıvan Dövlət Universiteti nəzdindəki Gimnaziyanın Şagird Elmi Cəmiyyəti (ŞEC), istedadlı və elmə marağı olan şagirdləri bir araya gətirərək onların elmi-tədqiqat bacarıqlarını erkən yaşlardan inkişaf etdirmək məqsədi daşıyır. Biz, şagirdlərin akademik potensialını reallaşdırmaq, onlara tədqiqat aparmağın əsaslarını öyrətmək və elmi düşüncə tərzini aşılamaq üçün çalışırıq.</p>
-            <p>ŞEC olaraq, gənc nəslin elmə olan həvəsini artırmaq, onları gələcəyin alimləri, mühəndisləri və ixtiraçıları olmağa ruhlandırmaq əsas hədəfimizdir. Bu yolda müxtəlif layihələr, seminarlar, müsabiqələr və ekskursiyalar təşkil edərək onların həm nəzəri biliklərini, həm də praktiki bacarıqlarını gücləndiririk.</p>
-        </motion.section>
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+        />
 
         <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
             <div className="text-center">
@@ -181,4 +190,3 @@ export default function AboutClientPage({ teamMembers }: AboutClientPageProps) {
     </motion.div>
   );
 }
-

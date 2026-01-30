@@ -13,6 +13,7 @@ import { logoutAdmin } from '@/lib/actions';
 const navLinks = [
   { href: "/ndutecnaxcivan19692025tec/dashboard", label: "Əsas Panel", icon: Home },
   { href: "/ndutecnaxcivan19692025tec/about-content", label: "Haqqımızda Məzmunu", icon: Info },
+  { href: "/ndutecnaxcivan19692025tec/sec-about-content", label: "ŞEC Haqqımızda", icon: Info },
   { href: "/ndutecnaxcivan19692025tec/admins", label: "Admin Hesabları", icon: Shield },
   { href: "/ndutecnaxcivan19692025tec/users", label: "Təlim İstifadəçiləri", icon: Users },
   { href: "/ndutecnaxcivan19692025tec/messages", label: "Mesajlar", icon: MessageSquare },
