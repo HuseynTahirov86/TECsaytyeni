@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -51,9 +50,9 @@ export function Header() {
         <div className="flex items-center flex-shrink-0 min-w-0">
           <Link href="/" className="flex items-center space-x-3">
              <Image src="/logo1.png" alt="TEC Təhlilləri Loqosu" width={60} height={60} className="object-contain flex-shrink-0" />
-            <div className="hidden sm:flex flex-col text-sm font-semibold leading-tight min-w-0">
-              <span className="whitespace-nowrap">Naxçıvan Dövlət Universiteti</span>
-              <span className="text-xs font-medium whitespace-nowrap">Tələbə Elmi Cəmiyyəti</span>
+            <div className="hidden sm:flex flex-col text-sm font-semibold leading-tight">
+              <span>Naxçıvan Dövlət Universiteti</span>
+              <span className="text-xs font-medium">Tələbə Elmi Cəmiyyəti</span>
             </div>
           </Link>
         </div>
@@ -101,6 +100,19 @@ export function Header() {
                 </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="destructive" size="sm" className="text-xs sm:text-sm px-2 sm:px-4">
+                        Tabe Qurumlar
+                        <ChevronDown className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-64">
+                    <DropdownMenuItem asChild>
+                        <Link href="/affiliated-bodies/gymnasium-sec" className="text-sm">NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti</Link>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
 
           <div className="lg:hidden xl:hidden">
             <Sheet>
@@ -123,6 +135,18 @@ export function Header() {
                 </Link>
                 <nav className="flex flex-col space-y-3">
                   <NavLinksContent isMobile={true} />
+                   <DropdownMenu>
+                    <DropdownMenuTrigger className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg text-primary-foreground">
+                        <Building className="h-4 w-4" />
+                        <span>Tabe Qurumlar</span>
+                        <ChevronDown className="ml-auto h-4 w-4" />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem asChild>
+                             <Link href="/affiliated-bodies/gymnasium-sec" className="text-sm">NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti</Link>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </nav>
               </SheetContent>
             </Sheet>
