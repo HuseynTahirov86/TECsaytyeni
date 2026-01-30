@@ -27,6 +27,7 @@ const navLinks = [
   { href: "/ndutecnaxcivan19692025tec/law-journal", label: "Hüquq Jurnalı", icon: Landmark },
   { href: "/ndutecnaxcivan19692025tec/library", label: "Kitabxana", icon: Library },
   { href: "/ndutecnaxcivan19692025tec/news", label: "Xəbərlər", icon: Newspaper },
+  { href: "/ndutecnaxcivan19692025tec/sec-blog", label: "ŞEC Bloq", icon: Newspaper },
   { href: "/ndutecnaxcivan19692025tec/projects", label: "Layihələr", icon: Briefcase },
   { href: "/ndutecnaxcivan19692025tec/trainings", label: "Təlimlər", icon: GraduationCap },
   { href: "/ndutecnaxcivan19692025tec/trainings/registrations", label: "Təlim Qeydiyyatları", icon: ClipboardList },

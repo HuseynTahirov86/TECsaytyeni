@@ -13,7 +13,8 @@ const ALLOWED_DIRECTORIES = [
     'sekiller',
     'telebeelmijurnali',
     'telebehuquqjurnali',
-    'tetimelumat'
+    'tetimelumat',
+    'sec-images'
 ];
 
 export async function POST(request: NextRequest) {
