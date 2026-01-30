@@ -15,6 +15,14 @@ const navLinks = [
   { href: "/projects", label: "Layihələr", icon: Briefcase },
   { href: "/trainings", label: "Təlimlər", icon: GraduationCap },
   { href: "/blog", label: "Bloq", icon: Newspaper },
+  { 
+    label: "Tabe Qurumlar", 
+    icon: Building, 
+    isDropdown: true, 
+    subItems: [
+      { href: "/affiliated-bodies/gymnasium-sec", label: "NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti" }
+    ]
+  },
   { href: "/library", label: "Kitabxana", icon: BookOpen },
   { href: "/appeal-to-chairman", label: "Sədrə Müraciət", icon: MessageSquare },
   { href: "/contact", label: "Əlaqə", icon: Mail },
@@ -25,22 +33,42 @@ export function Header() {
 
   const NavLinksContent = ({ isMobile = false }) => (
     <>
-      {navLinks.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className={cn(
-            "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap",
-            pathname === link.href ? "text-accent font-semibold" : "text-primary-foreground",
-            isMobile ? "px-2 py-2 text-lg" : "px-2 py-2 text-sm font-medium" // px-3-dən px-2-yə azaldıldı
-          )}
-        >
-          <link.icon className="h-4 w-4" />
-          <span>
-            {link.label}
-          </span>
-        </Link>
-      ))}
+      {navLinks.map((link) =>
+        'isDropdown' in link && link.isDropdown ? (
+          <DropdownMenu key={link.label}>
+            <DropdownMenuTrigger
+              className={cn(
+                "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap text-primary-foreground focus:outline-none",
+                isMobile ? "px-2 py-2 text-lg justify-start" : "px-2 py-2 text-sm font-medium"
+              )}
+            >
+              <link.icon className="h-4 w-4" />
+              <span>{link.label}</span>
+              <ChevronDown className="h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {link.subItems.map((subItem) => (
+                <DropdownMenuItem key={subItem.href} asChild>
+                  <Link href={subItem.href}>{subItem.label}</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Link
+            key={(link as any).href}
+            href={(link as any).href}
+            className={cn(
+              "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap",
+              pathname === (link as any).href ? "text-accent font-semibold" : "text-primary-foreground",
+              isMobile ? "px-2 py-2 text-lg" : "px-2 py-2 text-sm font-medium"
+            )}
+          >
+            <link.icon className="h-4 w-4" />
+            <span>{link.label}</span>
+          </Link>
+        )
+      )}
     </>
   );
 
@@ -100,20 +128,7 @@ export function Header() {
                 </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="destructive" size="sm" className="text-xs sm:text-sm px-2 sm:px-4">
-                        Tabe Qurumlar
-                        <ChevronDown className="ml-1 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-64">
-                    <DropdownMenuItem asChild>
-                        <Link href="/affiliated-bodies/gymnasium-sec" className="text-sm">NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti</Link>
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
-
+            
           <div className="lg:hidden xl:hidden">
             <Sheet>
               <SheetTrigger asChild>
@@ -135,18 +150,6 @@ export function Header() {
                 </Link>
                 <nav className="flex flex-col space-y-3">
                   <NavLinksContent isMobile={true} />
-                   <DropdownMenu>
-                    <DropdownMenuTrigger className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg text-primary-foreground">
-                        <Building className="h-4 w-4" />
-                        <span>Tabe Qurumlar</span>
-                        <ChevronDown className="ml-auto h-4 w-4" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuItem asChild>
-                             <Link href="/affiliated-bodies/gymnasium-sec" className="text-sm">NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti</Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
                 </nav>
               </SheetContent>
             </Sheet>
