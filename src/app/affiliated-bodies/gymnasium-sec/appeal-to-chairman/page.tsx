@@ -1,13 +1,7 @@
-import type { Metadata } from 'next';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
+"use client";
 
-export const metadata: Metadata = {
-  title: 'Sədrə Müraciət',
-};
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { AppealForm } from './AppealForm';
 
 export default function AppealPage() {
   return (
@@ -26,27 +20,7 @@ export default function AppealPage() {
             <CardDescription>Aşağıdakı formu dolduraraq birbaşa ŞEC sədrinə müraciət edə bilərsiniz.</CardDescription>
         </CardHeader>
         <CardContent>
-            <form className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="name">Ad və Soyad</Label>
-                        <Input id="name" placeholder="Adınız və Soyadınız" />
-                    </div>
-                    <div className="space-y-2">
-                        <Label htmlFor="class">Sinif</Label>
-                        <Input id="class" placeholder="Məs: 8a" />
-                    </div>
-                </div>
-                 <div className="space-y-2">
-                    <Label htmlFor="subject">Mövzu</Label>
-                    <Input id="subject" placeholder="Müraciətin mövzusu" />
-                </div>
-                 <div className="space-y-2">
-                    <Label htmlFor="message">Mesajınız</Label>
-                    <Textarea id="message" placeholder="Mesajınızı bura yazın..." rows={6}/>
-                </div>
-                 <Button type="submit" disabled>Göndər (Tezliklə aktiv olacaq)</Button>
-            </form>
+            <AppealForm />
         </CardContent>
        </Card>
     </div>

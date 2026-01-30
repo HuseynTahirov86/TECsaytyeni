@@ -17,6 +17,7 @@ const navLinks = [
   { href: "/ndutecnaxcivan19692025tec/users", label: "Təlim İstifadəçiləri", icon: Users },
   { href: "/ndutecnaxcivan19692025tec/messages", label: "Mesajlar", icon: MessageSquare },
   { href: "/ndutecnaxcivan19692025tec/appeals", label: "Sədrə Müraciətlər", icon: MailCheck },
+  { href: "/ndutecnaxcivan19692025tec/sec-appeals", label: "ŞEC Müraciətlər", icon: MailCheck },
   { href: "/ndutecnaxcivan19692025tec/teti-reports", label: "TETİ Sənədləri", icon: Building },
   { href: "/ndutecnaxcivan19692025tec/teti-users", label: "TETİ İstifadəçiləri", icon: Users },
   { href: "/ndutecnaxcivan19692025tec/hero-slides", label: "Hero Karusel", icon: ImageIcon },
