@@ -1,16 +1,5 @@
 import type { Metadata } from 'next';
-import { Livvic } from 'next/font/google';
 import '@/app/globals.css';
-import { cn } from "@/lib/utils";
-import { Header } from './components/header';
-import { Footer } from './components/footer';
-import { Toaster } from "@/components/ui/toaster";
-
-const livvic = Livvic({ 
-  subsets: ["latin"],
-  weight: ['400', '500', '600', '700'],
-  variable: "--font-livvic",
-});
 
 export const metadata: Metadata = {
   title: {
@@ -30,19 +19,5 @@ export default function SecLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="az" suppressHydrationWarning>
-      <body className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          livvic.variable
-        )}>
-        <div className="relative flex min-h-dvh flex-col bg-background">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <Toaster />
-        </div>
-      </body>
-    </html>
-  );
+  return <>{children}</>;
 }

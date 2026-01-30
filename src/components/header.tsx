@@ -8,6 +8,10 @@ import { usePathname } from 'next/navigation';
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { Footer as RootFooter } from '@/components/footer';
+import { Header as SecHeader } from '@/app/affiliated-bodies/gymnasium-sec/components/header';
+import { Footer as SecFooter } from '@/app/affiliated-bodies/gymnasium-sec/components/footer';
+import { Toaster } from "@/components/ui/toaster";
 
 const navLinks = [
   { href: "/", label: "Ana Səhifə", icon: Home },
@@ -157,5 +161,26 @@ export function Header() {
         </div>
       </div>
     </header>
+  );
+}
+
+export function LayoutWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname();
+  const isSecPage = pathname.startsWith('/affiliated-bodies/gymnasium-sec');
+
+  const CurrentHeader = isSecPage ? SecHeader : Header;
+  const CurrentFooter = isSecPage ? SecFooter : RootFooter;
+
+  return (
+    <div className="relative flex min-h-dvh flex-col bg-background">
+      <CurrentHeader />
+      <main className="flex-1">{children}</main>
+      <CurrentFooter />
+      <Toaster />
+    </div>
   );
 }

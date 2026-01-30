@@ -2,9 +2,7 @@ import type { Metadata } from 'next';
 import { Livvic } from 'next/font/google';
 import './globals.css';
 import { cn } from "@/lib/utils";
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
-import { Toaster } from "@/components/ui/toaster";
+import { LayoutWrapper } from '@/components/header';
 
 const livvic = Livvic({ 
   subsets: ["latin"],
@@ -96,12 +94,7 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           livvic.variable
         )}>
-        <div className="relative flex min-h-dvh flex-col bg-background">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <Toaster />
-        </div>
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );
