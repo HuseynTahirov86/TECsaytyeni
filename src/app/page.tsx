@@ -213,7 +213,7 @@ export default function Home() {
                                 
                                 <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
                                   <span className="block whitespace-nowrap">Naxçıvan Dövlət Universiteti</span>
-                                  <span className="block text-2xl lg:text-4xl mt-1 text-gray-200 whitespace-nowrap">Tələbə Elmi Cəmiyyəti</span>
+                                  <span className="block text-2xl lg:text-4xl mt-1 text-accent whitespace-nowrap">Tələbə Elmi Cəmiyyəti</span>
                                 </motion.h1>
                                 
                                 <motion.div variants={heroItemVariants}>
@@ -224,7 +224,7 @@ export default function Home() {
                                         animate={textAnimation.animate}
                                         exit={textAnimation.exit}
                                         transition={textAnimation.transition}
-                                        className="mt-4 text-xl font-normal italic text-gray-200 drop-shadow-md"
+                                        className="mt-4 text-xl font-normal italic text-accent drop-shadow-md"
                                     >
                                         {dynamicTexts[dynamicTextIndex]}
                                     </motion.p>
@@ -246,7 +246,7 @@ export default function Home() {
             </Carousel>
         </section>
 
-      <section className="py-16 md:py-24">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center mb-12"
