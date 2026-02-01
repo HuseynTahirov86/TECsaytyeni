@@ -166,7 +166,7 @@ export default function Home() {
 
   return (
     <motion.div 
-      className="flex flex-col bg-gray-50 overflow-x-hidden"
+      className="flex flex-col bg-background overflow-x-hidden"
       initial="initial"
       animate="animate"
       variants={{
@@ -293,7 +293,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-primary/5">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center mb-12"
@@ -359,7 +359,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-primary/5">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
             <motion.div 
                 className="text-center mb-12"
@@ -408,7 +408,7 @@ export default function Home() {
         </div>
     </section>
 
-       <section className="bg-gray-50 py-16 md:py-24">
+       <section className="bg-primary/5 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center mb-12"
@@ -481,7 +481,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
            <motion.div 
             className="text-center mb-12"
