@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Facebook, Mail, MapPin } from "lucide-react";
+import { Instagram, Facebook, Mail, MapPin, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -69,7 +69,7 @@ export function Footer() {
              <div className="mt-4 flex flex-col space-y-2 text-sm">
                 <Link href="/" className="hover:text-accent hover:underline">TEC Əsas Sayt</Link>
                 <a href="https://ndu.edu.az/" target="_blank" rel="noopener noreferrer" className="hover:text-accent hover:underline">Naxçıvan Dövlət Universiteti</a>
-                <a href="https://gymnasium.ndu.edu.az/" target="_blank" rel="noopener noreferrer" className="hover:text-accent hover:underline">NDU nəzdində Gimnaziya</a>
+                <a href="https://ndu.edu.az/gimnaziya" target="_blank" rel="noopener noreferrer" className="hover:text-accent hover:underline">NDU nəzdində Gimnaziya</a>
             </div>
           </div>
            <div>
@@ -77,11 +77,15 @@ export function Footer() {
             <div className="mt-4 flex flex-col space-y-3 text-sm">
                 <div className="flex items-start gap-3">
                     <MapPin className="h-5 w-5 mt-1 shrink-0 text-accent"/>
-                    <span>Naxçıvan şəhəri, Heydər Əliyev prospekti, NDU nəzdində Gimnaziya.</span>
+                    <span>Naxçıvan şəhəri, Ə.Əliyev küçəsi, 4.</span>
+                </div>
+                <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 shrink-0 text-accent"/>
+                    <a href="tel:+994771852466" className="hover:text-accent hover:underline">+994 77 185 24 66</a>
                 </div>
                  <div className="flex items-center gap-3">
                     <Mail className="h-5 w-5 shrink-0 text-accent"/>
-                    <a href="mailto:sec@ndu.edu.az" className="hover:text-accent hover:underline">sec@ndu.edu.az (nümunə)</a>
+                    <a href="mailto:gimnaziyasec@ndu.edu.az" className="hover:text-accent hover:underline">gimnaziyasec@ndu.edu.az</a>
                 </div>
             </div>
           </div>

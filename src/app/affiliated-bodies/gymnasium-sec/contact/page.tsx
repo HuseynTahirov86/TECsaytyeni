@@ -47,7 +47,7 @@ export default function ContactPage() {
                     <div>
                         <h3 className="font-semibold text-lg">Ünvan</h3>
                         <p className="text-muted-foreground">
-                         Naxçıvan şəhəri, Heydər Əliyev prospekti, NDU nəzdində Gimnaziya.
+                         Naxçıvan şəhəri, Ə.Əliyev küçəsi, 4.
                         </p>
                     </div>
                 </div>
@@ -57,7 +57,16 @@ export default function ContactPage() {
                     </div>
                     <div>
                         <h3 className="font-semibold text-lg">Email</h3>
-                        <a href="mailto:sec@ndu.edu.az" className="text-muted-foreground hover:text-primary transition-colors">sec@ndu.edu.az (nümunə)</a>
+                        <a href="mailto:gimnaziyasec@ndu.edu.az" className="text-muted-foreground hover:text-primary transition-colors">gimnaziyasec@ndu.edu.az</a>
+                    </div>
+                </div>
+                 <div className="flex items-start gap-4 p-4 rounded-lg bg-muted/50">
+                    <div className="flex-shrink-0 bg-primary/10 text-primary p-3 rounded-full">
+                        <Phone className="h-6 w-6" />
+                    </div>
+                    <div>
+                        <h3 className="font-semibold text-lg">Telefon</h3>
+                        <a href="tel:+994771852466" className="text-muted-foreground hover:text-primary transition-colors">+994 77 185 24 66</a>
                     </div>
                 </div>
             </div>
