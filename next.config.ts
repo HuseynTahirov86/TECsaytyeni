@@ -12,6 +12,18 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/sec',
+        destination: '/affiliated-bodies/gymnasium-sec',
+      },
+      {
+        source: '/sec/:path*',
+        destination: '/affiliated-bodies/gymnasium-sec/:path*',
+      },
+    ]
+  },
 };
 
 export default nextConfig;

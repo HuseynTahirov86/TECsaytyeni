@@ -11,34 +11,48 @@ import { logoutAdmin } from '@/lib/actions';
 
 
 const navLinks = [
+  // --- ÜMUMİ İDARƏETMƏ ---
   { href: "/ndutecnaxcivan19692025tec/dashboard", label: "Əsas Panel", icon: Home },
-  { href: "/ndutecnaxcivan19692025tec/about-content", label: "Haqqımızda Məzmunu", icon: Info },
-  { href: "/ndutecnaxcivan19692025tec/sec-about-content", label: "ŞEC Haqqımızda", icon: Info },
   { href: "/ndutecnaxcivan19692025tec/admins", label: "Admin Hesabları", icon: Shield },
-  { href: "/ndutecnaxcivan19692025tec/users", label: "Təlim İstifadəçiləri", icon: Users },
-  { href: "/ndutecnaxcivan19692025tec/messages", label: "Mesajlar", icon: MessageSquare },
-  { href: "/ndutecnaxcivan19692025tec/appeals", label: "Sədrə Müraciətlər", icon: MailCheck },
-  { href: "/ndutecnaxcivan19692025tec/sec-appeals", label: "ŞEC Müraciətlər", icon: MailCheck },
-  { href: "/ndutecnaxcivan19692025tec/sec-messages", label: "ŞEC Mesajları", icon: MessageSquare },
-  { href: "/ndutecnaxcivan19692025tec/teti-reports", label: "TETİ Sənədləri", icon: Building },
-  { href: "/ndutecnaxcivan19692025tec/teti-users", label: "TETİ İstifadəçiləri", icon: Users },
+  { href: "/ndutecnaxcivan19692025tec/socials", label: "Sosial Hesablar", icon: Share2 },
+  
+  // --- ƏSAS SAYT MƏZMUNU ---
+  { href: "/ndutecnaxcivan19692025tec/about-content", label: "Haqqımızda Məzmunu", icon: Info },
   { href: "/ndutecnaxcivan19692025tec/hero-slides", label: "Hero Karusel", icon: ImageIcon },
+  { href: "/ndutecnaxcivan19692025tec/news", label: "Xəbərlər", icon: Newspaper },
+  { href: "/ndutecnaxcivan19692025tec/projects", label: "Layihələr", icon: Briefcase },
+  { href: "/ndutecnaxcivan19692025tec/team", label: "Komanda", icon: Users },
+  { href: "/ndutecnaxcivan19692025tec/formers", label: "Sabiq Sədrlər", icon: UserCheck },
   { href: "/ndutecnaxcivan19692025tec/aphorisms", label: "Aforizmlər", icon: Quote },
   { href: "/ndutecnaxcivan19692025tec/academic-writing", label: "Akademik Yazı", icon: BookText },
-  { href: "/ndutecnaxcivan19692025tec/journal-archive", label: "Jurnal Arxivi", icon: Archive },
-  { href: "/ndutecnaxcivan19692025tec/science-journal", label: "Elmi Jurnal", icon: BookText },
-  { href: "/ndutecnaxcivan19692025tec/law-journal", label: "Hüquq Jurnalı", icon: Landmark },
-  { href: "/ndutecnaxcivan19692025tec/library", label: "Kitabxana", icon: Library },
-  { href: "/ndutecnaxcivan19692025tec/news", label: "Xəbərlər", icon: Newspaper },
+  
+  // --- ŞEC BÖLMƏSİ ---
+  { href: "/ndutecnaxcivan19692025tec/sec-about-content", label: "ŞEC Haqqımızda", icon: Info },
   { href: "/ndutecnaxcivan19692025tec/sec-blog", label: "ŞEC Bloq", icon: Newspaper },
   { href: "/ndutecnaxcivan19692025tec/sec-projects", label: "ŞEC Layihələr", icon: Briefcase },
   { href: "/ndutecnaxcivan19692025tec/sec-team", label: "ŞEC Komanda", icon: Users },
-  { href: "/ndutecnaxcivan19692025tec/projects", label: "Layihələr", icon: Briefcase },
+  { href: "/ndutecnaxcivan19692025tec/sec-socials", label: "ŞEC Sosial Hesabları", icon: Share2 },
+
+  // --- KİTABXANA VƏ JURNALLAR ---
+  { href: "/ndutecnaxcivan19692025tec/library", label: "Kitabxana", icon: Library },
+  { href: "/ndutecnaxcivan19692025tec/journal-archive", label: "Jurnal Arxivi", icon: Archive },
+  { href: "/ndutecnaxcivan19692025tec/science-journal", label: "Elmi Jurnal Məqalələri", icon: BookText },
+  { href: "/ndutecnaxcivan19692025tec/law-journal", label: "Hüquq Jurnalı Məqalələri", icon: Landmark },
+
+  // --- MÜRACİƏTLƏR ---
+  { href: "/ndutecnaxcivan19692025tec/messages", label: "Əlaqə Mesajları", icon: MessageSquare },
+  { href: "/ndutecnaxcivan19692025tec/appeals", label: "Sədrə Müraciətlər", icon: MailCheck },
+  { href: "/ndutecnaxcivan19692025tec/sec-messages", label: "ŞEC Mesajları", icon: MessageSquare },
+  { href: "/ndutecnaxcivan19692025tec/sec-appeals", label: "ŞEC Müraciətlər", icon: MailCheck },
+  
+  // --- TETİ BÖLMƏSİ ---
+  { href: "/ndutecnaxcivan19692025tec/teti-users", label: "TETİ İstifadəçiləri", icon: Users },
+  { href: "/ndutecnaxcivan19692025tec/teti-reports", label: "TETİ Sənədləri", icon: Building },
+
+  // --- TƏLİM SİSTEMİ ---
+  { href: "/ndutecnaxcivan19692025tec/users", label: "Təlim İstifadəçiləri", icon: Users },
   { href: "/ndutecnaxcivan19692025tec/trainings", label: "Təlimlər", icon: GraduationCap },
   { href: "/ndutecnaxcivan19692025tec/trainings/registrations", label: "Təlim Qeydiyyatları", icon: ClipboardList },
-  { href: "/ndutecnaxcivan19692025tec/team", label: "Komanda", icon: Users },
-  { href: "/ndutecnaxcivan19692025tec/formers", label: "Sabiq Sədrlər", icon: UserCheck },
-  { href: "/ndutecnaxcivan19692025tec/socials", label: "Sosial Hesablar", icon: Share2 },
 ];
 
 export default function AdminLayout({
