@@ -183,7 +183,7 @@ export default function GymnasiumSECPage() {
                                 animate={textAnimation.animate}
                                 exit={textAnimation.exit}
                                 transition={textAnimation.transition}
-                                className="mt-4 text-xl font-normal italic text-primary drop-shadow-md"
+                                className="mt-4 text-xl font-normal italic text-white drop-shadow-md"
                             >
                                 {dynamicTexts[dynamicTextIndex]}
                             </motion.p>
@@ -201,7 +201,7 @@ export default function GymnasiumSECPage() {
                  </div>
             </section>
             
-            <section className="py-16 md:py-24 bg-background">
+            <section className="py-16 md:py-24 bg-primary/5">
                 <div className="container mx-auto px-4">
                   <motion.div 
                     className="text-center mb-12"
@@ -248,7 +248,7 @@ export default function GymnasiumSECPage() {
                 </div>
             </section>
 
-            <section className="py-16 md:py-24 bg-primary/5">
+            <section className="py-16 md:py-24 bg-background">
                 <div className="container mx-auto px-4">
                     <motion.div className="text-center mb-12" {...motionProps}>
                         <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Son Xəbərlər</h2>
@@ -294,7 +294,7 @@ export default function GymnasiumSECPage() {
                 </div>
             </section>
             
-            <section className="py-16 md:py-24 bg-background">
+            <section className="py-16 md:py-24 bg-primary/5">
                 <div className="container mx-auto px-4">
                     <motion.div className="text-center mb-12" {...motionProps}>
                         <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
@@ -340,7 +340,7 @@ export default function GymnasiumSECPage() {
                 </div>
             </section>
 
-             <section className="bg-primary/5 py-16 md:py-24">
+             <section className="bg-background py-16 md:py-24">
                 <div className="container mx-auto px-4">
                   <motion.div className="text-center mb-12" {...motionProps}>
                     <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Layihələrimiz</h2>
@@ -401,7 +401,7 @@ export default function GymnasiumSECPage() {
                 </div>
             </section>
             
-             <section className="py-16 md:py-24 bg-background">
+             <section className="py-16 md:py-24 bg-primary/5">
                 <div className="container mx-auto px-4">
                    <motion.div 
                     className="text-center mb-12"
