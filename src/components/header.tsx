@@ -133,7 +133,7 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
             
-          <div className="lg:hidden xl:hidden">
+          <div className="xl:hidden">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="sm" className="text-primary-foreground hover:bg-primary-foreground/10 p-2">
@@ -141,7 +141,7 @@ export function Header() {
                   <span className="sr-only">Menyunu Aç/Bağla</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="bg-primary text-primary-foreground border-primary/20 w-[80vw] sm:w-[50vw]">
+              <SheetContent side="left" className="bg-primary text-primary-foreground border-primary/20">
                 <SheetHeader>
                    <SheetTitle className="sr-only">Menyu</SheetTitle>
                 </SheetHeader>

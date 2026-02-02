@@ -4,10 +4,11 @@
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon, Info } from "lucide-react";
+import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon, Info, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { logoutAdmin } from '@/lib/actions';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 
 const navLinks = [
@@ -74,6 +75,29 @@ export default function AdminLayout({
     router.refresh();
   };
 
+  const NavContent = () => (
+    <>
+      {navLinks.map((link) => {
+        const isActive = pathname.startsWith(link.href) && 
+        (pathname === link.href || pathname.startsWith(link.href + '/'));
+
+        return (
+            <Link
+            key={link.href}
+            href={link.href}
+            className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
+                 isActive ? "bg-muted text-primary" : ""
+            )}
+            >
+            <link.icon className="h-4 w-4" />
+            {link.label}
+            </Link>
+        )
+      })}
+    </>
+  );
+
   return (
     <div className="flex min-h-screen bg-muted/40">
       <aside className="hidden w-64 flex-col border-r bg-background sm:flex">
@@ -82,27 +106,10 @@ export default function AdminLayout({
             <span className="text-xl">Admin Panel</span>
           </Link>
         </div>
-        <nav className="flex flex-col gap-2 p-4">
-          {navLinks.map((link) => {
-            const isActive = pathname.startsWith(link.href) && 
-            (pathname === link.href || pathname.startsWith(link.href + '/'));
-
-            return (
-                <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                    "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                     isActive ? "bg-muted text-primary" : ""
-                )}
-                >
-                <link.icon className="h-4 w-4" />
-                {link.label}
-                </Link>
-            )
-          })}
+        <nav className="flex flex-col gap-2 p-4 overflow-y-auto">
+          <NavContent />
         </nav>
-        <div className="mt-auto p-4">
+        <div className="mt-auto p-4 border-t">
           <Button variant="ghost" className="w-full justify-start gap-3" onClick={handleLogout}>
             <LogOut className="h-4 w-4" />
             Çıxış
@@ -111,12 +118,39 @@ export default function AdminLayout({
       </aside>
       <div className="flex flex-1 flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-background px-6 lg:h-[60px]">
-           <Link
-            href="#"
-            className="flex items-center gap-2 font-semibold sm:hidden"
-          >
-            <span>Admin Panel</span>
-          </Link>
+           <div className="sm:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline" size="icon">
+                    <Menu className="h-6 w-6" />
+                    <span className="sr-only">Menyunu aç</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="flex flex-col p-0">
+                    <SheetHeader className="p-4 border-b">
+                        <SheetTitle>
+                           <Link href="/ndutecnaxcivan19692025tec/dashboard" className="flex items-center gap-2 font-semibold">
+                              <span>Admin Panel</span>
+                           </Link>
+                        </SheetTitle>
+                    </SheetHeader>
+                    <nav className="flex-1 grid gap-2 p-4 text-lg font-medium overflow-y-auto">
+                        <NavContent />
+                    </nav>
+                     <div className="mt-auto p-4 border-t">
+                        <Button variant="ghost" className="w-full justify-start gap-3" onClick={handleLogout}>
+                            <LogOut className="h-4 w-4" />
+                            Çıxış
+                        </Button>
+                    </div>
+                </SheetContent>
+              </Sheet>
+           </div>
+           <div className="flex-1 sm:hidden">
+              <h1 className="font-semibold text-lg">
+                 {navLinks.find(link => pathname === link.href)?.label || "Admin Panel"}
+              </h1>
+           </div>
         </header>
         <main className="flex-1 p-4 sm:p-6">{children}</main>
       </div>
