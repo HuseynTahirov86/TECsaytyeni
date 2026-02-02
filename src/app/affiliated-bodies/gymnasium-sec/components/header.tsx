@@ -45,7 +45,7 @@ export function Header() {
         <Link href="/affiliated-bodies/gymnasium-sec" className="flex items-center space-x-3">
           <Image src="/logo1.png" alt="ŞEC Loqo" width={50} height={50} className="object-contain" />
           <div className="flex flex-col text-sm font-semibold leading-tight">
-            <span>NDU Gimnaziya</span>
+            <span>NDU nəzdində Gimnaziya</span>
             <span className="text-xs font-medium">Şagird Elmi Cəmiyyəti</span>
           </div>
         </Link>

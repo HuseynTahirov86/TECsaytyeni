@@ -10,10 +10,10 @@ export function Footer() {
         <div className="flex flex-col items-center justify-between sm:flex-row">
             <Link href="/affiliated-bodies/gymnasium-sec" className="flex items-center space-x-2">
                 <Image src="/logo1.png" alt="ŞEC Loqo" width={40} height={40} />
-                <span className="font-semibold">NDU Gimnaziya ŞEC</span>
+                <span className="font-semibold">NDU nəzdində Gimnaziya ŞEC</span>
             </Link>
           <p className="mt-4 text-sm text-primary-foreground/80 sm:mt-0">
-            &copy; {new Date().getFullYear()} NDU Gimnaziya Şagird Elmi Cəmiyyəti. Bütün hüquqlar qorunur.
+            &copy; {new Date().getFullYear()} NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti. Bütün hüquqlar qorunur.
           </p>
         </div>
       </div>
