@@ -34,38 +34,18 @@ export default function GymnasiumSECPage() {
     const [libraryEntries, setLibraryEntries] = React.useState<LibraryEntry[]>([]);
     const [aphorisms, setAphorisms] = React.useState<Aphorism[]>([]);
     const [academicWritingRules, setAcademicWritingRules] = React.useState<AcademicWritingRule[]>([]);
-    const [heroSlides, setHeroSlides] = React.useState<HeroSlide[]>([]);
 
     const [isLoadingNews, setIsLoadingNews] = useState(true);
     const [isLoadingProjects, setIsLoadingProjects] = useState(true);
     const [isLoadingLibrary, setIsLoadingLibrary] = React.useState(true);
     const [isLoadingAphorisms, setIsLoadingAphorisms] = React.useState(true);
     const [isLoadingAcademicRules, setIsLoadingAcademicRules] = React.useState(true);
-    const [isLoadingHero, setIsLoadingHero] = React.useState(true);
 
     const [dynamicTextIndex, setDynamicTextIndex] = React.useState(0);
-    const [api, setApi] = React.useState<CarouselApi>()
-    const [currentSlide, setCurrentSlide] = React.useState(0)
 
     const aphorismAutoplay = React.useRef(Autoplay({ delay: 5000, stopOnInteraction: false }));
     const rulesAutoplay = React.useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
-    const heroAutoplay = React.useRef(Autoplay({ delay: 6000, stopOnInteraction: true }))
     
-     React.useEffect(() => {
-        if (!api) return;
-        
-        const onSelect = () => {
-          setCurrentSlide(api.selectedScrollSnap())
-        }
-        
-        api.on("select", onSelect)
-        onSelect(); 
-
-        return () => {
-          api.off("select", onSelect)
-        }
-    }, [api])
-
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -124,7 +104,6 @@ export default function GymnasiumSECPage() {
         fetchOrderedData("library", setLibraryEntries, setIsLoadingLibrary, "title", 4);
         fetchOrderedData("aphorisms", setAphorisms, setIsLoadingAphorisms, "order");
         fetchOrderedData("academicWritingRules", setAcademicWritingRules, setIsLoadingAcademicRules, "order");
-        fetchOrderedData("heroSlides", setHeroSlides, setIsLoadingHero, "order");
     }, []);
 
     const motionProps = {
@@ -167,76 +146,53 @@ export default function GymnasiumSECPage() {
             }}
         >
             <section className="w-full relative h-[60vh] sm:h-[80vh] lg:h-auto">
-             <Carousel 
-                className="w-full h-full"
-                plugins={[heroAutoplay.current]}
-                setApi={setApi}
-                opts={{ loop: true }}
-              >
-              <CarouselContent>
-                {isLoadingHero ? (
-                    <CarouselItem>
-                        <Skeleton className="w-full h-[60vh] sm:h-[80vh] lg:h-full lg:aspect-[16/7]" />
-                    </CarouselItem>
-                ) : heroSlides.map((slide, index) => (
-                    <CarouselItem key={slide.id}>
-                        <div className="relative w-full h-[60vh] sm:h-[80vh] lg:h-full lg:aspect-[16/7]">
-                            <Image
-                                src={slide.imageUrl}
-                                alt={slide.title || `Hero Slide ${index + 1}`}
-                                fill
-                                className="object-cover"
-                                priority={index === 0}
-                            />
-                        </div>
-                    </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="absolute inset-0 flex items-center justify-start text-left bg-gradient-to-r from-black/50 to-transparent">
-                  <div className="container mx-auto px-4">
-                      <AnimatePresence>
-                        {heroSlides[currentSlide]?.type === 'main' && (
-                            <motion.div 
-                                variants={heroContainerVariants}
-                                initial="initial"
-                                animate="animate"
-                                exit="exit"
-                                className="relative z-10 max-w-3xl">
-                                
-                                <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                  <span className="block whitespace-nowrap">NDU Gimnaziya</span>
-                                  <span className="block text-2xl lg:text-4xl mt-1 text-white whitespace-nowrap">Şagird Elmi Cəmiyyəti</span>
-                                </motion.h1>
-                                
-                                <motion.div variants={heroItemVariants}>
-                                    <AnimatePresence mode="wait">
-                                    <motion.p
-                                        key={dynamicTextIndex}
-                                        initial={textAnimation.initial}
-                                        animate={textAnimation.animate}
-                                        exit={textAnimation.exit}
-                                        transition={textAnimation.transition}
-                                        className="mt-4 text-xl font-normal italic text-white drop-shadow-md"
-                                    >
-                                        {dynamicTexts[dynamicTextIndex]}
-                                    </motion.p>
-                                    </AnimatePresence>
-                                </motion.div>
-                                <motion.div variants={heroItemVariants} className="mt-8 flex gap-4">
-                                    <Button size="lg" asChild>
-                                        <Link href="/affiliated-bodies/gymnasium-sec/about">Haqqımızda <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                                    </Button>
-                                    <Button size="lg" variant="secondary" asChild>
-                                        <Link href="/affiliated-bodies/gymnasium-sec/projects">Layihələrimiz <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                                    </Button>
-                                </motion.div>
+                <div className="relative w-full h-[60vh] sm:h-[80vh] lg:h-full lg:aspect-[16/7]">
+                    <Image
+                        src="/secbanner.png"
+                        alt="ŞEC Banner"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-start text-left bg-gradient-to-r from-black/50 to-transparent">
+                    <div className="container mx-auto px-4">
+                        <motion.div 
+                            variants={heroContainerVariants}
+                            initial="initial"
+                            animate="animate"
+                            className="relative z-10 max-w-3xl">
+                            
+                            <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                                NDU nəzdində Gimnaziya
+                            </motion.h1>
+                            
+                            <motion.div variants={heroItemVariants}>
+                                <AnimatePresence mode="wait">
+                                <motion.p
+                                    key={dynamicTextIndex}
+                                    initial={textAnimation.initial}
+                                    animate={textAnimation.animate}
+                                    exit={textAnimation.exit}
+                                    transition={textAnimation.transition}
+                                    className="mt-4 text-xl font-normal italic text-white drop-shadow-md"
+                                >
+                                    {dynamicTexts[dynamicTextIndex]}
+                                </motion.p>
+                                </AnimatePresence>
                             </motion.div>
-                        )}
-                      </AnimatePresence>
-                  </div>
-              </div>
-            </Carousel>
-        </section>
+                            <motion.div variants={heroItemVariants} className="mt-8 flex gap-4">
+                                <Button size="lg" asChild>
+                                    <Link href="/affiliated-bodies/gymnasium-sec/about">Haqqımızda <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                                </Button>
+                                <Button size="lg" variant="secondary" asChild>
+                                    <Link href="/affiliated-bodies/gymnasium-sec/projects">Layihələrimiz <ArrowRight className="ml-2 h-5 w-5" /></Link>
+                                </Button>
+                            </motion.div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
             
             <section className="py-16 md:py-24 bg-primary/5">
                 <div className="container mx-auto px-4">
