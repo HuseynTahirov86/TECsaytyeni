@@ -164,7 +164,8 @@ export default function GymnasiumSECPage() {
                             className="relative z-10 max-w-3xl">
                             
                             <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                NDU nəzdində Gimnaziya
+                                <span className="block whitespace-nowrap">NDU nəzdində Gimnaziya</span>
+                                <span className="block text-2xl lg:text-4xl mt-1 text-white">Şagird Elmi Cəmiyyəti</span>
                             </motion.h1>
                             
                             <motion.div variants={heroItemVariants}>
