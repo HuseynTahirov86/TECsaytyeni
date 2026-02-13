@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon, Info, Menu, UserCog, FileText } from "lucide-react";
+import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon, Info, Menu, UserCog, FileText, Eye, ListOrdered, Goal, Scale } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { logoutAdmin } from '@/lib/actions';
@@ -20,9 +20,13 @@ const navLinks = [
   // --- HAQQIMIZDA BÖLMƏSİ ---
   { href: "/ndutecnaxcivan19692025tec/chairman", label: "Rəhbərlik", icon: UserCog },
   { href: "/ndutecnaxcivan19692025tec/team", label: "İdarə Heyəti", icon: Users },
-  { href: "/ndutecnaxcivan19692025tec/formers", label: "Sabiq Sədrlər", icon: UserCheck },
-  { href: "/ndutecnaxcivan19692025tec/about-content", label: "Haqqımızda Səhifə Mətnləri", icon: Info },
+  { href: "/ndutecnaxcivan19692025tec/history", label: "Tariximiz", icon: Info },
   { href: "/ndutecnaxcivan19692025tec/documents", label: "Rəsmi Sənədlər", icon: FileText },
+  { href: "/ndutecnaxcivan19692025tec/main-activities", label: "Fəaliyyət İstiqamətləri", icon: ListOrdered },
+  { href: "/ndutecnaxcivan19692025tec/values-and-principles", label: "Dəyər və Prinsiplər", icon: Scale },
+  { href: "/ndutecnaxcivan19692025tec/vision", label: "Vizyonumuz", icon: Eye },
+  { href: "/ndutecnaxcivan19692025tec/strategic-goals", label: "Strateji Məqsədlər", icon: Goal },
+  { href: "/ndutecnaxcivan19692025tec/formers", label: "Sabiq Sədrlər", icon: UserCheck },
 
   // --- SAYT MƏZMUNU ---
   { href: "/ndutecnaxcivan19692025tec/hero-slides", label: "Ana Səhifə Slayderi", icon: ImageIcon },
@@ -156,3 +160,4 @@ export default function AdminLayout({
     </div>
   );
 }
+
