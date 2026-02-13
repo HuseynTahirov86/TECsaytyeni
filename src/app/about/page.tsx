@@ -1,36 +1,15 @@
-
 import type { Metadata } from 'next';
-import { collection, getDocs, orderBy, query, doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import type { TeamMember } from '../ndutecnaxcivan19692025tec/team/team-form';
-import type { FormerChairman } from '../ndutecnaxcivan19692025tec/formers/former-chairman-form';
 import type { AboutContent } from '../ndutecnaxcivan19692025tec/about-content/form';
-import AboutClientPage from './AboutClientPage';
+import { AboutContentClient } from './AboutContentClient';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Haqqımızda',
-  description: 'Naxçıvan Dövlət Universiteti Tələbə Elmi Cəmiyyətinin tarixi, məqsədləri, fəaliyyət istiqamətləri və komandası haqqında ətraflı məlumat.',
+  title: 'Tariximiz',
+  description: 'Naxçıvan Dövlət Universiteti Tələbə Elmi Cəmiyyətinin tarixi və fəaliyyət mərhələləri.',
 };
-
-async function getTeamMembers(): Promise<TeamMember[]> {
-    const q = query(collection(db, "teamMembers"), orderBy("order", "asc"));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-    }) as TeamMember);
-}
-
-async function getFormerChairmen(): Promise<FormerChairman[]> {
-    const q = query(collection(db, "formerChairmen"), orderBy("period", "desc"));
-    const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-    }) as FormerChairman);
-}
 
 async function getAboutContent(): Promise<AboutContent | null> {
     const docRef = doc(db, "siteContent", "about");
@@ -41,10 +20,17 @@ async function getAboutContent(): Promise<AboutContent | null> {
     return null;
 }
 
-export default async function AboutPage() {
-    const teamMembers = await getTeamMembers();
-    const formerChairmen = await getFormerChairmen();
+export default async function AboutHistoryPage() {
     const aboutContent = await getAboutContent();
 
-    return <AboutClientPage teamMembers={teamMembers} formerChairmen={formerChairmen} aboutContent={aboutContent} />;
+    return (
+        <div>
+            <header className="mb-8">
+                <h1 className="text-4xl font-extrabold tracking-tight text-primary lg:text-5xl">
+                Tariximiz
+                </h1>
+            </header>
+            <AboutContentClient content={aboutContent?.historyContent || ''} />
+        </div>
+    );
 }

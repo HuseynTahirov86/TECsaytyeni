@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -23,7 +22,13 @@ export default function AboutContentAdminPage() {
         if (docSnap.exists()) {
           setContent(docSnap.data() as AboutContent);
         } else {
-          setContent({ mainContent: "" });
+          setContent({ 
+              historyContent: "",
+              visionContent: "",
+              missionContent: "",
+              valuesContent: "",
+              goalsContent: ""
+          });
         }
       } catch (error) {
         console.error("Error fetching about content: ", error);
@@ -51,14 +56,14 @@ export default function AboutContentAdminPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">Haqqımızda Səhifəsini İdarə Et</h1>
-        <p className="text-muted-foreground">Səhifədə görünən əsas mətn bloklarını redaktə edin.</p>
+        <h1 className="text-3xl font-bold">"Haqqımızda" Səhifə Məzmunu</h1>
+        <p className="text-muted-foreground">Səhifələrdə görünən mətn bloklarını redaktə edin.</p>
       </div>
       <Card>
         <CardHeader>
           <CardTitle>Səhifə Məzmunu</CardTitle>
           <CardDescription>
-            Aşağıdakı mətn sahəsindəki məzmun birbaşa "Haqqımızda" səhifəsində göstəriləcək.
+            Buradakı məzmun birbaşa "Haqqımızda" bölməsinin müvafiq səhifələrində göstəriləcək.
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -1,20 +1,28 @@
-
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
 import { RichTextEditor } from "@/components/rich-text-editor";
+import { Textarea } from "@/components/ui/textarea";
 
 export interface AboutContent {
-  mainContent: string;
+  historyContent: string;
+  visionContent: string;
+  missionContent: string;
+  valuesContent: string;
+  goalsContent: string;
 }
 
 const formSchema = z.object({
-  mainContent: z.string().min(50, { message: "Məzmun ən azı 50 simvoldan ibarət olmalıdır." }),
+  historyContent: z.string().min(50, { message: "Tarixçə məzmunu ən azı 50 simvoldan ibarət olmalıdır." }),
+  visionContent: z.string().min(20, { message: "Vizyon mətni ən azı 20 simvoldan ibarət olmalıdır." }),
+  missionContent: z.string().min(20, { message: "Fəaliyyət istiqamətləri mətni ən azı 20 simvoldan ibarət olmalıdır." }),
+  valuesContent: z.string().min(20, { message: "Dəyərlər mətni ən azı 20 simvoldan ibarət olmalıdır." }),
+  goalsContent: z.string().min(20, { message: "Məqsədlər mətni ən azı 20 simvoldan ibarət olmalıdır." }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -30,7 +38,11 @@ export function AboutContentForm({ onSubmit, initialData }: AboutContentFormProp
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
-      mainContent: "",
+      historyContent: "",
+      visionContent: "",
+      missionContent: "",
+      valuesContent: "",
+      goalsContent: ""
     },
   });
 
@@ -45,16 +57,88 @@ export function AboutContentForm({ onSubmit, initialData }: AboutContentFormProp
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         <FormField
           control={form.control}
-          name="mainContent"
+          name="historyContent"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Səhifənin Əsas Məzmunu</FormLabel>
+              <FormLabel>Tariximiz</FormLabel>
               <FormControl>
                 <RichTextEditor
                   value={field.value}
                   onChange={field.onChange}
-                  placeholder="Haqqımızda səhifəsinin mətnini daxil edin..."
-                  className="min-h-[400px]"
+                  placeholder="TEC-in tarixi haqqında məlumat..."
+                  className="min-h-[300px]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="visionContent"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Vizyonumuz</FormLabel>
+              <FormControl>
+                <Textarea
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Vizyon mətni..."
+                  className="min-h-[100px]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+         <FormField
+          control={form.control}
+          name="missionContent"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Əsas Fəaliyyət İstiqamətlərimiz</FormLabel>
+              <FormControl>
+                <RichTextEditor
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Fəaliyyət istiqamətlərini siyahı şəklində daxil edin..."
+                  className="min-h-[200px]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+         <FormField
+          control={form.control}
+          name="valuesContent"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Dəyər və Prinsiplərimiz</FormLabel>
+              <FormControl>
+                <RichTextEditor
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Dəyərləri siyahı şəklində daxil edin..."
+                  className="min-h-[200px]"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+         <FormField
+          control={form.control}
+          name="goalsContent"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Strateji Məqsədlərimiz</FormLabel>
+              <FormControl>
+                <RichTextEditor
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Məqsədləri siyahı şəklində daxil edin..."
+                  className="min-h-[200px]"
                 />
               </FormControl>
               <FormMessage />

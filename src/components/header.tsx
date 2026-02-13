@@ -1,11 +1,10 @@
-
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building } from "lucide-react";
+import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
@@ -23,15 +22,11 @@ const navLinks = [
 ];
 
 const aboutLinks = [
-  { href: "/about#rehberlik", label: "Rəhbərlik" },
-  { href: "/about#idare-heyeti", label: "İdarə Heyətimiz" },
-  { href: "/about#tariximiz", label: "Tariximiz" },
-  { href: "/about#senedler", label: "Sənədlər" },
-  { href: "/about#fealiyyet-istiqametleri", label: "Fəaliyyət İstiqamətləri" },
-  { href: "/about#deyerlerimiz", label: "Dəyər və Prinsiplərimiz" },
-  { href: "/about#vizyonumuz", label: "Vizyonumuz" },
-  { href: "/about#meqsedlerimiz", label: "Strateji Məqsədlərimiz" },
-  { href: "/about#sabiq-sedrler", label: "Sabiq Sədrlər" },
+  { href: "/about", label: "Tariximiz" },
+  { href: "/about/leadership", label: "Rəhbərlik və Komanda" },
+  { href: "/about/mission", label: "Missiya və Dəyərlər" },
+  { href: "/about/documents", label: "Sənədlər" },
+  { href: "/about/former-chairmen", label: "Sabiq Sədrlər" },
 ];
 
 export function Header() {
@@ -100,7 +95,7 @@ export function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center" className="w-56">
                     <DropdownMenuItem asChild>
-                        <Link href="/sec-about" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
+                        <Link href="/sec" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
@@ -192,7 +187,7 @@ export function Header() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start" className="w-56">
                             <DropdownMenuItem asChild>
-                                <Link href="/sec-about" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
+                                <Link href="/sec" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -220,5 +215,3 @@ export function LayoutWrapper({
     </div>
   );
 }
-
-    

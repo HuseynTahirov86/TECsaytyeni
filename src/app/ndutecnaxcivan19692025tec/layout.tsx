@@ -1,10 +1,9 @@
-
 "use client";
 
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon, Info, Menu } from "lucide-react";
+import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon, Info, Menu, UserCog } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { logoutAdmin } from '@/lib/actions';
@@ -19,6 +18,7 @@ const navLinks = [
   
   // --- ƏSAS SAYT MƏZMUNU ---
   { href: "/ndutecnaxcivan19692025tec/about-content", label: "Haqqımızda Məzmunu", icon: Info },
+  { href: "/ndutecnaxcivan19692025tec/chairman", label: "Sədr", icon: UserCog },
   { href: "/ndutecnaxcivan19692025tec/hero-slides", label: "Hero Karusel", icon: ImageIcon },
   { href: "/ndutecnaxcivan19692025tec/news", label: "Xəbərlər", icon: Newspaper },
   { href: "/ndutecnaxcivan19692025tec/projects", label: "Layihələr", icon: Briefcase },
