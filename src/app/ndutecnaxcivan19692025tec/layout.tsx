@@ -17,21 +17,23 @@ const navLinks = [
   { href: "/ndutecnaxcivan19692025tec/admins", label: "Admin Hesabları", icon: Shield },
   { href: "/ndutecnaxcivan19692025tec/socials", label: "Sosial Hesablar", icon: Share2 },
   
-  // --- ƏSAS SAYT MƏZMUNU ---
-  { href: "/ndutecnaxcivan19692025tec/about-content", label: "Haqqımızda Məzmunu", icon: Info },
-  { href: "/ndutecnaxcivan19692025tec/documents", label: "Rəsmi Sənədlər", icon: FileText },
-  { href: "/ndutecnaxcivan19692025tec/chairman", label: "Sədr", icon: UserCog },
-  { href: "/ndutecnaxcivan19692025tec/hero-slides", label: "Hero Karusel", icon: ImageIcon },
-  { href: "/ndutecnaxcivan19692025tec/news", label: "Xəbərlər", icon: Newspaper },
-  { href: "/ndutecnaxcivan19692025tec/projects", label: "Layihələr", icon: Briefcase },
-  { href: "/ndutecnaxcivan19692025tec/team", label: "Komanda", icon: Users },
+  // --- HAQQIMIZDA BÖLMƏSİ ---
+  { href: "/ndutecnaxcivan19692025tec/chairman", label: "Rəhbərlik", icon: UserCog },
+  { href: "/ndutecnaxcivan19692025tec/team", label: "İdarə Heyəti", icon: Users },
   { href: "/ndutecnaxcivan19692025tec/formers", label: "Sabiq Sədrlər", icon: UserCheck },
-  { href: "/ndutecnaxcivan19692025tec/aphorisms", label: "Aforizmlər", icon: Quote },
-  { href: "/ndutecnaxcivan19692025tec/academic-writing", label: "Akademik Yazı", icon: BookText },
+  { href: "/ndutecnaxcivan19692025tec/about-content", label: "Haqqımızda Səhifə Mətnləri", icon: Info },
+  { href: "/ndutecnaxcivan19692025tec/documents", label: "Rəsmi Sənədlər", icon: FileText },
+
+  // --- SAYT MƏZMUNU ---
+  { href: "/ndutecnaxcivan19692025tec/hero-slides", label: "Ana Səhifə Slayderi", icon: ImageIcon },
+  { href: "/ndutecnaxcivan19692025tec/news", label: "Xəbərlər və Bloq", icon: Newspaper },
+  { href: "/ndutecnaxcivan19692025tec/projects", label: "Layihələr", icon: Briefcase },
+  { href: "/ndutecnaxcivan19692025tec/aphorisms", label: "Aforizm Karuseli", icon: Quote },
+  { href: "/ndutecnaxcivan19692025tec/academic-writing", label: "Akademik Yazı Qaydaları", icon: BookText },
   
   // --- ŞEC BÖLMƏSİ ---
   { href: "/ndutecnaxcivan19692025tec/sec-about-content", label: "ŞEC Məzmunu", icon: Info },
-  { href: "/ndutecnaxcivan19692025tec/sec-team", label: "ŞEC Komanda", icon: Users },
+  { href: "/ndutecnaxcivan19692025tec/sec-team", label: "ŞEC Komandası", icon: Users },
 
   // --- KİTABXANA VƏ JURNALLAR ---
   { href: "/ndutecnaxcivan19692025tec/library", label: "Kitabxana", icon: Library },

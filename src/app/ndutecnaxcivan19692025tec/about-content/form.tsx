@@ -1,3 +1,4 @@
+
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useState } from "react";
 import { RichTextEditor } from "@/components/rich-text-editor";
 import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export interface AboutContent {
   historyContent: string;
@@ -55,96 +57,121 @@ export function AboutContentForm({ onSubmit, initialData }: AboutContentFormProp
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
-        <FormField
-          control={form.control}
-          name="historyContent"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Tariximiz</FormLabel>
-              <FormControl>
-                <RichTextEditor
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="TEC-in tarixi haqqında məlumat..."
-                  className="min-h-[300px]"
+        <Card>
+            <CardHeader><CardTitle>Tariximiz</CardTitle></CardHeader>
+            <CardContent>
+                <FormField
+                control={form.control}
+                name="historyContent"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormControl>
+                        <RichTextEditor
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="TEC-in tarixi haqqında məlumat..."
+                        className="min-h-[300px]"
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="visionContent"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Vizyonumuz</FormLabel>
-              <FormControl>
-                <Textarea
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Vizyon mətni..."
-                  className="min-h-[100px]"
+            </CardContent>
+        </Card>
+        
+        <Card>
+            <CardHeader><CardTitle>Vizyonumuz</CardTitle></CardHeader>
+            <CardContent>
+                <FormField
+                control={form.control}
+                name="visionContent"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormControl>
+                        <Textarea
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Vizyon mətni..."
+                        className="min-h-[100px]"
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-         <FormField
-          control={form.control}
-          name="missionContent"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Əsas Fəaliyyət İstiqamətlərimiz</FormLabel>
-              <FormControl>
-                <RichTextEditor
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Fəaliyyət istiqamətlərini siyahı şəklində daxil edin..."
-                  className="min-h-[200px]"
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader><CardTitle>Əsas Fəaliyyət İstiqamətlərimiz</CardTitle></CardHeader>
+            <CardContent>
+                <FormField
+                control={form.control}
+                name="missionContent"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormControl>
+                        <RichTextEditor
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Fəaliyyət istiqamətlərini siyahı şəklində daxil edin..."
+                        className="min-h-[200px]"
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-         <FormField
-          control={form.control}
-          name="valuesContent"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Dəyər və Prinsiplərimiz</FormLabel>
-              <FormControl>
-                <RichTextEditor
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Dəyərləri siyahı şəklində daxil edin..."
-                  className="min-h-[200px]"
+            </CardContent>
+        </Card>
+
+         <Card>
+            <CardHeader><CardTitle>Dəyər və Prinsiplərimiz</CardTitle></CardHeader>
+            <CardContent>
+                <FormField
+                control={form.control}
+                name="valuesContent"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormControl>
+                        <RichTextEditor
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Dəyərləri siyahı şəklində daxil edin..."
+                        className="min-h-[200px]"
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-         <FormField
-          control={form.control}
-          name="goalsContent"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Strateji Məqsədlərimiz</FormLabel>
-              <FormControl>
-                <RichTextEditor
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="Məqsədləri siyahı şəklində daxil edin..."
-                  className="min-h-[200px]"
+            </CardContent>
+        </Card>
+
+        <Card>
+            <CardHeader><CardTitle>Strateji Məqsədlərimiz</CardTitle></CardHeader>
+            <CardContent>
+                <FormField
+                control={form.control}
+                name="goalsContent"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormControl>
+                        <RichTextEditor
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder="Məqsədləri siyahı şəklində daxil edin..."
+                        className="min-h-[200px]"
+                        />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            </CardContent>
+        </Card>
+       
         <div className="flex justify-end pt-4">
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Saxlanılır...' : 'Məzmunu Yadda Saxla'}
