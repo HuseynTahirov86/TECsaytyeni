@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building, Sitemap } from "lucide-react";
+import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
@@ -22,16 +22,17 @@ const navLinks = [
 ];
 
 const aboutLinks = [
-  { href: "/about/leadership", label: "Rəhbərlik" },
-  { href: "/about/board-members", label: "İdarə Heyəti" },
-  { href: "/about", label: "Tariximiz" },
-  { href: "/about/documents", label: "Sənədlər" },
-  { href: "/about/vision", label: "Vizyonumuz" },
-  { href: "/about/main-activities", label: "Əsas Fəaliyyət İstiqamətlərimiz" },
-  { href: "/about/values-and-principles", label: "Dəyər Prinsiplərimiz" },
-  { href: "/about/strategic-goals", label: "Strateji Məqsədlərimiz" },
-  { href: "/about/former-chairmen", label: "Sabiq Sədrlər" },
+    { href: "/about/leadership", label: "Rəhbərlik" },
+    { href: "/about/board-members", label: "İdarə Heyəti" },
+    { href: "/about", label: "Tariximiz" },
+    { href: "/about/documents", label: "Sənədlər" },
+    { href: "/about/vision", label: "Vizyonumuz" },
+    { href: "/about/main-activities", label: "Əsas Fəaliyyət İstiqamətlərimiz" },
+    { href: "/about/values-and-principles", label: "Dəyər Prinsiplərimiz" },
+    { href: "/about/strategic-goals", label: "Strateji Məqsədlərimiz" },
+    { href: "/about/former-chairmen", label: "Sabiq Sədrlər" },
 ];
+
 
 export function Header() {
   const pathname = usePathname();
@@ -70,9 +71,8 @@ export function Header() {
         
         <nav className="hidden items-center space-x-1 xl:flex flex-1 justify-center mx-4 overflow-hidden">
           <div className="flex items-center space-x-1 overflow-x-auto scrollbar-hide">
-            <NavLinksContent />
-
-             <DropdownMenu>
+            
+            <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className={cn("flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium text-primary-foreground hover:bg-transparent", pathname.startsWith('/about') ? "text-accent font-semibold" : "")}>
                         <Info className="h-4 w-4" />
@@ -88,11 +88,25 @@ export function Header() {
                     ))}
                 </DropdownMenuContent>
             </DropdownMenu>
+            
+            {navLinks.map((link) => (
+                <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                    "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium",
+                    pathname === link.href ? "text-accent font-semibold" : "text-primary-foreground"
+                )}
+                >
+                <link.icon className="h-4 w-4" />
+                <span>{link.label}</span>
+                </Link>
+            ))}
 
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium text-primary-foreground hover:bg-transparent">
-                        <Sitemap className="h-4 w-4" />
+                        <Building className="h-4 w-4" />
                         Tabe Qurumlar
                         <ChevronDown className="h-4 w-4" />
                     </Button>
@@ -164,7 +178,6 @@ export function Header() {
                   </div>
                 </Link>
                 <nav className="flex flex-col space-y-3">
-                  <NavLinksContent isMobile={true} />
                    <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                           <button className={cn("flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg", pathname.startsWith('/about') ? "text-accent font-semibold" : "text-primary-foreground")}>
@@ -181,10 +194,13 @@ export function Header() {
                           ))}
                       </DropdownMenuContent>
                   </DropdownMenu>
+
+                  <NavLinksContent isMobile={true} />
+                  
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                              <button className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg text-primary-foreground">
-                                <Sitemap className="h-4 w-4" />
+                                <Building className="h-4 w-4" />
                                 Tabe Qurumlar
                                 <ChevronDown className="h-4 w-4" />
                             </button>
