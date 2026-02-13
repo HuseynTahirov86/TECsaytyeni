@@ -1,9 +1,8 @@
-
 import type { Metadata } from 'next';
 import { collection, getDocs, orderBy, query, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import type { SecTeamMember } from '@/app/ndutecnaxcivan19692025tec/sec-team/form';
-import type { AboutContent } from '@/app/ndutecnaxcivan19692025tec/about-content/form';
+import type { SecAboutContent } from '@/app/ndutecnaxcivan19692025tec/sec-about-content/form';
 import SecAboutClientPage from '../sec-about/SecAboutClientPage';
 
 export const dynamic = 'force-dynamic';
@@ -22,11 +21,11 @@ async function getSecTeamMembers(): Promise<SecTeamMember[]> {
     }) as SecTeamMember);
 }
 
-async function getSecAboutContent(): Promise<AboutContent | null> {
+async function getSecAboutContent(): Promise<SecAboutContent | null> {
     const docRef = doc(db, "siteContent", "sec-about");
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-        return docSnap.data() as AboutContent;
+        return docSnap.data() as SecAboutContent;
     }
     return null;
 }

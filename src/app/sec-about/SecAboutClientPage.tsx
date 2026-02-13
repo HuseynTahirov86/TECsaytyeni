@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -10,14 +9,14 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { type AboutContent } from '@/app/ndutecnaxcivan19692025tec/about-content/form';
+import type { SecAboutContent } from '@/app/ndutecnaxcivan19692025tec/sec-about-content/form';
 import { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 
 
 interface SecAboutClientPageProps {
     teamMembers: SecTeamMember[];
-    aboutContent: AboutContent | null;
+    aboutContent: SecAboutContent | null;
 }
 
 export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAboutClientPageProps) {
@@ -47,18 +46,18 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
     >
       <motion.header className="text-center" variants={FADE_IN_ANIMATION_SETTINGS}>
         <h1 className="text-4xl font-extrabold tracking-tight text-primary lg:text-5xl">
-          NDU nəzdində Gimnaziya Şagird Elmi Cəmiyyəti (ŞEC)
+          {aboutContent?.title || "Şagird Elmi Cəmiyyəti"}
         </h1>
       </motion.header>
         
       <motion.div className="my-12" variants={FADE_IN_ANIMATION_SETTINGS}>
         <Image
-          src="/secbanner.png"
-          alt="ŞEC"
+          src={aboutContent?.bannerImageUrl || "/secbanner.png"}
+          alt={aboutContent?.title || "ŞEC"}
           width={1200}
           height={500}
           className="rounded-lg shadow-lg object-cover w-full"
-          data-ai-hint="group young students science project"
+          data-ai-hint={aboutContent?.bannerImageHint}
         />
       </motion.div>
 
