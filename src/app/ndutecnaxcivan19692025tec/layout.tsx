@@ -28,11 +28,8 @@ const navLinks = [
   { href: "/ndutecnaxcivan19692025tec/academic-writing", label: "Akademik Yazı", icon: BookText },
   
   // --- ŞEC BÖLMƏSİ ---
-  { href: "/ndutecnaxcivan19692025tec/sec-about-content", label: "ŞEC Haqqımızda", icon: Info },
-  { href: "/ndutecnaxcivan19692025tec/sec-blog", label: "ŞEC Bloq", icon: Newspaper },
-  { href: "/ndutecnaxcivan19692025tec/sec-projects", label: "ŞEC Layihələr", icon: Briefcase },
+  { href: "/ndutecnaxcivan19692025tec/sec-about-content", label: "ŞEC Məzmunu", icon: Info },
   { href: "/ndutecnaxcivan19692025tec/sec-team", label: "ŞEC Komanda", icon: Users },
-  { href: "/ndutecnaxcivan19692025tec/sec-socials", label: "ŞEC Sosial Hesabları", icon: Share2 },
 
   // --- KİTABXANA VƏ JURNALLAR ---
   { href: "/ndutecnaxcivan19692025tec/library", label: "Kitabxana", icon: Library },
@@ -43,8 +40,6 @@ const navLinks = [
   // --- MÜRACİƏTLƏR ---
   { href: "/ndutecnaxcivan19692025tec/messages", label: "Əlaqə Mesajları", icon: MessageSquare },
   { href: "/ndutecnaxcivan19692025tec/appeals", label: "Sədrə Müraciətlər", icon: MailCheck },
-  { href: "/ndutecnaxcivan19692025tec/sec-messages", label: "ŞEC Mesajları", icon: MessageSquare },
-  { href: "/ndutecnaxcivan19692025tec/sec-appeals", label: "ŞEC Müraciətlər", icon: MailCheck },
   
   // --- TETİ BÖLMƏSİ ---
   { href: "/ndutecnaxcivan19692025tec/teti-users", label: "TETİ İstifadəçiləri", icon: Users },

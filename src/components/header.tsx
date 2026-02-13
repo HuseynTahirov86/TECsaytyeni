@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -9,8 +10,6 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Footer as RootFooter } from '@/components/footer';
-import { Header as SecHeader } from '@/app/affiliated-bodies/gymnasium-sec/components/header';
-import { Footer as SecFooter } from '@/app/affiliated-bodies/gymnasium-sec/components/footer';
 import { Toaster } from "@/components/ui/toaster";
 
 const navLinks = [
@@ -19,14 +18,7 @@ const navLinks = [
   { href: "/projects", label: "Layihələr", icon: Briefcase },
   { href: "/trainings", label: "Təlimlər", icon: GraduationCap },
   { href: "/blog", label: "Bloq", icon: Newspaper },
-  { 
-    label: "Tabe Qurumlar", 
-    icon: Building, 
-    isDropdown: true, 
-    subItems: [
-      { href: "/affiliated-bodies/gymnasium-sec", label: "NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti" }
-    ]
-  },
+  { href: "/sec-about", label: "ŞEC", icon: Building },
   { href: "/library", label: "Kitabxana", icon: BookOpen },
   { href: "/appeal-to-chairman", label: "Sədrə Müraciət", icon: MessageSquare },
   { href: "/contact", label: "Əlaqə", icon: Mail },
@@ -37,42 +29,20 @@ export function Header() {
 
   const NavLinksContent = ({ isMobile = false }) => (
     <>
-      {navLinks.map((link) =>
-        'isDropdown' in link && link.isDropdown ? (
-          <DropdownMenu key={link.label}>
-            <DropdownMenuTrigger
-              className={cn(
-                "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap text-primary-foreground focus:outline-none",
-                isMobile ? "px-2 py-2 text-lg justify-start" : "px-2 py-2 text-sm font-medium"
-              )}
-            >
-              <link.icon className="h-4 w-4" />
-              <span>{link.label}</span>
-              <ChevronDown className="h-4 w-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {link.subItems.map((subItem) => (
-                <DropdownMenuItem key={subItem.href} asChild>
-                  <Link href={subItem.href}>{subItem.label}</Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <Link
-            key={(link as any).href}
-            href={(link as any).href}
-            className={cn(
-              "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap",
-              pathname === (link as any).href ? "text-accent font-semibold" : "text-primary-foreground",
-              isMobile ? "px-2 py-2 text-lg" : "px-2 py-2 text-sm font-medium"
-            )}
-          >
-            <link.icon className="h-4 w-4" />
-            <span>{link.label}</span>
-          </Link>
-        )
-      )}
+      {navLinks.map((link) => (
+        <Link
+          key={link.href}
+          href={link.href}
+          className={cn(
+            "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap",
+            pathname === link.href ? "text-accent font-semibold" : "text-primary-foreground",
+            isMobile ? "px-2 py-2 text-lg" : "px-2 py-2 text-sm font-medium"
+          )}
+        >
+          <link.icon className="h-4 w-4" />
+          <span>{link.label}</span>
+        </Link>
+      ))}
     </>
   );
 
@@ -169,17 +139,11 @@ export function LayoutWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const isSecPage = pathname.startsWith('/affiliated-bodies/gymnasium-sec');
-
-  const CurrentHeader = isSecPage ? SecHeader : Header;
-  const CurrentFooter = isSecPage ? SecFooter : RootFooter;
-
   return (
     <div className="relative flex min-h-dvh flex-col bg-background">
-      <CurrentHeader />
+      <Header />
       <main className="flex-1">{children}</main>
-      <CurrentFooter />
+      <RootFooter />
       <Toaster />
     </div>
   );

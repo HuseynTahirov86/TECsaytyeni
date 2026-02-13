@@ -13,8 +13,7 @@ const ALLOWED_DIRECTORIES = [
     'sekiller',
     'telebeelmijurnali',
     'telebehuquqjurnali',
-    'tetimelumat',
-    'sec-images'
+    'tetimelumat'
 ];
 
 

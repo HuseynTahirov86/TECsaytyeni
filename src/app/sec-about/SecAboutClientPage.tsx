@@ -15,12 +15,12 @@ import { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 
 
-interface AboutClientPageProps {
+interface SecAboutClientPageProps {
     teamMembers: SecTeamMember[];
     aboutContent: AboutContent | null;
 }
 
-export default function AboutClientPage({ teamMembers, aboutContent }: AboutClientPageProps) {
+export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAboutClientPageProps) {
   const [sanitizedContent, setSanitizedContent] = useState('');
 
   useEffect(() => {
@@ -35,29 +35,6 @@ export default function AboutClientPage({ teamMembers, aboutContent }: AboutClie
     transition: { duration: 0.8, ease: "easeInOut" },
   };
 
-  const mainDirections = [
-      {
-        title: "Elmi Tədqiqat",
-        description: "Şagirdləri maraqlandıqları sahələrdə kiçik həcmli elmi araşdırmalar aparmağa təşviq etmək.",
-        icon: GraduationCap,
-      },
-      {
-        title: "Konfrans və Seminarlar",
-        description: "Şagirdlərin öz tədqiqatlarını təqdim edə biləcəyi məktəbdaxili konfrans və seminarlar təşkil etmək.",
-        icon: Users2,
-      },
-       {
-        title: "Elmi Populyarlıq",
-        description: "Elmin maraqlı və əyləncəli tərəflərini təqdimatlar, təcrübələr və viktorinalar vasitəsilə tanıtmaq.",
-        icon: CheckCircle,
-      },
-       {
-        title: "Layihə Müsabiqələri",
-        description: "Məktəblilər arasında kiçik elmi layihə müsabiqələri keçirərək yaradıcılığı stimullaşdırmaq.",
-        icon: Goal,
-      },
-    ];
-
   return (
     <motion.div 
       className="container mx-auto max-w-5xl px-4 py-12"
@@ -70,14 +47,14 @@ export default function AboutClientPage({ teamMembers, aboutContent }: AboutClie
     >
       <motion.header className="text-center" variants={FADE_IN_ANIMATION_SETTINGS}>
         <h1 className="text-4xl font-extrabold tracking-tight text-primary lg:text-5xl">
-          ŞEC Haqqında
+          NDU nəzdində Gimnaziya Şagird Elmi Cəmiyyəti (ŞEC)
         </h1>
       </motion.header>
         
       <motion.div className="my-12" variants={FADE_IN_ANIMATION_SETTINGS}>
         <Image
-          src="https://picsum.photos/seed/gymnasium-team/1200/500"
-          alt="ŞEC Komandası"
+          src="/secbanner.png"
+          alt="ŞEC"
           width={1200}
           height={500}
           className="rounded-lg shadow-lg object-cover w-full"
@@ -90,27 +67,6 @@ export default function AboutClientPage({ teamMembers, aboutContent }: AboutClie
             variants={FADE_IN_ANIMATION_SETTINGS}
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
-
-        <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
-            <div className="text-center">
-                <h2 className="text-3xl font-bold tracking-tight text-primary">Fəaliyyət İstiqamətlərimiz</h2>
-            </div>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {mainDirections.map((item, index) => (
-                    <Card key={index}>
-                        <CardHeader className="flex flex-row items-center gap-4">
-                            <div className="bg-primary/10 p-3 rounded-full">
-                                <item.icon className="h-6 w-6 text-primary" />
-                            </div>
-                            <CardTitle className="text-xl">{item.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-muted-foreground">{item.description}</p>
-                        </CardContent>
-                    </Card>
-                ))}
-            </div>
-        </motion.section>
 
       <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
         <div className="text-center">

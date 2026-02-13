@@ -4,12 +4,12 @@ import { collection, getDocs, orderBy, query, doc, getDoc } from 'firebase/fires
 import { db } from '@/lib/firebase';
 import type { SecTeamMember } from '@/app/ndutecnaxcivan19692025tec/sec-team/form';
 import type { AboutContent } from '@/app/ndutecnaxcivan19692025tec/about-content/form';
-import AboutClientPage from './AboutClientPage';
+import SecAboutClientPage from './SecAboutClientPage';
 
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Haqqımızda',
+  title: 'ŞEC Haqqında',
   description: 'NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti (ŞEC) haqqında ətraflı məlumat.',
 };
 
@@ -31,10 +31,9 @@ async function getSecAboutContent(): Promise<AboutContent | null> {
     return null;
 }
 
-
-export default async function AboutPage() {
+export default async function SecAboutPage() {
     const teamMembers = await getSecTeamMembers();
     const aboutContent = await getSecAboutContent();
 
-    return <AboutClientPage teamMembers={teamMembers} aboutContent={aboutContent} />;
+    return <SecAboutClientPage teamMembers={teamMembers} aboutContent={aboutContent} />;
 }
