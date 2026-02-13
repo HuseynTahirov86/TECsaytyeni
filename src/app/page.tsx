@@ -213,7 +213,7 @@ export default function Home() {
                                 
                                 <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
                                   <span className="block whitespace-nowrap">Naxçıvan Dövlət Universiteti</span>
-                                  <span className="block text-2xl lg:text-4xl mt-1 text-primary whitespace-nowrap">Tələbə Elmi Cəmiyyəti</span>
+                                  <span className="block text-2xl lg:text-4xl mt-1 text-white whitespace-nowrap">Tələbə Elmi Cəmiyyəti</span>
                                 </motion.h1>
                                 
                                 <motion.div variants={heroItemVariants}>
