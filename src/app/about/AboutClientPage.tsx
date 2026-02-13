@@ -159,7 +159,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
       </motion.div>
 
       {/* Rəhbərlik */}
-      <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+      <motion.section id="rehberlik" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-primary">Rəhbərlik</h2>
         </div>
@@ -171,7 +171,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
       </motion.section>
 
       {/* İdarə Heyəti */}
-      <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+      <motion.section id="idare-heyeti" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-primary">İdarə Heyətimiz</h2>
         </div>
@@ -183,7 +183,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
       </motion.section>
       
       {/* Tariximiz */}
-       <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+       <motion.section id="tariximiz" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
          <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-primary">Tariximiz</h2>
         </div>
@@ -194,7 +194,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
       </motion.section>
       
       {/* Sənədlər */}
-      <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+      <motion.section id="senedler" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-primary">Sənədlər</h2>
           </div>
@@ -221,7 +221,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
         </motion.section>
       
       {/* Əsas Fəaliyyət İstiqamətlərimiz */}
-      <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+      <motion.section id="fealiyyet-istiqametleri" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
             <div className="text-center">
                 <h2 className="text-3xl font-bold tracking-tight text-primary">Əsas Fəaliyyət İstiqamətlərimiz</h2>
             </div>
@@ -243,7 +243,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
         </motion.section>
 
       {/* Dəyər Prinsiplərimiz */}
-      <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+      <motion.section id="deyerlerimiz" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
             <div className="text-center">
                 <h2 className="text-3xl font-bold tracking-tight text-primary">Dəyər və Prinsiplərimiz</h2>
             </div>
@@ -265,7 +265,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
         </motion.section>
         
         {/* Vizyonumuz */}
-        <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+        <motion.section id="vizyonumuz" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
           <Card className="bg-primary text-primary-foreground">
             <CardHeader className="flex flex-col items-center text-center">
               <div className="bg-primary-foreground/20 p-4 rounded-full mb-4">
@@ -280,7 +280,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
         </motion.section>
         
       {/* Strateji Məqsədlərimiz */}
-       <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+       <motion.section id="meqsedlerimiz" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
             <div className="text-center">
                 <h2 className="text-3xl font-bold tracking-tight text-primary">Strateji Məqsədlərimiz</h2>
             </div>
@@ -302,7 +302,7 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
         </motion.section>
 
       {/* Sabiq TEC sədrləri */}
-       <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
+       <motion.section id="sabiq-sedrler" className="mt-16 scroll-mt-24" variants={FADE_IN_ANIMATION_SETTINGS}>
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-primary">
             Sabiq TEC Sədrləri
@@ -357,3 +357,5 @@ export default function AboutClientPage({ teamMembers, formerChairmen, aboutCont
     </motion.div>
   );
 }
+
+    

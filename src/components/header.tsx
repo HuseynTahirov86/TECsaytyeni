@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -13,13 +14,24 @@ import { Toaster } from "@/components/ui/toaster";
 
 const navLinks = [
   { href: "/", label: "Ana Səhifə", icon: Home },
-  { href: "/about", label: "Haqqımızda", icon: Info },
   { href: "/projects", label: "Layihələr", icon: Briefcase },
   { href: "/trainings", label: "Təlimlər", icon: GraduationCap },
   { href: "/blog", label: "Bloq", icon: Newspaper },
   { href: "/library", label: "Kitabxana", icon: BookOpen },
   { href: "/appeal-to-chairman", label: "Sədrə Müraciət", icon: MessageSquare },
   { href: "/contact", label: "Əlaqə", icon: Mail },
+];
+
+const aboutLinks = [
+  { href: "/about#rehberlik", label: "Rəhbərlik" },
+  { href: "/about#idare-heyeti", label: "İdarə Heyətimiz" },
+  { href: "/about#tariximiz", label: "Tariximiz" },
+  { href: "/about#senedler", label: "Sənədlər" },
+  { href: "/about#fealiyyet-istiqametleri", label: "Fəaliyyət İstiqamətləri" },
+  { href: "/about#deyerlerimiz", label: "Dəyər və Prinsiplərimiz" },
+  { href: "/about#vizyonumuz", label: "Vizyonumuz" },
+  { href: "/about#meqsedlerimiz", label: "Strateji Məqsədlərimiz" },
+  { href: "/about#sabiq-sedrler", label: "Sabiq Sədrlər" },
 ];
 
 export function Header() {
@@ -60,6 +72,24 @@ export function Header() {
         <nav className="hidden items-center space-x-1 xl:flex flex-1 justify-center mx-4 overflow-hidden">
           <div className="flex items-center space-x-1 overflow-x-auto scrollbar-hide">
             <NavLinksContent />
+
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className={cn("flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium text-primary-foreground hover:bg-transparent", pathname.startsWith('/about') ? "text-accent font-semibold" : "")}>
+                        <Info className="h-4 w-4" />
+                        Haqqımızda
+                        <ChevronDown className="h-4 w-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="center" className="w-56">
+                    {aboutLinks.map(link => (
+                        <DropdownMenuItem asChild key={link.href}>
+                            <Link href={link.href} className="text-sm">{link.label}</Link>
+                        </DropdownMenuItem>
+                    ))}
+                </DropdownMenuContent>
+            </DropdownMenu>
+
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium text-primary-foreground hover:bg-transparent">
@@ -70,7 +100,7 @@ export function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center" className="w-56">
                     <DropdownMenuItem asChild>
-                        <Link href="/sec" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
+                        <Link href="/sec-about" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
@@ -136,6 +166,22 @@ export function Header() {
                 </Link>
                 <nav className="flex flex-col space-y-3">
                   <NavLinksContent isMobile={true} />
+                   <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                          <button className={cn("flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg", pathname.startsWith('/about') ? "text-accent font-semibold" : "text-primary-foreground")}>
+                              <Info className="h-4 w-4" />
+                              Haqqımızda
+                              <ChevronDown className="h-4 w-4" />
+                          </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="start" className="w-56">
+                          {aboutLinks.map(link => (
+                              <DropdownMenuItem asChild key={link.href}>
+                                  <Link href={link.href} className="text-sm">{link.label}</Link>
+                              </DropdownMenuItem>
+                          ))}
+                      </DropdownMenuContent>
+                  </DropdownMenu>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                              <button className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg text-primary-foreground">
@@ -146,7 +192,7 @@ export function Header() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start" className="w-56">
                             <DropdownMenuItem asChild>
-                                <Link href="/sec" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
+                                <Link href="/sec-about" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -174,3 +220,5 @@ export function LayoutWrapper({
     </div>
   );
 }
+
+    
