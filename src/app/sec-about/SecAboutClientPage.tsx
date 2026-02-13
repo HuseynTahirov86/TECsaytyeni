@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Linkedin, Instagram, Facebook } from "lucide-react";
 import type { SecTeamMember } from '@/app/ndutecnaxcivan19692025tec/sec-team/form';
 import Link from 'next/link';
@@ -20,6 +20,75 @@ interface SecAboutClientPageProps {
     aboutContent: SecAboutContent | null;
 }
 
+const TeamMemberCard = ({ member }: { member: SecTeamMember }) => (
+    <Dialog key={member.id}>
+      <DialogTrigger asChild>
+        <Card className="text-center overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer hover:scale-105">
+            <div className="aspect-[4/5] relative w-full">
+               <img 
+                  src={member.avatarUrl || "https://placehold.co/400x500.png"}
+                  alt={member.name} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  data-ai-hint={member.avatarHint}
+                />
+            </div>
+            <CardContent className="p-4">
+                <h3 className="font-semibold text-lg">{member.name}</h3>
+                <p className="text-sm text-accent">{member.role}</p>
+            </CardContent>
+        </Card>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-md p-0">
+        <ScrollArea className="max-h-[85vh]">
+          <div className="p-6">
+            <DialogHeader>
+              <div className="flex flex-col items-center text-center">
+                <img
+                  src={member.avatarUrl || "https://placehold.co/128x128.png"}
+                  alt={member.name}
+                  className="w-32 h-32 rounded-full object-cover mb-4"
+                  data-ai-hint={member.avatarHint}
+                />
+                <DialogTitle className="text-2xl">{member.name}</DialogTitle>
+                <DialogDesc className="text-accent text-base mt-1">{member.role}</DialogDesc>
+                <p className="text-sm text-muted-foreground mt-1">{member.faculty}</p>
+              </div>
+            </DialogHeader>
+            {member.bio && (
+                <div className="py-4 text-left">
+                  <p className="text-muted-foreground whitespace-pre-wrap">{member.bio}</p>
+                </div>
+            )}
+            <div className="flex justify-center gap-4 pt-4 border-t">
+                {member.linkedinUrl && (
+                    <Button variant="ghost" size="icon" asChild>
+                        <Link href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
+                            <Linkedin className="h-5 w-5" />
+                        </Link>
+                    </Button>
+                )}
+                {member.instagramUrl && (
+                    <Button variant="ghost" size="icon" asChild>
+                      <Link href={member.instagramUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
+                          <Instagram className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                )}
+                {member.facebookUrl && (
+                    <Button variant="ghost" size="icon" asChild>
+                      <Link href={member.facebookUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
+                          <Facebook className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                )}
+            </div>
+          </div>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
+);
+
+
 export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAboutClientPageProps) {
   const [sanitizedContent, setSanitizedContent] = useState('');
 
@@ -35,9 +104,13 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
     transition: { duration: 0.8, ease: "easeInOut" },
   };
 
+  const leadershipRoles = ['Sədr', 'Sədr müavini', 'Katib'];
+  const leadership = teamMembers.filter(member => leadershipRoles.includes(member.role));
+  const boardMembers = teamMembers.filter(member => !leadershipRoles.includes(member.role));
+
   return (
     <motion.div 
-      className="container mx-auto max-w-5xl px-4 py-12"
+      className="container mx-auto max-w-5xl px-4 py-12 space-y-16"
       initial="initial"
       animate="animate"
       variants={{
@@ -51,7 +124,7 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
         </h1>
       </motion.header>
         
-      <motion.div className="my-12" variants={FADE_IN_ANIMATION_SETTINGS}>
+      <motion.div variants={FADE_IN_ANIMATION_SETTINGS}>
         <Image
           src={aboutContent?.bannerImageUrl || "/secbanner.png"}
           alt={aboutContent?.title || "ŞEC"}
@@ -63,88 +136,46 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
       </motion.div>
 
        <motion.section 
-            className="mt-12 prose prose-lg max-w-none text-foreground/90 prose-headings:text-primary prose-a:text-primary prose-strong:text-foreground"
             variants={FADE_IN_ANIMATION_SETTINGS}
-            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-        />
+        >
+            <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold tracking-tight text-primary">Tariximiz</h2>
+            </div>
+            <div 
+              className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-primary prose-a:text-primary prose-strong:text-foreground"
+              dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+             />
+        </motion.section>
+      
+      {leadership.length > 0 && (
+          <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
+            <div className="text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-primary">
+                Rəhbərlik
+              </h2>
+            </div>
+            <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              {leadership.map((member) => (
+                <TeamMemberCard key={member.id} member={member} />
+              ))}
+            </div>
+          </motion.section>
+      )}
 
-      <motion.section className="mt-16" variants={FADE_IN_ANIMATION_SETTINGS}>
-        <div className="text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-primary">
-            Komandamızla Tanış Olun
-          </h2>
-          <p className="mt-2 text-muted-foreground">Təşəbbüslərimizin arxasındakı güc.</p>
-        </div>
-        <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {teamMembers.map((member) => (
-            <Dialog key={member.id}>
-              <DialogTrigger asChild>
-                <Card className="text-center overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer hover:scale-105">
-                    <div className="aspect-[4/5] relative w-full">
-                       <img 
-                          src={member.avatarUrl || "https://placehold.co/400x500.png"}
-                          alt={member.name} 
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                          data-ai-hint={member.avatarHint}
-                        />
-                    </div>
-                    <CardContent className="p-4">
-                        <h3 className="font-semibold text-lg">{member.name}</h3>
-                        <p className="text-sm text-accent">{member.role}</p>
-                    </CardContent>
-                </Card>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md p-0">
-                <ScrollArea className="max-h-[85vh]">
-                  <div className="p-6">
-                    <DialogHeader>
-                      <div className="flex flex-col items-center text-center">
-                        <img
-                          src={member.avatarUrl || "https://placehold.co/128x128.png"}
-                          alt={member.name}
-                          className="w-32 h-32 rounded-full object-cover mb-4"
-                          data-ai-hint={member.avatarHint}
-                        />
-                        <DialogTitle className="text-2xl">{member.name}</DialogTitle>
-                        <DialogDesc className="text-accent text-base mt-1">{member.role}</DialogDesc>
-                        <p className="text-sm text-muted-foreground mt-1">{member.faculty}</p>
-                      </div>
-                    </DialogHeader>
-                    <div className="py-4 text-left">
-                      <p className="text-muted-foreground whitespace-pre-wrap">{member.bio}</p>
-                    </div>
-                    <div className="flex justify-center gap-4 pt-4 border-t">
-                        {member.linkedinUrl && (
-                            <Button variant="ghost" size="icon" asChild>
-                                <Link href={member.linkedinUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                                    <Linkedin className="h-5 w-5" />
-                                </Link>
-                            </Button>
-                        )}
-                        {member.instagramUrl && (
-                            <Button variant="ghost" size="icon" asChild>
-                              <Link href={member.instagramUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                                  <Instagram className="h-5 w-5" />
-                              </Link>
-                            </Button>
-                        )}
-                        {member.facebookUrl && (
-                            <Button variant="ghost" size="icon" asChild>
-                              <Link href={member.facebookUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">
-                                  <Facebook className="h-5 w-5" />
-                              </Link>
-                            </Button>
-                        )}
-                    </div>
-                  </div>
-                </ScrollArea>
-              </DialogContent>
-            </Dialog>
-          ))}
-        </div>
-      </motion.section>
+      {boardMembers.length > 0 && (
+        <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-primary">
+              İdarə Heyəti
+            </h2>
+          </div>
+          <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {boardMembers.map((member) => (
+              <TeamMemberCard key={member.id} member={member} />
+            ))}
+          </div>
+        </motion.section>
+      )}
     </motion.div>
   );
 }
-
-    
