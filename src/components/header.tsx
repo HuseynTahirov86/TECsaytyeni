@@ -1,10 +1,9 @@
-
 "use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building } from "lucide-react";
+import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building, Users } from "lucide-react";
 import { usePathname } from 'next/navigation';
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -18,7 +17,6 @@ const navLinks = [
   { href: "/projects", label: "Layihələr", icon: Briefcase },
   { href: "/trainings", label: "Təlimlər", icon: GraduationCap },
   { href: "/blog", label: "Bloq", icon: Newspaper },
-  { href: "/sec-about", label: "ŞEC", icon: Building },
   { href: "/library", label: "Kitabxana", icon: BookOpen },
   { href: "/appeal-to-chairman", label: "Sədrə Müraciət", icon: MessageSquare },
   { href: "/contact", label: "Əlaqə", icon: Mail },
@@ -62,6 +60,20 @@ export function Header() {
         <nav className="hidden items-center space-x-1 xl:flex flex-1 justify-center mx-4 overflow-hidden">
           <div className="flex items-center space-x-1 overflow-x-auto scrollbar-hide">
             <NavLinksContent />
+             <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium text-primary-foreground hover:bg-transparent">
+                        <Users className="h-4 w-4" />
+                        Tabe Qurumlar
+                        <ChevronDown className="h-4 w-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="center" className="w-56">
+                    <DropdownMenuItem asChild>
+                        <Link href="/sec-about" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </nav>
         
@@ -111,7 +123,7 @@ export function Header() {
                   <span className="sr-only">Menyunu Aç/Bağla</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="bg-primary text-primary-foreground border-primary/20">
+              <SheetContent side="left" className="bg-primary text-primary-foreground border-primary/20 w-full sm:max-w-sm">
                 <SheetHeader>
                    <SheetTitle className="sr-only">Menyu</SheetTitle>
                 </SheetHeader>
@@ -124,6 +136,20 @@ export function Header() {
                 </Link>
                 <nav className="flex flex-col space-y-3">
                   <NavLinksContent isMobile={true} />
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                             <button className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg text-primary-foreground">
+                                <Users className="h-4 w-4" />
+                                Tabe Qurumlar
+                                <ChevronDown className="h-4 w-4" />
+                            </button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start" className="w-56">
+                            <DropdownMenuItem asChild>
+                                <Link href="/sec-about" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </nav>
               </SheetContent>
             </Sheet>
