@@ -1,8 +1,9 @@
+
 "use client";
 
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Eye, Target, Linkedin, Instagram, Facebook, Download, CheckCircle, ListOrdered, Goal, Scale, Handshake, Users2, ShieldCheck, GraduationCap } from "lucide-react";
+import { Linkedin, Instagram, Facebook } from "lucide-react";
 import type { SecTeamMember } from '@/app/ndutecnaxcivan19692025tec/sec-team/form';
 import Link from 'next/link';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription as DialogDesc } from "@/components/ui/dialog";
@@ -145,3 +146,5 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
     </motion.div>
   );
 }
+
+    

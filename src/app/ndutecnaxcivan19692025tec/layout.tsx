@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
-import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Bot, Shield, Image as ImageIcon, Info, Menu, UserCog, FileText, Eye, ListOrdered, Goal, Scale } from "lucide-react";
+import { Home, Newspaper, Briefcase, LogOut, Share2, Users, MessageSquare, BookText, Landmark, MailCheck, UserCheck, Library, GraduationCap, ClipboardList, Quote, Building, Archive, Shield, Image as ImageIcon, Info, Menu, UserCog, FileText, Eye, ListOrdered, Goal, Scale } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 import { logoutAdmin } from '@/lib/actions';
@@ -161,3 +161,4 @@ export default function AdminLayout({
   );
 }
 
+    
