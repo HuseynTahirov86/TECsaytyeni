@@ -5,10 +5,14 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const aboutNavLinks = [
+  { href: "/about/leadership", label: "Rəhbərlik" },
+  { href: "/about/board-members", label: "İdarə Heyəti" },
   { href: "/about", label: "Tariximiz" },
-  { href: "/about/leadership", label: "Rəhbərlik və Komanda" },
-  { href: "/about/mission", label: "Missiya və Dəyərlər" },
   { href: "/about/documents", label: "Sənədlər" },
+  { href: "/about/vision", label: "Vizyonumuz" },
+  { href: "/about/main-activities", label: "Əsas Fəaliyyət İstiqamətlərimiz" },
+  { href: "/about/values-and-principles", label: "Dəyər Prinsiplərimiz" },
+  { href: "/about/strategic-goals", label: "Strateji Məqsədlərimiz" },
   { href: "/about/former-chairmen", label: "Sabiq Sədrlər" },
 ];
 

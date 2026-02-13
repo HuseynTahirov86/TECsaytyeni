@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building, Users } from "lucide-react";
+import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building, Sitemap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
@@ -22,10 +22,14 @@ const navLinks = [
 ];
 
 const aboutLinks = [
+  { href: "/about/leadership", label: "Rəhbərlik" },
+  { href: "/about/board-members", label: "İdarə Heyəti" },
   { href: "/about", label: "Tariximiz" },
-  { href: "/about/leadership", label: "Rəhbərlik və Komanda" },
-  { href: "/about/mission", label: "Missiya və Dəyərlər" },
   { href: "/about/documents", label: "Sənədlər" },
+  { href: "/about/vision", label: "Vizyonumuz" },
+  { href: "/about/main-activities", label: "Əsas Fəaliyyət İstiqamətlərimiz" },
+  { href: "/about/values-and-principles", label: "Dəyər Prinsiplərimiz" },
+  { href: "/about/strategic-goals", label: "Strateji Məqsədlərimiz" },
   { href: "/about/former-chairmen", label: "Sabiq Sədrlər" },
 ];
 
@@ -76,7 +80,7 @@ export function Header() {
                         <ChevronDown className="h-4 w-4" />
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="center" className="w-56">
+                <DropdownMenuContent align="center" className="w-64">
                     {aboutLinks.map(link => (
                         <DropdownMenuItem asChild key={link.href}>
                             <Link href={link.href} className="text-sm">{link.label}</Link>
@@ -88,7 +92,7 @@ export function Header() {
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium text-primary-foreground hover:bg-transparent">
-                        <Building className="h-4 w-4" />
+                        <Sitemap className="h-4 w-4" />
                         Tabe Qurumlar
                         <ChevronDown className="h-4 w-4" />
                     </Button>
@@ -180,7 +184,7 @@ export function Header() {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                              <button className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg text-primary-foreground">
-                                <Building className="h-4 w-4" />
+                                <Sitemap className="h-4 w-4" />
                                 Tabe Qurumlar
                                 <ChevronDown className="h-4 w-4" />
                             </button>
