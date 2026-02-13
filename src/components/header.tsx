@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Building, Users, Sitemap } from "lucide-react";
-import { usePathname } from 'next/navigation';
+import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquare, BookOpen, GraduationCap, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
@@ -52,7 +52,7 @@ export function Header() {
              <Image src="/logo1.png" alt="TEC Təhlilləri Loqosu" width={60} height={60} className="object-contain flex-shrink-0" />
             <div className="hidden sm:flex flex-col text-sm font-semibold leading-tight">
               <span>Naxçıvan Dövlət Universiteti</span>
-              <span className="text-xs font-medium">Tələbə Elmi Cəmiyyəti</span>
+              <span className="text-sm font-medium">Tələbə Elmi Cəmiyyəti</span>
             </div>
           </Link>
         </div>
@@ -63,14 +63,14 @@ export function Header() {
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium text-primary-foreground hover:bg-transparent">
-                        <Sitemap className="h-4 w-4" />
+                        <Share2 className="h-4 w-4" />
                         Tabe Qurumlar
                         <ChevronDown className="h-4 w-4" />
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center" className="w-56">
                     <DropdownMenuItem asChild>
-                        <Link href="/sec" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
+                        <Link href="/sec-about" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
@@ -139,14 +139,14 @@ export function Header() {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                              <button className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg text-primary-foreground">
-                                <Sitemap className="h-4 w-4" />
+                                <Share2 className="h-4 w-4" />
                                 Tabe Qurumlar
                                 <ChevronDown className="h-4 w-4" />
                             </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start" className="w-56">
                             <DropdownMenuItem asChild>
-                                <Link href="/sec" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
+                                <Link href="/sec-about" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
