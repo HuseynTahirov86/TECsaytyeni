@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -146,7 +145,7 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
       {chairman && (
         <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
             <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold tracking-tight text-primary">Sədr</h2>
+                <h2 className="text-3xl font-bold tracking-tight text-primary">Rəhbərlik</h2>
             </div>
              <Card className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 items-center max-w-4xl mx-auto">
                 <div className="md:col-span-1">
@@ -209,6 +208,4 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
     </motion.div>
   );
 }
-
-
     
