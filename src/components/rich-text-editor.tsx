@@ -4,6 +4,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import 'quill/dist/quill.snow.css';
 import { cn } from '@/lib/utils';
 import type Quill from 'quill';
+import { uploadFile } from '@/lib/utils';
 
 interface RichTextEditorProps {
   value: string;
@@ -24,17 +25,51 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
     
     import('quill').then((QuillModule) => {
       const Quill = QuillModule.default;
+      
+      const imageHandler = () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.click();
+
+        input.onchange = async () => {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const range = quill.getSelection(true);
+
+                quill.insertText(range.index, ' [Şəkil yüklənir...] ', 'italic', true);
+
+                try {
+                    const imageUrl = await uploadFile(file, 'sekiller');
+                    
+                    quill.deleteText(range.index, ' [Şəkil yüklənir...] '.length);
+                    quill.insertEmbed(range.index, 'image', imageUrl);
+                    quill.setSelection(range.index + 1, 0);
+
+                } catch (error) {
+                    console.error("Image upload failed:", error);
+                    quill.deleteText(range.index, ' [Şəkil yüklənir...] '.length);
+                }
+            }
+        };
+      }
+      
       const quill = new Quill(editor, {
         theme: 'snow',
         placeholder,
         modules: {
-          toolbar: [
-            [{ 'header': [1, 2, 3, false] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-            ['link', 'image'],
-            ['clean']
-          ],
+          toolbar: {
+              container: [
+                [{ 'header': [1, 2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                ['link', 'image'],
+                ['clean']
+              ],
+              handlers: {
+                  image: imageHandler,
+              }
+          }
         },
       });
 
@@ -44,8 +79,10 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
         quill.clipboard.dangerouslyPasteHTML(value);
       }
 
-      quill.on('text-change', () => {
-        onChange(quill.root.innerHTML);
+      quill.on('text-change', (delta, oldDelta, source) => {
+          if (source === 'user') {
+            onChange(quill.root.innerHTML);
+          }
       });
     });
   }, [onChange, placeholder]);
@@ -53,13 +90,14 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
   useEffect(() => {
     const quill = quillRef.current;
     if (quill && value !== quill.root.innerHTML) {
-      // Use dangerouslyPasteHTML to set content and prevent infinite loops
-      // by not triggering text-change for this programmatic change.
       const selection = quill.getSelection();
       quill.clipboard.dangerouslyPasteHTML(value);
-      if (selection) {
-         // Restore cursor position after pasting
-        setTimeout(() => quill.setSelection(selection.index, selection.length), 0);
+      if (selection && quill.hasFocus()) {
+         setTimeout(() => {
+          if(quillRef.current) {
+            quillRef.current.setSelection(selection.index, selection.length)
+          }
+         }, 0);
       }
     }
   }, [value]);
