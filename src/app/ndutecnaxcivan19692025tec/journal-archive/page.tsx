@@ -52,12 +52,12 @@ export default function JournalArchiveAdminPage() {
     try {
       let imageUrl = values.imageUrl;
       if (imageFile) {
-        imageUrl = await uploadFile(imageFile, values.journalType === 'science' ? 'telebeelmijurnali' : 'telebehuquqjurnali');
+        imageUrl = await uploadFile(imageFile, 'sekiller');
       }
 
       let fileUrl = values.fileUrl;
       if (docFile) {
-        fileUrl = await uploadFile(docFile, values.journalType === 'science' ? 'telebeelmijurnali' : 'telebehuquqjurnali');
+        fileUrl = await uploadFile(docFile, 'sekiller');
       }
 
       const dataToSave = { ...values, imageUrl, fileUrl };

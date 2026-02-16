@@ -49,7 +49,7 @@ export function FacultyDocumentForm() {
     }
 
     try {
-      const fileUrl = await uploadFile(documentFile, "fakultecixaris");
+      const fileUrl = await uploadFile(documentFile, "sekiller");
       await addDoc(collection(db, "facultyDocuments"), {
         ...values,
         fileUrl: fileUrl,

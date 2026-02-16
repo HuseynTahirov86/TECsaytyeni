@@ -52,12 +52,12 @@ export default function LibraryAdminPage() {
     try {
         let imageUrl = values.imageUrl;
         if (imageFile) {
-            imageUrl = await uploadFile(imageFile, 'kitablar');
+            imageUrl = await uploadFile(imageFile, 'sekiller');
         }
 
         let fileUrl = values.fileUrl;
         if (docFile) {
-            fileUrl = await uploadFile(docFile, 'kitablar');
+            fileUrl = await uploadFile(docFile, 'sekiller');
         }
       
         const slug = generateSlug(values.title);

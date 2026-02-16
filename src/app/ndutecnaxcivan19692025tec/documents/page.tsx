@@ -58,13 +58,13 @@ export default function DocumentsAdminPage() {
       };
 
       if (files.charter) {
-        urls.charterUrl = await uploadFile(files.charter, 'documents');
+        urls.charterUrl = await uploadFile(files.charter, 'sekiller');
       }
       if (files.ethicsCode) {
-        urls.ethicsCodeUrl = await uploadFile(files.ethicsCode, 'documents');
+        urls.ethicsCodeUrl = await uploadFile(files.ethicsCode, 'sekiller');
       }
       if (files.researchRegulation) {
-        urls.researchRegulationUrl = await uploadFile(files.researchRegulation, 'documents');
+        urls.researchRegulationUrl = await uploadFile(files.researchRegulation, 'sekiller');
       }
 
       const docRef = doc(db, docPath, docId);

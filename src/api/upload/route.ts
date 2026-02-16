@@ -7,15 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 const UPLOADS_ROOT = join(process.cwd(), 'uploads');
 
 const ALLOWED_DIRECTORIES = [
-    'fakultecixaris',
-    'kafedraciaris',
-    'kitablar',
-    'sekiller',
-    'telebeelmijurnali',
-    'telebehuquqjurnali',
-    'tetimelumat',
-    'documents',
-    'sec-images'
+    'sekiller'
 ];
 
 export async function POST(request: NextRequest) {
