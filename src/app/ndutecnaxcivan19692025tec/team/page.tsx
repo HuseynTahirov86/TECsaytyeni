@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription as AlertDialogDesc, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { uploadFile } from "@/lib/utils";
+import Image from "next/image";
 
 export default function TeamAdminPage() {
   const [members, setMembers] = useState<TeamMember[]>([]);
@@ -129,7 +130,7 @@ export default function TeamAdminPage() {
                         <AccordionTrigger>
                            <div className="flex items-center justify-between w-full pr-4">
                                <div className="flex items-center gap-4">
-                                     <img
+                                     <Image
                                         alt={member.name}
                                         className="aspect-square rounded-full object-cover"
                                         height="40"
@@ -174,7 +175,7 @@ export default function TeamAdminPage() {
                 ))}
              </Accordion>
            ) : (
-             <div className="flex flex-col items-center justify-center h-48 text-center text-muted-foreground border-2 border-dashed rounded-lg">
+            <div className="flex flex-col items-center justify-center h-48 text-center text-muted-foreground border-2 border-dashed rounded-lg">
                 <Users className="h-10 w-10 mb-2"/>
                 <h3 className="text-xl font-semibold">Heç bir komanda üzvü tapılmadı.</h3>
             </div>

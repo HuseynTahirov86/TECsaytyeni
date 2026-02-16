@@ -9,6 +9,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Training } from '../ndutecnaxcivan19692025tec/trainings/training-form';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const formatDate = (dateString: string) => {
     if (!dateString) return '';
@@ -97,11 +98,12 @@ export function TrainingsClientPage() {
                 <motion.div key={training.id} variants={FADE_IN_ANIMATION_SETTINGS}>
                 <Link href={`/trainings/${training.slug}`} className="group block h-full">
                     <Card className="w-full transition-shadow group-hover:shadow-lg h-full flex flex-col">
-                        <div className="overflow-hidden rounded-t-lg">
-                           <img
+                        <div className="overflow-hidden rounded-t-lg aspect-video relative">
+                           <Image
                                 src={training.imageUrl || 'https://placehold.co/600x400.png'}
                                 alt={training.title}
-                                className="w-full aspect-video object-cover transition-transform duration-300 group-hover:scale-105"
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
                                 data-ai-hint={training.imageHint}
                            />
                         </div>

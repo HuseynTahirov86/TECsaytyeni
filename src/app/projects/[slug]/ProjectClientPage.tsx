@@ -7,6 +7,7 @@ import { Users, Calendar } from "lucide-react";
 import { motion } from 'framer-motion';
 import DOMPurify from 'dompurify';
 import { formatDate } from "@/lib/utils";
+import Image from "next/image";
 
 interface ProjectClientPageProps {
   project: ProjectArticle;
@@ -60,11 +61,12 @@ export default function ProjectClientPage({ project }: ProjectClientPageProps) {
         </header>
         
         {project.imageUrl && (
-            <div className="mb-8">
-                <img
+            <div className="mb-8 relative w-full aspect-video rounded-lg shadow-lg overflow-hidden">
+                <Image
                     src={project.imageUrl}
                     alt={project.title}
-                    className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg"
+                    fill
+                    className="object-cover"
                 />
             </div>
         )}

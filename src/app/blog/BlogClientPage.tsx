@@ -14,6 +14,7 @@ import Link from "next/link";
 import { NewsArticle } from "../ndutecnaxcivan19692025tec/news/news-form";
 import { motion } from 'framer-motion';
 import { formatDate } from "@/lib/utils";
+import Image from "next/image";
 
 export default function BlogClientPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -131,11 +132,14 @@ export default function BlogClientPage() {
               <Link href={`/blog/${item.slug}`} className="group">
                 <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:border-primary/30">
                   <CardHeader className="p-0">
-                      <img
-                        src={item.imageUrl || "https://placehold.co/600x400.png"}
-                        alt={item.title}
-                        className="w-full object-cover aspect-[3/2] transition-transform duration-300 group-hover:scale-105"
-                      />
+                      <div className="aspect-[3/2] relative">
+                        <Image
+                            src={item.imageUrl || "https://placehold.co/600x400.png"}
+                            alt={item.title}
+                            fill
+                            className="w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
                   </CardHeader>
                   <CardContent className="p-6 flex-grow">
                     <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">{item.title}</CardTitle>

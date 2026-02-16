@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription as AlertDialogDesc, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { uploadFile } from "@/lib/utils";
+import Image from "next/image";
 
 export default function SecTeamAdminPage() {
   const [members, setMembers] = useState<SecTeamMember[]>([]);
@@ -129,7 +130,7 @@ export default function SecTeamAdminPage() {
                         <AccordionTrigger>
                            <div className="flex items-center justify-between w-full pr-4">
                                <div className="flex items-center gap-4">
-                                     <img
+                                     <Image
                                         alt={member.name}
                                         className="aspect-square rounded-full object-cover"
                                         height="40"

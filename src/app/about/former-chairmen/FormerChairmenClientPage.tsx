@@ -1,9 +1,11 @@
+
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
 import type { FormerChairman } from '@/app/ndutecnaxcivan19692025tec/formers/former-chairman-form';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription as DialogDesc } from "@/components/ui/dialog";
 import { ScrollArea } from '@/components/ui/scroll-area';
+import Image from 'next/image';
 
 export function FormerChairmenClientPage({ formerChairmen }: { formerChairmen: FormerChairman[] }) {
     return (
@@ -22,10 +24,11 @@ export function FormerChairmenClientPage({ formerChairmen }: { formerChairmen: F
                 <DialogTrigger asChild>
                     <Card className="text-center overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer hover:scale-105">
                         <div className="aspect-[4/5] relative w-full">
-                            <img 
+                            <Image 
                             src={chairman.avatarUrl || "https://placehold.co/400x500.png"}
                             alt={chairman.name} 
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
                             data-ai-hint={chairman.avatarHint}
                             />
                         </div>
@@ -40,12 +43,15 @@ export function FormerChairmenClientPage({ formerChairmen }: { formerChairmen: F
                     <div className="p-6">
                         <DialogHeader>
                         <div className="flex flex-col items-center text-center">
-                            <img
-                            src={chairman.avatarUrl || "https://placehold.co/128x128.png"}
-                            alt={chairman.name}
-                            className="w-32 h-32 rounded-full object-cover mb-4"
-                            data-ai-hint={chairman.avatarHint}
-                            />
+                            <div className="w-32 h-32 relative rounded-full overflow-hidden mb-4">
+                                <Image
+                                src={chairman.avatarUrl || "https://placehold.co/128x128.png"}
+                                alt={chairman.name}
+                                fill
+                                className="object-cover"
+                                data-ai-hint={chairman.avatarHint}
+                                />
+                            </div>
                             <DialogTitle className="text-2xl">{chairman.name}</DialogTitle>
                             <DialogDesc className="text-accent text-base mt-1">{chairman.period}</DialogDesc>
                         </div>

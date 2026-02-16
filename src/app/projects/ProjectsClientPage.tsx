@@ -11,6 +11,7 @@ import { ProjectArticle } from "../ndutecnaxcivan19692025tec/projects/project-fo
 import Link from "next/link";
 import { motion } from 'framer-motion';
 import { formatDate } from "@/lib/utils";
+import Image from "next/image";
 
 export default function ProjectsClientPage() {
   const [projects, setProjects] = useState<ProjectArticle[]>([]);
@@ -102,11 +103,14 @@ export default function ProjectsClientPage() {
               <Link href={`/projects/${project.slug}`} className="group">
                 <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
                   <CardHeader className="p-0">
-                      <img
-                        src={project.imageUrl || "https://placehold.co/600x400.png"}
-                        alt={project.title}
-                        className="w-full object-cover aspect-[3/2] transition-transform duration-300 group-hover:scale-105"
-                      />
+                      <div className="relative aspect-[3/2]">
+                        <Image
+                            src={project.imageUrl || "https://placehold.co/600x400.png"}
+                            alt={project.title}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
                   </CardHeader>
                   <CardContent className="p-6 flex-grow">
                     <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</CardTitle>

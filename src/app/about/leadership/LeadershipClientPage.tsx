@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card } from "@/components/ui/card";
@@ -6,6 +7,7 @@ import type { Chairman } from '@/app/ndutecnaxcivan19692025tec/chairman/form';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface LeadershipClientPageProps {
     chairman: Chairman | null;
@@ -34,12 +36,15 @@ export function LeadershipClientPage({ chairman }: LeadershipClientPageProps) {
                     </div>
                      <Card className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 items-center">
                         <div className="md:col-span-1">
-                             <img
-                                src={chairman.avatarUrl || "https://placehold.co/400x500.png"}
-                                alt={chairman.name}
-                                className="w-full aspect-[4/5] object-cover rounded-lg shadow-md"
-                                data-ai-hint={chairman.avatarHint}
-                            />
+                             <div className="relative w-full aspect-[4/5] rounded-lg shadow-md overflow-hidden">
+                                <Image
+                                    src={chairman.avatarUrl || "https://placehold.co/400x500.png"}
+                                    alt={chairman.name}
+                                    fill
+                                    className="object-cover"
+                                    data-ai-hint={chairman.avatarHint}
+                                />
+                             </div>
                         </div>
                         <div className="md:col-span-2">
                             <h3 className="text-3xl font-bold text-primary">{chairman.name}</h3>

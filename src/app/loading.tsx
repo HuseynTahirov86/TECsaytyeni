@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 
 export default function Loading() {
@@ -9,6 +10,7 @@ export default function Loading() {
           alt="Yüklənir..."
           width={100}
           height={100}
+          priority
         />
         <p className="text-xl font-semibold text-primary">#TECləSivilizasiyaGəlir</p>
       </div>

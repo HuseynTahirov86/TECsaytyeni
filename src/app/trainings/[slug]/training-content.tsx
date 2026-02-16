@@ -13,6 +13,7 @@ import type { User } from '@/lib/definitions';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import type { TrainingRegistration } from '@/lib/data';
 import DOMPurify from 'dompurify';
+import Image from 'next/image';
 
 
 interface TrainingContentProps {
@@ -111,11 +112,12 @@ export function TrainingContent({ training, registration, user, onComplete }: Tr
                             {isCompleted && <CheckCircle className="h-6 w-6 text-green-500" />}
                         </div>
                         {module.imageUrl && (
-                          <div className="my-4 rounded-lg overflow-hidden">
-                             <img
+                          <div className="my-4 rounded-lg overflow-hidden relative aspect-video">
+                             <Image
                                 src={module.imageUrl}
                                 alt={module.title}
-                                className="w-full h-auto max-h-[300px] object-cover"
+                                fill
+                                className="object-cover"
                                 data-ai-hint={module.imageHint}
                               />
                           </div>

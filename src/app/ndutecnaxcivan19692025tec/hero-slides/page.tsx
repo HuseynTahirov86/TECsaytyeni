@@ -15,6 +15,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Skeleton } from "@/components/ui/skeleton";
 import { uploadFile } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 export default function HeroSlidesAdminPage() {
   const [slides, setSlides] = useState<HeroSlide[]>([]);
@@ -131,7 +132,7 @@ export default function HeroSlidesAdminPage() {
                         <AccordionTrigger>
                            <div className="flex items-center justify-between w-full pr-4">
                                 <div className="flex items-center gap-4">
-                                     <img
+                                     <Image
                                         alt={item.title || `Slide ${item.id}`}
                                         className="aspect-video rounded-md object-cover"
                                         height="40"

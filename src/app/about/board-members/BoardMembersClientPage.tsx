@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, Dialog
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import Image from 'next/image';
 
 interface BoardMembersClientPageProps {
     boardMembers: TeamMember[];
@@ -18,10 +20,11 @@ const TeamMemberCard = ({ member }: { member: TeamMember }) => (
       <DialogTrigger asChild>
         <Card className="text-center overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer hover:scale-105">
             <div className="aspect-[4/5] relative w-full">
-                <img 
+                <Image 
                   src={member.avatarUrl || "https://placehold.co/400x500.png"}
                   alt={member.name} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform"
                   data-ai-hint={member.avatarHint}
                 />
             </div>
@@ -36,12 +39,15 @@ const TeamMemberCard = ({ member }: { member: TeamMember }) => (
           <div className="p-6">
             <DialogHeader>
               <div className="flex flex-col items-center text-center">
-                <img
-                  src={member.avatarUrl || "https://placehold.co/128x128.png"}
-                  alt={member.name}
-                  className="w-32 h-32 rounded-full object-cover mb-4"
-                  data-ai-hint={member.avatarHint}
-                />
+                 <div className="w-32 h-32 rounded-full relative overflow-hidden mb-4">
+                    <Image
+                    src={member.avatarUrl || "https://placehold.co/128x128.png"}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                    data-ai-hint={member.avatarHint}
+                    />
+                </div>
                 <DialogTitle className="text-2xl">{member.name}</DialogTitle>
                 <DialogDesc className="text-accent text-base mt-1">{member.role}</DialogDesc>
                 <p className="text-sm text-muted-foreground mt-1">{member.faculty}</p>

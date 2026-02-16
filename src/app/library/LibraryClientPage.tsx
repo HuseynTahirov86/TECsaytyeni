@@ -14,6 +14,7 @@ import Link from "next/link";
 import { LibraryEntry } from "../ndutecnaxcivan19692025tec/library/library-form";
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function LibraryClientPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -128,12 +129,15 @@ export default function LibraryClientPage() {
                 <Card className="flex flex-col h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-primary/30">
                   <Link href={`/library/${item.slug}`} className="group block">
                     <CardHeader className="p-0">
-                        <img
-                          src={item.imageUrl || "https://placehold.co/300x400.png"}
-                          alt={item.title}
-                          className="w-full object-cover aspect-[3/4] transition-transform duration-300 group-hover:scale-105"
-                          data-ai-hint={item.imageHint}
-                        />
+                        <div className="aspect-[3/4] relative">
+                            <Image
+                            src={item.imageUrl || "https://placehold.co/300x400.png"}
+                            alt={item.title}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            data-ai-hint={item.imageHint}
+                            />
+                        </div>
                     </CardHeader>
                     <CardContent className="p-4 flex-grow">
                       <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors line-clamp-2">{item.title}</CardTitle>

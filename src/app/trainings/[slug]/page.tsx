@@ -17,6 +17,7 @@ import type { User } from '@/lib/definitions';
 import { CertificateGenerator } from './certificate-generator';
 import type { TrainingRegistration } from '@/lib/data';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 
 const formatDate = (dateString: string) => {
@@ -168,11 +169,12 @@ export default function TrainingDetailPage({ params }: { params: { slug: string 
                 {/* Training Details */}
                 <div className="lg:col-span-2 space-y-6">
                      {training.imageUrl && (
-                        <div className="mb-8 rounded-lg overflow-hidden shadow-lg">
-                            <img
+                        <div className="mb-8 rounded-lg overflow-hidden shadow-lg relative aspect-video">
+                            <Image
                                 src={training.imageUrl}
                                 alt={training.title}
-                                className="w-full h-auto max-h-[400px] object-cover"
+                                fill
+                                className="object-cover"
                                 data-ai-hint={training.imageHint}
                             />
                         </div>

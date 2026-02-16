@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { FileUp, XCircle } from "lucide-react";
 import { Label } from "./ui/label";
 import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
 
 interface ImageUploaderProps {
   id: string;
@@ -100,10 +101,12 @@ export function ImageUploader({
 
       {previewUrl && (
         <div className="relative group w-fit mx-auto">
-          <img
+          <Image
             src={previewUrl}
             alt="Şəkil önizləməsi"
-            className="mt-2 rounded-md object-contain max-h-48"
+            width={200}
+            height={200}
+            className="mt-2 rounded-md object-contain max-h-48 w-auto"
           />
           <Button 
             type="button"

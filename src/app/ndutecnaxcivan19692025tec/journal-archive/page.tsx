@@ -15,6 +15,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { uploadFile } from "@/lib/utils";
+import Image from "next/image";
 
 export default function JournalArchiveAdminPage() {
   const [entries, setEntries] = useState<JournalArchive[]>([]);
@@ -138,7 +139,7 @@ export default function JournalArchiveAdminPage() {
                         <AccordionTrigger>
                            <div className="flex items-center justify-between w-full pr-4">
                                <div className="flex items-center gap-4">
-                                     <img
+                                     <Image
                                         alt={entry.title}
                                         className="aspect-[3/4] rounded-md object-cover"
                                         height="48"

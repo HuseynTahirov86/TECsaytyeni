@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import DOMPurify from 'dompurify';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 interface LibraryClientPageProps {
   entry: LibraryEntry;
@@ -43,12 +44,15 @@ export default function LibraryClientPage({ entry }: LibraryClientPageProps) {
     >
         <motion.div className="grid md:grid-cols-3 gap-8 lg:gap-12" variants={FADE_IN_ANIMATION_SETTINGS}>
             <div className="md:col-span-1">
-                <img
-                    src={entry.imageUrl || "https://placehold.co/300x400.png"}
-                    alt={entry.title}
-                    className="w-full h-auto aspect-[3/4] object-cover rounded-lg shadow-lg"
-                    data-ai-hint={entry.imageHint}
-                />
+                 <div className="relative w-full aspect-[3/4] rounded-lg shadow-lg overflow-hidden">
+                    <Image
+                        src={entry.imageUrl || "https://placehold.co/300x400.png"}
+                        alt={entry.title}
+                        fill
+                        className="object-cover"
+                        data-ai-hint={entry.imageHint}
+                    />
+                 </div>
             </div>
             <div className="md:col-span-2">
                 <article>

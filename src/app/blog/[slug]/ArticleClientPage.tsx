@@ -7,6 +7,7 @@ import { Calendar, Tag } from "lucide-react";
 import { motion } from 'framer-motion';
 import DOMPurify from 'dompurify';
 import { formatDate } from "@/lib/utils";
+import Image from "next/image";
 
 interface ArticleClientPageProps {
   article: NewsArticle;
@@ -55,11 +56,12 @@ export default function ArticleClientPage({ article }: ArticleClientPageProps) {
         </header>
         
         {article.imageUrl && (
-            <div className="mb-8">
-                <img
+            <div className="mb-8 relative w-full aspect-video rounded-lg shadow-lg overflow-hidden">
+                <Image
                     src={article.imageUrl}
                     alt={article.title}
-                    className="w-full h-auto max-h-[500px] object-cover rounded-lg shadow-lg"
+                    fill
+                    className="object-cover"
                 />
             </div>
         )}
