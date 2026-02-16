@@ -52,7 +52,8 @@ const navGroups = [
     title: "ŞEC Bölməsi",
     links: [
         { href: "/ndutecnaxcivan19692025tec/sec-about-content", label: "ŞEC Məzmunu", icon: Info },
-        { href: "/ndutecnaxcivan19692025tec/sec-team", label: "ŞEC Komandası", icon: Users },
+        { href: "/ndutecnaxcivan19692025tec/sec-leadership", label: "ŞEC Rəhbərlik", icon: UserCog },
+        { href: "/ndutecnaxcivan19692025tec/sec-board", label: "ŞEC İdarə Heyəti", icon: Users },
     ]
   },
   {
@@ -197,7 +198,3 @@ export default function AdminLayout({
     </div>
   );
 }
-
-    
-
-    
