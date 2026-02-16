@@ -49,7 +49,7 @@ export default function AphorismsAdminPage() {
       let imageUrl = values.imageUrl;
 
       if (imageFile) {
-        imageUrl = await uploadFile(imageFile, 'sekiller');
+        imageUrl = await uploadFile(imageFile);
       }
 
       const dataToSave = { ...values, imageUrl };

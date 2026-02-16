@@ -65,14 +65,14 @@ export default function TrainingsAdminPage() {
     try {
       let mainImageUrl = values.imageUrl;
       if (files.mainImage) {
-        mainImageUrl = await uploadFile(files.mainImage, 'sekiller');
+        mainImageUrl = await uploadFile(files.mainImage);
       }
 
       const uploadedModuleImageUrls = await Promise.all(
         values.modules.map(async (module, index) => {
             const moduleImageFile = files.moduleImages[index];
             if(moduleImageFile) {
-                return await uploadFile(moduleImageFile, 'sekiller');
+                return await uploadFile(moduleImageFile);
             }
             return module.imageUrl || ''; // Keep existing URL if no new file is provided
         })

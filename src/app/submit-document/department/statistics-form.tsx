@@ -86,7 +86,7 @@ export function DepartmentStatisticsForm() {
     }
 
     try {
-      const fileUrl = await uploadFile(reportFile, "sekiller");
+      const fileUrl = await uploadFile(reportFile);
       await addDoc(collection(db, "departmentDocuments"), {
         documentType: 'statistics',
         department: values.department,

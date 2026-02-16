@@ -48,7 +48,7 @@ export default function SecTeamAdminPage() {
     try {
       let avatarUrl = values.avatarUrl;
       if (imageFile) {
-        avatarUrl = await uploadFile(imageFile, 'sec-images');
+        avatarUrl = await uploadFile(imageFile);
       }
 
       const dataToSave = { ...values, avatarUrl };

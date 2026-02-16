@@ -6,9 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const UPLOADS_ROOT = join(process.cwd(), 'uploads');
 
-const ALLOWED_DIRECTORIES = [
-    'sekiller'
-];
+const ALLOWED_DIRECTORIES = ['sekiller', 'documents'];
 
 export async function POST(request: NextRequest) {
   try {

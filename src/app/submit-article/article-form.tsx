@@ -113,8 +113,8 @@ export function ArticleForm({ journalType }: ArticleFormProps) {
         const collectionName = isLawJournal ? 'lawSubmissions' : 'scienceSubmissions';
         
         // Upload files and get URLs
-        const articleFileUrl = await uploadFile(articleFile, 'sekiller');
-        const reviewFileUrls = await Promise.all(validReviewFiles.map(file => uploadFile(file, 'sekiller')));
+        const articleFileUrl = await uploadFile(articleFile);
+        const reviewFileUrls = await Promise.all(validReviewFiles.map(file => uploadFile(file)));
 
         const dbData: any = {
             ...values,

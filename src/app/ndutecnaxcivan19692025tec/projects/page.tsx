@@ -62,7 +62,7 @@ export default function ProjectsAdminPage() {
     try {
       let imageUrl = values.imageUrl;
       if (imageFile) {
-        imageUrl = await uploadFile(imageFile, 'sekiller');
+        imageUrl = await uploadFile(imageFile);
       }
       
       const slug = generateSlug(values.title);

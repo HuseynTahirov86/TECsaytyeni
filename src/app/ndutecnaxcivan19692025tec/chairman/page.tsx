@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -50,7 +51,7 @@ export default function ChairmanAdminPage() {
     try {
       let avatarUrl = values.avatarUrl;
       if (imageFile) {
-        avatarUrl = await uploadFile(imageFile, 'sekiller');
+        avatarUrl = await uploadFile(imageFile);
       }
 
       const dataToSave = { ...values, avatarUrl };

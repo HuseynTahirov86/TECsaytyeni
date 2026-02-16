@@ -52,7 +52,7 @@ export function DepartmentProtocolForm({ documentType }: DepartmentProtocolFormP
     }
 
     try {
-      const fileUrl = await uploadFile(protocolFile, "sekiller");
+      const fileUrl = await uploadFile(protocolFile);
       await addDoc(collection(db, "departmentDocuments"), {
         documentType: documentType,
         department: values.department,

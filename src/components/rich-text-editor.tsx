@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useRef, useCallback } from 'react';
@@ -40,7 +41,7 @@ export function RichTextEditor({ value, onChange, placeholder, className }: Rich
                 quill.insertText(range.index, ' [Şəkil yüklənir...] ', 'italic', true);
 
                 try {
-                    const imageUrl = await uploadFile(file, 'sekiller');
+                    const imageUrl = await uploadFile(file);
                     
                     quill.deleteText(range.index, ' [Şəkil yüklənir...] '.length);
                     quill.insertEmbed(range.index, 'image', imageUrl);

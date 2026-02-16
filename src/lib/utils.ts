@@ -54,10 +54,21 @@ export const formatDate = (dateSource: Date | string | undefined | null): string
     }
 };
 
-// Mərkəzi fayl yükləmə funksiyası - Lokal API ilə
-export async function uploadFile(file: File, directory: string): Promise<string> {
+export async function uploadFile(file: File): Promise<string> {
     if (!file) {
         throw new Error('Fayl seçilməyib');
+    }
+
+    const fileType = file.type;
+    let directory = 'documents'; // Default to documents
+
+    if (fileType.startsWith('image/')) {
+        directory = 'sekiller';
+    } else {
+        const extension = file.name.split('.').pop()?.toLowerCase();
+        if (extension && ['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension)) {
+            directory = 'sekiller';
+        }
     }
 
     const formData = new FormData();
