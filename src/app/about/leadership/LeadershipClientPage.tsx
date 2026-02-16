@@ -21,7 +21,7 @@ export function LeadershipClientPage({ chairman }: LeadershipClientPageProps) {
 
     return (
         <div>
-             <header className="mb-8">
+             <header className="mb-8 text-center">
                 <h1 className="text-4xl font-extrabold tracking-tight text-primary lg:text-5xl">
                 Rəhbərlik
                 </h1>
@@ -30,23 +30,21 @@ export function LeadershipClientPage({ chairman }: LeadershipClientPageProps) {
             {/* Chairman section */}
             {chairman ? (
                 <motion.section id="chairman" variants={FADE_IN_ANIMATION_SETTINGS}>
-                     <Card className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 items-center">
-                        <div className="md:col-span-1 flex justify-center">
-                             <div className="relative w-full max-w-[250px] aspect-[4/5] rounded-lg shadow-md overflow-hidden">
+                     <Card className="p-8">
+                        <div className="flex flex-col items-center text-center">
+                             <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full shadow-lg overflow-hidden mb-6">
                                 <Image
-                                    src={chairman.avatarUrl || "https://placehold.co/400x500.png"}
+                                    src={chairman.avatarUrl || "https://placehold.co/400x400.png"}
                                     alt={chairman.name}
                                     fill
                                     className="object-cover"
                                     data-ai-hint={chairman.avatarHint}
                                 />
                              </div>
-                        </div>
-                        <div className="md:col-span-2 text-center md:text-left">
                             <h3 className="text-3xl font-bold text-primary">{chairman.name}</h3>
-                            <p className="text-lg text-accent font-semibold">{chairman.role}</p>
-                            <p className="mt-4 text-muted-foreground whitespace-pre-wrap">{chairman.bio}</p>
-                            <div className="mt-6 flex gap-2 justify-center md:justify-start">
+                            <p className="text-lg text-accent font-semibold mt-1">{chairman.role}</p>
+                            <p className="mt-6 max-w-2xl text-muted-foreground whitespace-pre-wrap">{chairman.bio}</p>
+                            <div className="mt-6 flex gap-3">
                                 {chairman.linkedinUrl && (
                                     <Button asChild variant="outline" size="icon">
                                         <Link href={chairman.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
