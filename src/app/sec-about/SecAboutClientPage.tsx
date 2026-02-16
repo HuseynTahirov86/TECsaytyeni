@@ -118,20 +118,13 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
         animate: { opacity: 1, transition: { staggerChildren: 0.2, duration: 0.8 } },
       }}
     >
-      <motion.header className="text-center" variants={FADE_IN_ANIMATION_SETTINGS}>
-        <h1 className="text-4xl font-extrabold tracking-tight text-primary lg:text-5xl">
-          {aboutContent?.title || "Şagird Elmi Cəmiyyəti"}
-        </h1>
-      </motion.header>
-        
-      <motion.div variants={FADE_IN_ANIMATION_SETTINGS}>
+       <motion.div className="flex justify-center" variants={FADE_IN_ANIMATION_SETTINGS}>
         <Image
-          src={aboutContent?.bannerImageUrl || "/secbanner.png"}
-          alt={aboutContent?.title || "ŞEC"}
-          width={1200}
-          height={500}
-          className="rounded-lg shadow-lg object-cover w-full"
-          data-ai-hint={aboutContent?.bannerImageHint}
+            src="https://tec.ndu.edu.az/uploads/sekiller/logo.png"
+            alt="Şagird Elmi Cəmiyyəti Logosu"
+            width={150}
+            height={150}
+            className="object-contain"
         />
       </motion.div>
 
@@ -139,7 +132,7 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
             variants={FADE_IN_ANIMATION_SETTINGS}
         >
             <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold tracking-tight text-primary">Tariximiz</h2>
+                <h1 className="text-4xl font-extrabold tracking-tight text-primary lg:text-5xl">{aboutContent?.title || "Şagird Elmi Cəmiyyəti"}</h1>
             </div>
             <div 
               className="prose prose-lg max-w-none text-foreground/90 prose-headings:text-primary prose-a:text-primary prose-strong:text-foreground"
@@ -149,7 +142,7 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
       
       {leadership.length > 0 && (
           <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
-            <div className="text-center">
+            <div className="text-center mb-8">
               <h2 className="text-3xl font-bold tracking-tight text-primary">
                 Rəhbərlik
               </h2>
@@ -164,7 +157,7 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
 
       {boardMembers.length > 0 && (
         <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
-          <div className="text-center">
+          <div className="text-center mb-8">
             <h2 className="text-3xl font-bold tracking-tight text-primary">
               İdarə Heyəti
             </h2>
