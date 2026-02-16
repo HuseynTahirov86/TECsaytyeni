@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { SecAboutContentForm, type SecAboutContent } from "./form";
 import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
-import { uploadFile } from "@/lib/utils";
 
 export default function SecAboutContentAdminPage() {
   const [content, setContent] = useState<SecAboutContent | null>(null);
@@ -23,12 +22,14 @@ export default function SecAboutContentAdminPage() {
         const docRef = doc(db, docPath, docId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setContent(docSnap.data() as SecAboutContent);
+          const data = docSnap.data();
+          setContent({
+            title: data.title,
+            mainContent: data.mainContent
+          });
         } else {
           setContent({ 
               title: "NDU nəzdində Gimnaziya Şagird Elmi Cəmiyyəti (ŞEC)",
-              bannerImageUrl: "/secbanner.png",
-              bannerImageHint: "group young students science project",
               mainContent: "<p>Naxçıvan Dövlət Universiteti nəzdindəki Gimnaziyanın Şagird Elmi Cəmiyyəti (ŞEC), istedadlı və elmə marağı olan şagirdləri bir araya gətirərək onların elmi-tədqiqat bacarıqlarını erkən yaşlardan inkişaf etdirmək məqsədi daşıyır. Biz, şagirdlərin akademik potensialını reallaşdırmaq, onlara tədqiqat aparmağın əsaslarını öyrətmək və elmi düşüncə tərzini aşılamaq üçün çalışırıq.</p><p>ŞEC olaraq, gənc nəslin elmə olan həvəsini artırmaq, onları gələcəyin alimləri, mühəndisləri və ixtiraçıları olmağa ruhlandırmaq əsas hədəfimizdir. Bu yolda müxtəlif layihələr, seminarlar, müsabiqələr və ekskursiyalar təşkil edərək onların həm nəzəri biliklərini, həm də praktiki bacarıqlarını gücləndiririk.</p>" 
           });
         }
@@ -43,19 +44,12 @@ export default function SecAboutContentAdminPage() {
     fetchContent();
   }, [toast]);
 
-  const handleFormSubmit = async (values: SecAboutContent, imageFile: File | null) => {
+  const handleFormSubmit = async (values: SecAboutContent) => {
     try {
-      let bannerImageUrl = values.bannerImageUrl;
-      if (imageFile) {
-        bannerImageUrl = await uploadFile(imageFile, 'sec-images');
-      }
-      
-      const dataToSave = { ...values, bannerImageUrl };
-
       const docRef = doc(db, docPath, docId);
-      await setDoc(docRef, dataToSave);
-      toast({ title: "Uğurlu", description: "ŞEC Haqqımızda səhifəsinin məzmunu yeniləndi." });
-      setContent(dataToSave);
+      await setDoc(docRef, values, { merge: true });
+      toast({ title: "Uğurlu", description: "ŞEC Haqqında səhifəsinin məzmunu yeniləndi." });
+      setContent(values);
     } catch (error) {
       console.error("Error saving ŞEC about content: ", error);
       toast({ title: "Xəta", description: "Məlumatları saxlayarkən problem yarandı.", variant: "destructive" });
@@ -66,13 +60,13 @@ export default function SecAboutContentAdminPage() {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold">ŞEC Haqqında Səhifəsini İdarə Et</h1>
-        <p className="text-muted-foreground">Səhifədə görünən bütün məzmunu buradan redaktə edin.</p>
+        <p className="text-muted-foreground">Səhifədə görünən məzmunu buradan redaktə edin.</p>
       </div>
       <Card>
         <CardHeader>
           <CardTitle>Səhifə Məzmunu</CardTitle>
           <CardDescription>
-            Aşağıdakı məzmun birbaşa ŞEC-in "Haqqımızda" səhifəsində göstəriləcək.
+            Aşağıdakı məzmun birbaşa ŞEC-in "Haqqımızda" bölməsində göstəriləcək.
           </CardDescription>
         </CardHeader>
         <CardContent>
