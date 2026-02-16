@@ -108,9 +108,8 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
     transition: { duration: 0.8, ease: "easeInOut" },
   };
 
-  const leadershipRoles = ['Sədr', 'Sədr müavini', 'Katib'];
-  const leadership = teamMembers.filter(member => leadershipRoles.includes(member.role));
-  const boardMembers = teamMembers.filter(member => !leadershipRoles.includes(member.role));
+  const chairman = teamMembers.find(member => member.role === 'Sədr');
+  const boardMembers = teamMembers.filter(member => member.role !== 'Sədr');
 
   return (
     <motion.div 
@@ -144,24 +143,58 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
              />
         </motion.section>
       
-      {leadership.length > 0 && (
-          <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
+      {chairman && (
+        <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold tracking-tight text-primary">
-                Rəhbərlik
-              </h2>
+                <h2 className="text-3xl font-bold tracking-tight text-primary">Sədr</h2>
             </div>
-            <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {leadership.map((member) => (
-                <TeamMemberCard key={member.id} member={member} />
-              ))}
-            </div>
-          </motion.section>
+             <Card className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 items-center max-w-4xl mx-auto">
+                <div className="md:col-span-1">
+                     <div className="relative w-full aspect-[4/5] rounded-lg shadow-md overflow-hidden">
+                        <Image
+                            src={chairman.avatarUrl || "https://placehold.co/400x500.png"}
+                            alt={chairman.name}
+                            fill
+                            className="object-cover"
+                            data-ai-hint={chairman.avatarHint}
+                        />
+                     </div>
+                </div>
+                <div className="md:col-span-2">
+                    <h3 className="text-3xl font-bold text-primary">{chairman.name}</h3>
+                    <p className="text-lg text-accent font-semibold">{chairman.role}</p>
+                    <p className="mt-4 text-muted-foreground whitespace-pre-wrap">{chairman.bio}</p>
+                    <div className="mt-6 flex gap-2">
+                        {chairman.linkedinUrl && (
+                            <Button asChild variant="outline" size="icon">
+                                <Link href={chairman.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                    <Linkedin className="h-5 w-5" />
+                                </Link>
+                            </Button>
+                        )}
+                        {chairman.instagramUrl && (
+                            <Button asChild variant="outline" size="icon">
+                                <Link href={chairman.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                    <Instagram className="h-5 w-5" />
+                                </Link>
+                            </Button>
+                        )}
+                        {chairman.facebookUrl && (
+                            <Button asChild variant="outline" size="icon">
+                                <Link href={chairman.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                    <Facebook className="h-5 w-5" />
+                                </Link>
+                            </Button>
+                        )}
+                    </div>
+                </div>
+            </Card>
+        </motion.section>
       )}
 
       {boardMembers.length > 0 && (
         <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 pt-12">
             <h2 className="text-3xl font-bold tracking-tight text-primary">
               İdarə Heyəti
             </h2>
@@ -176,3 +209,6 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
     </motion.div>
   );
 }
+
+
+    
