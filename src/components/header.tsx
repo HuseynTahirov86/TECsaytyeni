@@ -12,7 +12,6 @@ import { Footer as RootFooter } from '@/components/footer';
 import { Toaster } from "@/components/ui/toaster";
 
 const navLinks = [
-  { href: "/", label: "Ana Səhifə", icon: Home },
   { href: "/projects", label: "Layihələr", icon: Briefcase },
   { href: "/trainings", label: "Təlimlər", icon: GraduationCap },
   { href: "/blog", label: "Bloq", icon: Newspaper },
@@ -71,6 +70,17 @@ export function Header() {
         
         <nav className="hidden items-center space-x-1 xl:flex flex-1 justify-center mx-4 overflow-hidden">
           <div className="flex items-center space-x-1 overflow-x-auto scrollbar-hide">
+            
+            <Link
+              href="/"
+              className={cn(
+                "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium",
+                pathname === "/" ? "text-accent font-semibold" : "text-primary-foreground"
+              )}
+            >
+              <Home className="h-4 w-4" />
+              <span>Ana Səhifə</span>
+            </Link>
             
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -178,6 +188,17 @@ export function Header() {
                   </div>
                 </Link>
                 <nav className="flex flex-col space-y-3">
+                   <Link
+                      href="/"
+                      className={cn(
+                        "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg",
+                        pathname === "/" ? "text-accent font-semibold" : "text-primary-foreground"
+                      )}
+                    >
+                      <Home className="h-4 w-4" />
+                      <span>Ana Səhifə</span>
+                    </Link>
+
                    <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                           <button className={cn("flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg", pathname.startsWith('/about') ? "text-accent font-semibold" : "text-primary-foreground")}>
