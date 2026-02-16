@@ -144,12 +144,12 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
       
       {chairman && (
         <motion.section variants={FADE_IN_ANIMATION_SETTINGS}>
-            <div className="text-center mb-8">
+            <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold tracking-tight text-primary">Rəhbərlik</h2>
             </div>
              <Card className="grid grid-cols-1 md:grid-cols-3 gap-8 p-8 items-center max-w-4xl mx-auto">
-                <div className="md:col-span-1">
-                     <div className="relative w-full aspect-[4/5] rounded-lg shadow-md overflow-hidden">
+                <div className="md:col-span-1 flex justify-center">
+                     <div className="relative w-full max-w-[250px] aspect-[4/5] rounded-lg shadow-md overflow-hidden">
                         <Image
                             src={chairman.avatarUrl || "https://placehold.co/400x500.png"}
                             alt={chairman.name}
@@ -159,11 +159,11 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
                         />
                      </div>
                 </div>
-                <div className="md:col-span-2">
+                <div className="md:col-span-2 text-center md:text-left">
                     <h3 className="text-3xl font-bold text-primary">{chairman.name}</h3>
                     <p className="text-lg text-accent font-semibold">{chairman.role}</p>
                     <p className="mt-4 text-muted-foreground whitespace-pre-wrap">{chairman.bio}</p>
-                    <div className="mt-6 flex gap-2">
+                    <div className="mt-6 flex gap-2 justify-center md:justify-start">
                         {chairman.linkedinUrl && (
                             <Button asChild variant="outline" size="icon">
                                 <Link href={chairman.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
