@@ -7,7 +7,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { RichTextEditor } from "@/components/rich-text-editor";
 
 const formSchema = z.object({
   content: z.string().min(20, { message: "Məzmun ən azı 20 simvoldan ibarət olmalıdır." }),
@@ -44,11 +44,11 @@ export function ContentForm({ onSubmit, initialContent }: ContentFormProps) {
             <FormItem>
               <FormLabel>Səhifə Məzmunu</FormLabel>
               <FormControl>
-                <Textarea
+                <RichTextEditor
                   value={field.value}
                   onChange={field.onChange}
                   placeholder="Vizyon mətnini daxil edin..."
-                  className="min-h-[200px]"
+                  className="min-h-[250px]"
                 />
               </FormControl>
               <FormMessage />

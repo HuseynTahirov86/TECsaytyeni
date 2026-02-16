@@ -1,9 +1,9 @@
+
 import type { Metadata } from 'next';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import type { AboutContent } from '@/app/ndutecnaxcivan19692025tec/about-content/form';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Eye } from 'lucide-react';
+import { AboutContentClient } from '../AboutContentClient';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,17 +34,7 @@ export default async function VisionPage() {
 
             {aboutContent?.visionContent ? (
                 <section>
-                    <Card className="bg-primary text-primary-foreground">
-                        <CardHeader className="flex flex-col items-center text-center">
-                        <div className="bg-primary-foreground/20 p-4 rounded-full mb-4">
-                            <Eye className="h-10 w-10 text-primary-foreground" />
-                        </div>
-                        <CardTitle className="text-3xl">Vizyonumuz</CardTitle>
-                        </CardHeader>
-                        <CardContent className="text-center text-xl text-primary-foreground/90 max-w-3xl mx-auto">
-                            <p>{aboutContent.visionContent}</p>
-                        </CardContent>
-                    </Card>
+                    <AboutContentClient content={aboutContent.visionContent} />
                 </section>
             ) : (
                  <div className="text-center py-16 text-muted-foreground">
