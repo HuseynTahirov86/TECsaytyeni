@@ -126,8 +126,8 @@ export default function SecAboutClientPage({ teamMembers, aboutContent }: SecAbo
         <Image
             src="https://tec.ndu.edu.az/uploads/sekiller/logo.png"
             alt="Şagird Elmi Cəmiyyəti Logosu"
-            width={150}
-            height={150}
+            width={300}
+            height={300}
             className="object-contain"
         />
       </motion.div>
