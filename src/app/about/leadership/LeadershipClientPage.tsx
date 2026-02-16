@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { Linkedin } from "lucide-react";
+import { Linkedin, Instagram, Facebook } from "lucide-react";
 import type { Chairman } from '@/app/ndutecnaxcivan19692025tec/chairman/form';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -45,14 +45,29 @@ export function LeadershipClientPage({ chairman }: LeadershipClientPageProps) {
                             <h3 className="text-3xl font-bold text-primary">{chairman.name}</h3>
                             <p className="text-lg text-accent font-semibold">{chairman.role}</p>
                             <p className="mt-4 text-muted-foreground whitespace-pre-wrap">{chairman.bio}</p>
-                            {chairman.linkedinUrl && (
-                                <Button asChild className="mt-4">
-                                    <Link href={chairman.linkedinUrl} target="_blank" rel="noopener noreferrer">
-                                        <Linkedin className="mr-2 h-4 w-4" />
-                                        LinkedIn
-                                    </Link>
-                                </Button>
-                            )}
+                            <div className="mt-6 flex gap-2">
+                                {chairman.linkedinUrl && (
+                                    <Button asChild variant="outline" size="icon">
+                                        <Link href={chairman.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                            <Linkedin className="h-5 w-5" />
+                                        </Link>
+                                    </Button>
+                                )}
+                                {chairman.instagramUrl && (
+                                    <Button asChild variant="outline" size="icon">
+                                        <Link href={chairman.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                            <Instagram className="h-5 w-5" />
+                                        </Link>
+                                    </Button>
+                                )}
+                                {chairman.facebookUrl && (
+                                    <Button asChild variant="outline" size="icon">
+                                        <Link href={chairman.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                            <Facebook className="h-5 w-5" />
+                                        </Link>
+                                    </Button>
+                                )}
+                            </div>
                         </div>
                     </Card>
                 </motion.section>

@@ -31,6 +31,8 @@ export default function ChairmanAdminPage() {
             avatarUrl: "",
             avatarHint: "",
             linkedinUrl: "",
+            instagramUrl: "",
+            facebookUrl: "",
           });
         }
       } catch (error) {

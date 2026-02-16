@@ -17,7 +17,9 @@ export interface Chairman {
   bio: string;
   avatarUrl: string;
   avatarHint: string;
-  linkedinUrl: string;
+  linkedinUrl?: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
 }
 
 const formSchema = z.object({
@@ -27,6 +29,8 @@ const formSchema = z.object({
   avatarUrl: z.string().min(1, { message: "Avatar şəkli yüklənməlidir." }),
   avatarHint: z.string().min(2, { message: "Şəkil üçün açar söz daxil edin (məs., male student)." }),
   linkedinUrl: z.string().url({ message: "Düzgün URL daxil edin" }).or(z.literal('')).optional(),
+  instagramUrl: z.string().url({ message: "Düzgün URL daxil edin" }).or(z.literal('')).optional(),
+  facebookUrl: z.string().url({ message: "Düzgün URL daxil edin" }).or(z.literal('')).optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -51,6 +55,8 @@ export function ChairmanForm({ onSubmit, initialData }: ChairmanFormProps) {
       avatarUrl: "",
       avatarHint: "",
       linkedinUrl: "",
+      instagramUrl: "",
+      facebookUrl: "",
     },
   });
 
@@ -138,17 +144,41 @@ export function ChairmanForm({ onSubmit, initialData }: ChairmanFormProps) {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="linkedinUrl"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>LinkedIn Profili</FormLabel>
-              <FormControl><Input placeholder="https://linkedin.com/in/username" {...field} value={field.value || ''} /></FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <FormField
+              control={form.control}
+              name="linkedinUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>LinkedIn Profili</FormLabel>
+                  <FormControl><Input placeholder="https://linkedin.com/in/..." {...field} value={field.value || ''} /></FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="instagramUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Instagram Profili</FormLabel>
+                  <FormControl><Input placeholder="https://instagram.com/..." {...field} value={field.value || ''} /></FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="facebookUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Facebook Profili</FormLabel>
+                  <FormControl><Input placeholder="https://facebook.com/..." {...field} value={field.value || ''} /></FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+        </div>
         <FormField
           control={form.control}
           name="avatarHint"
