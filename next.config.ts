@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'tec.ndu.edu.az',
+      },
+    ],
   },
 };
 
