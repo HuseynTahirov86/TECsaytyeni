@@ -7,10 +7,28 @@ import SecAboutClientPage from '../sec-about/SecAboutClientPage';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
-  title: 'Şagird Elmi Cəmiyyəti',
-  description: 'NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti (ŞEC) haqqında ətraflı məlumat.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const aboutContent = await getSecAboutContent();
+
+  const title = aboutContent?.title || 'Şagird Elmi Cəmiyyəti';
+  const description = aboutContent?.mainContent
+    ? aboutContent.mainContent.replace(/<[^>]*>?/gm, '').substring(0, 160)
+    : 'NDU nəzdində Gimnaziyanın Şagird Elmi Cəmiyyəti (ŞEC) haqqında ətraflı məlumat: rəhbərlik, idarə heyəti və fəaliyyət istiqamətləri.';
+
+  return {
+    title,
+    description,
+    openGraph: {
+        title: `${title} | NDU TEC`,
+        description,
+    },
+    twitter: {
+        title: `${title} | NDU TEC`,
+        description,
+    }
+  };
+}
+
 
 async function getSecTeamMembers(): Promise<SecTeamMember[]> {
     const q = query(collection(db, "secTeamMembers"), orderBy("order", "asc"));
