@@ -200,7 +200,7 @@ export default function Home() {
                     </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="absolute inset-0 flex items-center justify-start text-left bg-gradient-to-r from-black/50 to-transparent">
+              <div className="absolute inset-0 flex items-center justify-start text-left bg-gradient-to-r from-black/60 to-black/20">
                   <div className="container mx-auto px-4">
                       <AnimatePresence>
                         {heroSlides[currentSlide]?.type === 'main' && (
@@ -209,11 +209,11 @@ export default function Home() {
                                 initial="initial"
                                 animate="animate"
                                 exit="exit"
-                                className="relative z-10 max-w-2xl">
+                                className="relative z-10 max-w-md lg:max-w-2xl">
                                 
-                                <motion.h1 variants={heroItemVariants} className="text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                  <span className="block whitespace-nowrap">Naxçıvan Dövlət Universiteti</span>
-                                  <span className="block text-2xl lg:text-4xl mt-1 text-white whitespace-nowrap">Tələbə Elmi Cəmiyyəti</span>
+                                <motion.h1 variants={heroItemVariants} className="text-3xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
+                                  <span className="block">Naxçıvan Dövlət Universiteti</span>
+                                  <span className="block text-2xl sm:text-3xl lg:text-4xl mt-1 text-white">Tələbə Elmi Cəmiyyəti</span>
                                 </motion.h1>
                                 
                                 <motion.div variants={heroItemVariants}>
@@ -224,13 +224,13 @@ export default function Home() {
                                         animate={textAnimation.animate}
                                         exit={textAnimation.exit}
                                         transition={textAnimation.transition}
-                                        className="mt-4 text-xl font-normal italic text-white drop-shadow-md"
+                                        className="mt-4 text-lg sm:text-xl font-normal italic text-white drop-shadow-md"
                                     >
                                         {dynamicTexts[dynamicTextIndex]}
                                     </motion.p>
                                     </AnimatePresence>
                                 </motion.div>
-                                <motion.div variants={heroItemVariants} className="mt-8 flex gap-4">
+                                <motion.div variants={heroItemVariants} className="mt-8 flex flex-col sm:flex-row gap-4">
                                     <Button size="lg" asChild>
                                         <Link href="/about">Daha çox <ArrowRight className="ml-2 h-5 w-5" /></Link>
                                     </Button>
