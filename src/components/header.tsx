@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -8,8 +9,10 @@ import { Menu, Home, Info, Briefcase, Newspaper, Mail, ChevronDown, MessageSquar
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Footer as RootFooter } from '@/components/footer';
 import { Toaster } from "@/components/ui/toaster";
+import * as React from "react";
 
 const navLinks = [
   { href: "/projects", label: "Layihələr", icon: Briefcase },
@@ -35,13 +38,15 @@ const aboutLinks = [
 
 export function Header() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  const NavLinksContent = ({ isMobile = false }) => (
+  const NavLinksContent = ({ isMobile = false, onLinkClick }: { isMobile?: boolean, onLinkClick?: () => void }) => (
     <>
       {navLinks.map((link) => (
         <Link
           key={link.href}
           href={link.href}
+          onClick={onLinkClick}
           className={cn(
             "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap",
             pathname === link.href ? "text-accent font-semibold" : "text-primary-foreground",
@@ -99,19 +104,7 @@ export function Header() {
                 </DropdownMenuContent>
             </DropdownMenu>
             
-            {navLinks.map((link) => (
-                <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                    "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-sm font-medium",
-                    pathname === link.href ? "text-accent font-semibold" : "text-primary-foreground"
-                )}
-                >
-                <link.icon className="h-4 w-4" />
-                <span>{link.label}</span>
-                </Link>
-            ))}
+            <NavLinksContent />
 
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -169,27 +162,28 @@ export function Header() {
           </DropdownMenu>
             
           <div className="xl:hidden">
-            <Sheet>
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="sm" className="text-primary-foreground hover:bg-primary-foreground/10 p-2">
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Menyunu Aç/Bağla</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="bg-primary text-primary-foreground border-primary/20 w-full sm:max-w-sm">
+              <SheetContent side="left" className="bg-primary text-primary-foreground border-primary/20 w-full sm:max-w-sm flex flex-col">
                 <SheetHeader>
                    <SheetTitle className="sr-only">Menyu</SheetTitle>
                 </SheetHeader>
-                <Link href="/" className="mb-8 flex items-center space-x-3">
+                 <Link href="/" className="mb-8 flex items-center space-x-3" onClick={() => setIsMobileMenuOpen(false)}>
                    <Image src="/logo1.png" alt="TEC Təhlilləri Loqosu" width={50} height={50} className="object-contain" />
                    <div className="flex flex-col text-base font-semibold leading-tight">
                     <span className="whitespace-nowrap">Naxçıvan Dövlət Universiteti</span>
                     <span className="text-sm font-medium">Tələbə Elmi Cəmiyyəti</span>
                   </div>
                 </Link>
-                <nav className="flex flex-col space-y-3">
+                <nav className="flex-1 flex flex-col space-y-1 overflow-y-auto">
                    <Link
                       href="/"
+                      onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
                         "flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg",
                         pathname === "/" ? "text-accent font-semibold" : "text-primary-foreground"
@@ -199,39 +193,33 @@ export function Header() {
                       <span>Ana Səhifə</span>
                     </Link>
 
-                   <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                          <button className={cn("flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg", pathname.startsWith('/about') ? "text-accent font-semibold" : "text-primary-foreground")}>
-                              <Info className="h-4 w-4" />
-                              Haqqımızda
-                              <ChevronDown className="h-4 w-4" />
-                          </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="start" className="w-56">
-                          {aboutLinks.map(link => (
-                              <DropdownMenuItem asChild key={link.href}>
-                                  <Link href={link.href} className="text-sm">{link.label}</Link>
-                              </DropdownMenuItem>
-                          ))}
-                      </DropdownMenuContent>
-                  </DropdownMenu>
-
-                  <NavLinksContent isMobile={true} />
+                    <Accordion type="single" collapsible className="w-full">
+                        <AccordionItem value="about-us" className="border-b-0">
+                            <AccordionTrigger className={cn("flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg hover:no-underline [&_svg]:h-5 [&_svg]:w-5", pathname.startsWith('/about') ? "text-accent font-semibold" : "text-primary-foreground")}>
+                                <Info className="h-4 w-4" />
+                                <span>Haqqımızda</span>
+                            </AccordionTrigger>
+                            <AccordionContent className="pl-8 flex flex-col space-y-2 py-2">
+                                {aboutLinks.map(link => (
+                                    <Link key={link.href} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className={cn("text-primary-foreground/80 hover:text-accent text-base", pathname === link.href ? "text-accent font-semibold" : "")}>{link.label}</Link>
+                                ))}
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
+                    
+                    <NavLinksContent isMobile={true} onLinkClick={() => setIsMobileMenuOpen(false)} />
                   
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                             <button className="flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg text-primary-foreground">
+                    <Accordion type="single" collapsible className="w-full">
+                        <AccordionItem value="related-orgs" className="border-b-0">
+                            <AccordionTrigger className={cn("flex items-center gap-2 transition-colors hover:text-accent whitespace-nowrap px-2 py-2 text-lg hover:no-underline [&_svg]:h-5 [&_svg]:w-5", pathname.startsWith('/sec') ? "text-accent font-semibold" : "text-primary-foreground")}>
                                 <Building className="h-4 w-4" />
-                                Tabe Qurumlar
-                                <ChevronDown className="h-4 w-4" />
-                            </button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="start" className="w-56">
-                            <DropdownMenuItem asChild>
-                                <Link href="/sec" className="text-sm">Şagird Elmi Cəmiyyəti</Link>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                                <span>Tabe Qurumlar</span>
+                            </AccordionTrigger>
+                            <AccordionContent className="pl-8 py-2">
+                                 <Link href="/sec" onClick={() => setIsMobileMenuOpen(false)} className={cn("text-primary-foreground/80 hover:text-accent text-base", pathname === "/sec" ? "text-accent font-semibold" : "")}>Şagird Elmi Cəmiyyəti</Link>
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
                 </nav>
               </SheetContent>
             </Sheet>
