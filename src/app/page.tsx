@@ -1,3 +1,4 @@
+
 "use client";
 import React from 'react';
 import Image from "next/image";
@@ -200,7 +201,7 @@ export default function Home() {
                     </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="absolute inset-0 flex items-center justify-start text-left bg-gradient-to-r from-black/60 to-black/20">
+              <div className="absolute inset-0 flex items-center justify-start text-left bg-gradient-to-r from-black/70 to-black/30">
                   <div className="container mx-auto px-4">
                       <AnimatePresence>
                         {heroSlides[currentSlide]?.type === 'main' && (
@@ -212,7 +213,7 @@ export default function Home() {
                                 className="relative z-10 max-w-md lg:max-w-2xl">
                                 
                                 <motion.h1 variants={heroItemVariants} className="text-3xl sm:text-4xl lg:text-6xl font-extrabold tracking-tight text-white drop-shadow-lg">
-                                  <span className="block">Naxçıvan Dövlət Universiteti</span>
+                                  <span className="block lg:whitespace-nowrap">Naxçıvan Dövlət Universiteti</span>
                                   <span className="block text-2xl sm:text-3xl lg:text-4xl mt-1 text-white">Tələbə Elmi Cəmiyyəti</span>
                                 </motion.h1>
                                 
